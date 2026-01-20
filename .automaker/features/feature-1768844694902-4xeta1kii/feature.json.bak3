@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "AI agent specialized in generating code from design understanding. Apply framework idioms and best practices. Optimize for readability and maintainability. Support iterative refinement based on feedback.",
+  "title": "Code Generation Agent",
+  "dependencies": [
+    "agentic-task-orchestrator",
+    "design-understanding-agent"
+  ],
+  "priority": 66,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694902-4xeta1kii",
+  "descriptionHistory": [
+    {
+      "description": "AI agent specialized in generating code from design understanding. Apply framework idioms and best practices. Optimize for readability and maintainability. Support iterative refinement based on feedback.",
+      "timestamp": "2026-01-19T17:44:54.902Z",
+      "source": "initial"
+    }
+  ]
+}

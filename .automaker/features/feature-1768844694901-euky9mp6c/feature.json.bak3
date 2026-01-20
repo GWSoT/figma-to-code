@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "AI agent specialized in understanding design intent. Analyze visual hierarchy, information architecture, and user flow. Provide semantic understanding beyond raw structure. Support natural language queries about design.",
+  "title": "Design Understanding Agent",
+  "dependencies": [
+    "agentic-task-orchestrator",
+    "layout-inference-engine"
+  ],
+  "priority": 65,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694901-euky9mp6c",
+  "descriptionHistory": [
+    {
+      "description": "AI agent specialized in understanding design intent. Analyze visual hierarchy, information architecture, and user flow. Provide semantic understanding beyond raw structure. Support natural language queries about design.",
+      "timestamp": "2026-01-19T17:44:54.901Z",
+      "source": "initial"
+    }
+  ]
+}

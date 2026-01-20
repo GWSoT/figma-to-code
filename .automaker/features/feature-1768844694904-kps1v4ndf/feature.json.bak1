@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Support iterative code improvement based on user feedback. Allow natural language change requests. Track changes across iterations. Support undo/redo of AI-generated changes.",
+  "title": "Iterative Refinement Loop",
+  "dependencies": [
+    "code-generation-agent"
+  ],
+  "priority": 68,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694904-kps1v4ndf",
+  "descriptionHistory": [
+    {
+      "description": "Support iterative code improvement based on user feedback. Allow natural language change requests. Track changes across iterations. Support undo/redo of AI-generated changes.",
+      "timestamp": "2026-01-19T17:44:54.904Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T06:55:21.887Z",
+  "updatedAt": "2026-01-20T06:55:23.972Z"
+}

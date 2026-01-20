@@ -7,7 +7,7 @@
     "layout-inference-engine"
   ],
   "priority": 65,
-  "status": "backlog",
+  "status": "in_progress",
   "branchName": "master",
   "id": "feature-1768844694901-euky9mp6c",
   "descriptionHistory": [
@@ -16,5 +16,6 @@
       "timestamp": "2026-01-19T17:44:54.901Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T06:44:40.345Z"
 }

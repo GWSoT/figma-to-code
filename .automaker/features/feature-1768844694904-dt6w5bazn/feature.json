@@ -6,7 +6,7 @@
     "code-generation-agent"
   ],
   "priority": 69,
-  "status": "backlog",
+  "status": "verified",
   "branchName": "master",
   "id": "feature-1768844694904-dt6w5bazn",
   "descriptionHistory": [
@@ -15,5 +15,7 @@
       "timestamp": "2026-01-19T17:44:54.905Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T06:55:25.872Z",
+  "updatedAt": "2026-01-20T06:57:01.004Z"
 }

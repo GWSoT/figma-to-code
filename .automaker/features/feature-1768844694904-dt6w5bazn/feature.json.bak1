@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Generate visual comparison between original Figma design and rendered code output. Highlight pixel-level differences. Calculate similarity scores. Identify specific areas needing improvement.",
+  "title": "Visual Diff Generator",
+  "dependencies": [
+    "code-generation-agent"
+  ],
+  "priority": 69,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694904-dt6w5bazn",
+  "descriptionHistory": [
+    {
+      "description": "Generate visual comparison between original Figma design and rendered code output. Highlight pixel-level differences. Calculate similarity scores. Identify specific areas needing improvement.",
+      "timestamp": "2026-01-19T17:44:54.905Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T06:55:25.872Z",
+  "updatedAt": "2026-01-20T06:55:29.585Z"
+}

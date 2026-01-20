@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "AI agent that reviews generated code for quality. Check for best practices, accessibility, performance, and security. Suggest improvements and catch common mistakes. Support custom review rules.",
+  "title": "Code Review Agent",
+  "dependencies": [
+    "agentic-task-orchestrator",
+    "code-generation-agent"
+  ],
+  "priority": 67,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694903-04mw18py7",
+  "descriptionHistory": [
+    {
+      "description": "AI agent that reviews generated code for quality. Check for best practices, accessibility, performance, and security. Suggest improvements and catch common mistakes. Support custom review rules.",
+      "timestamp": "2026-01-19T17:44:54.903Z",
+      "source": "initial"
+    }
+  ]
+}

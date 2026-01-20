@@ -286,5 +286,25 @@
       <name>Agentic Task Orchestrator</name>
       <description>Orchestrate multi-step agentic workflows for complex conversions. Define task graphs with dependencies. Handle parallel execution where possible. Support human-in-the-loop checkpoints.</description>
     </feature>
+    <feature>
+      <name>Code Review Agent</name>
+      <description>AI agent that reviews generated code for quality. Check for best practices, accessibility, performance, and security. Suggest improvements and catch common mistakes. Support custom review rules.</description>
+    </feature>
+    <feature>
+      <name>Design Understanding Agent</name>
+      <description>AI agent specialized in understanding design intent. Analyze visual hierarchy, information architecture, and user flow. Provide semantic understanding beyond raw structure. Support natural language queries about design.</description>
+    </feature>
+    <feature>
+      <name>Iterative Refinement Loop</name>
+      <description>Support iterative code improvement based on user feedback. Allow natural language change requests. Track changes across iterations. Support undo/redo of AI-generated changes.</description>
+    </feature>
+    <feature>
+      <name>Visual Diff Generator</name>
+      <description>Generate visual comparison between original Figma design and rendered code output. Highlight pixel-level differences. Calculate similarity scores. Identify specific areas needing improvement.</description>
+    </feature>
+    <feature>
+      <name>Code Generation Agent</name>
+      <description>AI agent specialized in generating code from design understanding. Apply framework idioms and best practices. Optimize for readability and maintainability. Support iterative refinement based on feedback.</description>
+    </feature>
   </implemented_features>
 </project_specification>

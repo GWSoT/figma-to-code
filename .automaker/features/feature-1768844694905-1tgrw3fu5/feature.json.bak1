@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Render generated code in real-time preview. Support hot reloading during editing. Match Figma viewport sizes. Allow interactive testing of generated components.",
+  "title": "Code Preview Renderer",
+  "dependencies": [
+    "react-code-generator",
+    "html-css-code-generator"
+  ],
+  "priority": 70,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694905-1tgrw3fu5",
+  "descriptionHistory": [
+    {
+      "description": "Render generated code in real-time preview. Support hot reloading during editing. Match Figma viewport sizes. Allow interactive testing of generated components.",
+      "timestamp": "2026-01-19T17:44:54.906Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T06:56:42.738Z"
+}

@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Side-by-side view showing Figma design and generated code. Synchronized scrolling and element highlighting. Click-to-navigate between design elements and code. Support multiple panel arrangements.",
+  "title": "Split View Editor Interface",
+  "dependencies": [
+    "code-preview-renderer"
+  ],
+  "priority": 71,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694906-j6hsamdb4",
+  "descriptionHistory": [
+    {
+      "description": "Side-by-side view showing Figma design and generated code. Synchronized scrolling and element highlighting. Click-to-navigate between design elements and code. Support multiple panel arrangements.",
+      "timestamp": "2026-01-19T17:44:54.907Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T06:56:43.159Z"
+}
