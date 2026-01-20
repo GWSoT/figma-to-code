@@ -1,0 +1,224 @@
+/**
+ * ExampleCard CSS Module
+ *
+ * Demonstrates proper CSS Module naming conventions:
+ * - BEM-inspired class naming (block__element--modifier)
+ * - Composition using composes
+ * - CSS custom properties for theming
+ * - Scoped animations
+ */
+
+/* Base card styles */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius, 0.5rem);
+  background-color: var(--background, #ffffff);
+  border: 1px solid var(--border, #e5e7eb);
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Card header section */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+}
+
+/* Card title */
+.title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--foreground, #0f172a);
+  line-height: 1.5;
+}
+
+/* Card description/subtitle */
+.description {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--muted-foreground, #64748b);
+  line-height: 1.5;
+}
+
+/* Card content area */
+.content {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+/* Card footer section */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border, #e5e7eb);
+}
+
+/* Card action button area */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+/* ========== Variants ========== */
+
+/* Elevated variant with more shadow */
+.elevated {
+  composes: card;
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Interactive variant with hover effects */
+.interactive {
+  composes: card;
+  cursor: pointer;
+}
+
+.interactive:hover {
+  border-color: var(--primary, #3b82f6);
+  box-shadow:
+    0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transform: translateY(-2px);
+}
+
+.interactive:active {
+  transform: translateY(0);
+}
+
+/* Outlined variant - no background */
+.outlined {
+  composes: card;
+  background-color: transparent;
+  border-width: 2px;
+}
+
+/* Ghost variant - minimal styling */
+.ghost {
+  composes: card;
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.ghost:hover {
+  background-color: var(--accent, #f1f5f9);
+}
+
+/* ========== Size Variants ========== */
+
+.small {
+  border-radius: calc(var(--radius, 0.5rem) * 0.75);
+}
+
+.small .header {
+  padding: 0.75rem 1rem;
+}
+
+.small .content {
+  padding: 1rem;
+}
+
+.small .footer {
+  padding: 0.75rem 1rem;
+}
+
+.small .title {
+  font-size: 1rem;
+}
+
+.large {
+  border-radius: calc(var(--radius, 0.5rem) * 1.5);
+}
+
+.large .header {
+  padding: 1.5rem 2rem;
+}
+
+.large .content {
+  padding: 2rem;
+}
+
+.large .footer {
+  padding: 1.5rem 2rem;
+}
+
+.large .title {
+  font-size: 1.25rem;
+}
+
+/* ========== State Variants ========== */
+
+.selected {
+  border-color: var(--primary, #3b82f6);
+  box-shadow: 0 0 0 2px var(--primary, #3b82f6);
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* Loading state with animation */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+/* ========== Scoped Animation ========== */
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ========== Media (decorative) ========== */
+
+.media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius, 0.5rem) var(--radius, 0.5rem) 0 0;
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card with media on top */
+.withMedia .header {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

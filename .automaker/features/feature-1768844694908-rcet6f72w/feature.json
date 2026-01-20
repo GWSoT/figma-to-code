@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Inspect individual design elements with detailed property view. Show computed CSS values alongside Figma properties. Allow direct editing of element styles. Sync changes bidirectionally.",
+  "title": "Element Inspector Panel",
+  "dependencies": [
+    "split-view-editor-interface"
+  ],
+  "priority": 73,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694908-rcet6f72w",
+  "descriptionHistory": [
+    {
+      "description": "Inspect individual design elements with detailed property view. Show computed CSS values alongside Figma properties. Allow direct editing of element styles. Sync changes bidirectionally.",
+      "timestamp": "2026-01-19T17:44:54.908Z",
+      "source": "initial"
+    }
+  ]
+}

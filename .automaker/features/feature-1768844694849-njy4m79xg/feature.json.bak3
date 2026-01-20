@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Retrieve comprehensive metadata for selected Figma files including: document name, version history, page structure, component counts, style definitions, and last editor information. Store metadata in database for offline reference and change detection.",
+  "title": "Figma File Metadata Fetcher",
+  "dependencies": [
+    "figma-file-browser-interface"
+  ],
+  "priority": 5,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694849-njy4m79xg",
+  "descriptionHistory": [
+    {
+      "description": "Retrieve comprehensive metadata for selected Figma files including: document name, version history, page structure, component counts, style definitions, and last editor information. Store metadata in database for offline reference and change detection.",
+      "timestamp": "2026-01-19T17:44:54.850Z",
+      "source": "initial"
+    }
+  ]
+}

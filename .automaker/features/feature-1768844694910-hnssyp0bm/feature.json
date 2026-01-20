@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Display generated component hierarchy in tree view. Show props and state for each component. Allow component selection and highlighting. Support component renaming and reorganization.",
+  "title": "Component Tree Panel",
+  "dependencies": [
+    "split-view-editor-interface",
+    "component-composition-analyzer"
+  ],
+  "priority": 75,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694910-hnssyp0bm",
+  "descriptionHistory": [
+    {
+      "description": "Display generated component hierarchy in tree view. Show props and state for each component. Allow component selection and highlighting. Support component renaming and reorganization.",
+      "timestamp": "2026-01-19T17:44:54.910Z",
+      "source": "initial"
+    }
+  ]
+}

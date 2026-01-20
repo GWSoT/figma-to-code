@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Define roles: admin, member, viewer. Control access to configurations, history, and exports. Support custom role definitions. Audit log for access events.",
+  "title": "Role-Based Access Control",
+  "dependencies": [
+    "team-workspace-management"
+  ],
+  "priority": 96,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694928-frf43oxqq",
+  "descriptionHistory": [
+    {
+      "description": "Define roles: admin, member, viewer. Control access to configurations, history, and exports. Support custom role definitions. Audit log for access events.",
+      "timestamp": "2026-01-19T17:44:54.928Z",
+      "source": "initial"
+    }
+  ]
+}

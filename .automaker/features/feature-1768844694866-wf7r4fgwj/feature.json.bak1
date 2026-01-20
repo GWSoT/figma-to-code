@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Extract border/stroke properties: width, style (solid, dashed), alignment (inside, center, outside), individual sides. Convert to CSS border properties with proper box-sizing considerations.",
+  "title": "Figma Border and Stroke Parser",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 24,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694866-wf7r4fgwj",
+  "descriptionHistory": [
+    {
+      "description": "Extract border/stroke properties: width, style (solid, dashed), alignment (inside, center, outside), individual sides. Convert to CSS border properties with proper box-sizing considerations.",
+      "timestamp": "2026-01-19T17:44:54.866Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:45:14.501Z",
+  "updatedAt": "2026-01-19T18:45:15.854Z"
+}

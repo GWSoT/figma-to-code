@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Export generated code directly to GitHub repository. Support creating new repo or pushing to existing. Configure branch, commit message, and PR creation. Handle authentication securely.",
+  "title": "GitHub Repository Export",
+  "dependencies": [
+    "export-options-panel"
+  ],
+  "priority": 81,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694915-pxw1ne9qj",
+  "descriptionHistory": [
+    {
+      "description": "Export generated code directly to GitHub repository. Support creating new repo or pushing to existing. Configure branch, commit message, and PR creation. Handle authentication securely.",
+      "timestamp": "2026-01-19T17:44:54.915Z",
+      "source": "initial"
+    }
+  ]
+}

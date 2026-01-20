@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Allow users to share their conversion templates. Moderated submission process. Template ratings and reviews. Template versioning and updates.",
+  "title": "Community Template Sharing",
+  "dependencies": [
+    "template-library"
+  ],
+  "priority": 94,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694926-pn514a6zm",
+  "descriptionHistory": [
+    {
+      "description": "Allow users to share their conversion templates. Moderated submission process. Template ratings and reviews. Template versioning and updates.",
+      "timestamp": "2026-01-19T17:44:54.927Z",
+      "source": "initial"
+    }
+  ]
+}

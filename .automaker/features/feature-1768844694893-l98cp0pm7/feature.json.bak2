@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Generate styled-components/emotion code with template literals. Support theming, dynamic props, and style composition. Generate proper TypeScript types for styled components.",
+  "title": "Styled Components Generator",
+  "dependencies": [
+    "css-framework-selection-interface"
+  ],
+  "priority": 56,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694893-l98cp0pm7",
+  "descriptionHistory": [
+    {
+      "description": "Generate styled-components/emotion code with template literals. Support theming, dynamic props, and style composition. Generate proper TypeScript types for styled components.",
+      "timestamp": "2026-01-19T17:44:54.893Z",
+      "source": "initial"
+    }
+  ]
+}

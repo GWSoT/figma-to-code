@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Parse text nodes with full styling: font, size, weight, color, alignment, decoration, transformation. Handle mixed styles within single text blocks. Extract paragraph settings and list formatting.",
+  "title": "Figma Text Node Parser",
+  "dependencies": [
+    "figma-typography-system-analyzer"
+  ],
+  "priority": 26,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694867-kp39b8z89",
+  "descriptionHistory": [
+    {
+      "description": "Parse text nodes with full styling: font, size, weight, color, alignment, decoration, transformation. Handle mixed styles within single text blocks. Extract paragraph settings and list formatting.",
+      "timestamp": "2026-01-19T17:44:54.868Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:45:18.157Z",
+  "updatedAt": "2026-01-19T18:50:32.053Z"
+}

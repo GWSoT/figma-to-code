@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Analyze designs across multiple artboard sizes to infer responsive behavior. Identify breakpoint thresholds and layout changes. Detect mobile-first vs desktop-first patterns. Generate media query structure.",
+  "title": "Responsive Breakpoint Analyzer",
+  "dependencies": [
+    "figma-frame-detection-and-listing",
+    "layout-inference-engine"
+  ],
+  "priority": 37,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694876-tiubi8odp",
+  "descriptionHistory": [
+    {
+      "description": "Analyze designs across multiple artboard sizes to infer responsive behavior. Identify breakpoint thresholds and layout changes. Detect mobile-first vs desktop-first patterns. Generate media query structure.",
+      "timestamp": "2026-01-19T17:44:54.877Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T03:11:55.452Z",
+  "updatedAt": "2026-01-20T03:13:13.157Z"
+}

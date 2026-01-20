@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Analyze design to identify optimal component boundaries. Detect reusable patterns that should be extracted. Suggest component hierarchy based on design structure. Balance reusability vs simplicity.",
+  "title": "Component Composition Analyzer",
+  "dependencies": [
+    "figma-component-library-extractor",
+    "layout-inference-engine"
+  ],
+  "priority": 57,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694894-0ac9te7xl",
+  "descriptionHistory": [
+    {
+      "description": "Analyze design to identify optimal component boundaries. Detect reusable patterns that should be extracted. Suggest component hierarchy based on design structure. Balance reusability vs simplicity.",
+      "timestamp": "2026-01-19T17:44:54.894Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:32:30.052Z",
+  "updatedAt": "2026-01-20T05:32:31.126Z"
+}

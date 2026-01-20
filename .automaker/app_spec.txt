@@ -1,0 +1,254 @@
+<project_specification>
+  <project_name>figma-to-code</project_name>
+
+  <overview>
+    This project was created from the "Automaker Starter Kit" starter template.
+    An online community and training platform template for aspiring full stack engineers. Master frontend and backend development, build real-world projects, and launch your software engineering career.
+  </overview>
+
+  <technology_stack>
+    <technology>TanStack Start</technology>
+    <technology>PostgreSQL</technology>
+    <technology>Drizzle ORM</technology>
+    <technology>Better Auth</technology>
+    <technology>Tailwind CSS</technology>
+    <technology>Radix UI</technology>
+    <technology>Stripe</technology>
+    <technology>AWS S3/R2</technology>
+  </technology_stack>
+
+  <core_capabilities>
+    <capability>Community posts with comments and reactions</capability>
+    <capability>User profiles and portfolios</capability>
+    <capability>Calendar event management</capability>
+    <capability>Direct messaging</capability>
+    <capability>Member discovery directory</capability>
+    <capability>Real-time notifications</capability>
+    <capability>Classroom modules for learning</capability>
+    <capability>Tiered subscriptions (free/basic/pro)</capability>
+    <capability>File uploads with presigned URLs</capability>
+  </core_capabilities>
+
+  <implemented_features>
+    <feature>
+      <name>Figma File Browser Interface</name>
+      <description>Build a file browser UI that displays user&apos;s Figma files and projects. Show file thumbnails, last modified dates, collaborators, and project organization. Support search/filter by name, date, and project. Implement infinite scroll pagination for users with many files.</description>
+    </feature>
+    <feature>
+      <name>Figma Access Token Management</name>
+      <description>Create a secure token storage system for Figma API credentials. Implement encryption at rest for tokens, automatic token refresh before expiration, token revocation on user request, and audit logging for token usage. Include rate limit tracking per token.</description>
+    </feature>
+    <feature>
+      <name>Figma OAuth Authentication Integration</name>
+      <description>Implement OAuth 2.0 authentication flow with Figma API. Users should be able to connect their Figma accounts securely. Store access tokens and refresh tokens in the database with proper encryption. Handle token refresh automatically when tokens expire. Support multiple Figma accounts per user for agencies/teams.</description>
+    </feature>
+    <feature>
+      <name>Figma File Metadata Fetcher</name>
+      <description>Retrieve comprehensive metadata for selected Figma files including: document name, version history, page structure, component counts, style definitions, and last editor information. Store metadata in database for offline reference and change detection.</description>
+    </feature>
+    <feature>
+      <name>Figma Document Tree Parser</name>
+      <description>Parse the complete Figma document tree structure from API response. Build an internal representation of all nodes including: frames, groups, components, instances, vectors, text, and images. Maintain parent-child relationships and node ordering.</description>
+    </feature>
+    <feature>
+      <name>Figma Team and Project Discovery</name>
+      <description>Fetch and display all teams and projects the authenticated user has access to. Cache team/project hierarchy for faster navigation. Show team member counts and project file counts. Handle permission differences between personal, team, and organization files.</description>
+    </feature>
+    <feature>
+      <name>Figma Page Selection Interface</name>
+      <description>Allow users to select specific pages from a Figma file for conversion. Show page thumbnails and names. Support multi-page selection with clear visual feedback. Display estimated conversion time/complexity per page based on node count.</description>
+    </feature>
+    <feature>
+      <name>Figma Component Library Extractor</name>
+      <description>Extract all components (main components and variants) from selected Figma files. Build component dependency graph showing which components use others. Identify component sets and variant properties. Store component definitions for reuse across conversions.</description>
+    </feature>
+    <feature>
+      <name>Figma Style Definitions Extractor</name>
+      <description>Extract all defined styles from Figma files: color styles, text styles, effect styles, and grid styles. Map style IDs to their definitions. Track style usage across the document. Support external styles from team libraries.</description>
+    </feature>
+    <feature>
+      <name>Figma Instance Resolution Engine</name>
+      <description>Resolve all component instances to their main components. Handle nested instances and overrides at multiple levels. Track which properties are overridden vs inherited. Support external component references from linked libraries.</description>
+    </feature>
+    <feature>
+      <name>Figma Frame Detection and Listing</name>
+      <description>Identify and list all top-level frames within selected pages. Categorize frames by apparent type (screen, component, asset). Show frame dimensions and whether they match common device sizes. Allow bulk selection or individual frame picking.</description>
+    </feature>
+    <feature>
+      <name>Figma Color Palette Analyzer</name>
+      <description>Analyze all colors used in the design including fills, strokes, shadows, and gradients. Group similar colors within configurable threshold. Identify primary, secondary, and accent colors. Map to nearest named CSS colors for reference. Generate color contrast accessibility report.</description>
+    </feature>
+    <feature>
+      <name>Figma Spacing System Analyzer</name>
+      <description>Analyze spacing patterns in the design: padding, margins, gaps. Identify consistent spacing scale (4px, 8px system etc). Map spacing values to CSS custom properties. Detect spacing inconsistencies and suggest normalizations.</description>
+    </feature>
+    <feature>
+      <name>Figma Auto-Layout Parser</name>
+      <description>Parse Figma auto-layout properties and translate to flexbox/grid concepts. Handle primary axis direction, alignment, spacing modes, padding, and wrap behavior. Support nested auto-layouts with mixed configurations.</description>
+    </feature>
+    <feature>
+      <name>Figma Typography System Analyzer</name>
+      <description>Extract all typography settings: font families, sizes, weights, line heights, letter spacing. Identify typographic scale and hierarchy. Map fonts to web-safe alternatives and Google Fonts. Generate font-face declarations for custom fonts.</description>
+    </feature>
+    <feature>
+      <name>Figma Constraints Parser</name>
+      <description>Parse Figma constraint settings (left, right, top, bottom, center, scale) for non-auto-layout frames. Translate constraints to appropriate CSS positioning strategies. Handle mixed constraint modes within parent frames.</description>
+    </feature>
+    <feature>
+      <name>Figma Vector Graphics Processor</name>
+      <description>Process vector nodes (lines, polygons, stars, boolean operations). Export as optimized SVG with proper viewBox and path data. Handle vector networks and complex boolean combinations. Support stroke and fill styles on vectors.</description>
+    </feature>
+    <feature>
+      <name>Asset CDN Upload Pipeline</name>
+      <description>Upload exported images and SVGs to cloud storage (S3/R2). Generate unique, content-addressed URLs. Set proper cache headers for optimal delivery. Track asset references in database for cleanup and deduplication.</description>
+    </feature>
+    <feature>
+      <name>Figma Effects Parser</name>
+      <description>Parse visual effects: drop shadows, inner shadows, layer blur, background blur. Convert to CSS box-shadow, filter, and backdrop-filter properties. Handle multiple stacked effects with proper ordering.</description>
+    </feature>
+    <feature>
+      <name>Figma Blend Mode Converter</name>
+      <description>Convert Figma blend modes to CSS mix-blend-mode values. Handle unsupported blend modes with fallback strategies. Support blend modes on groups and individual layers.</description>
+    </feature>
+    <feature>
+      <name>Figma Image Export Handler</name>
+      <description>Export raster images from Figma at multiple resolutions (1x, 2x, 3x). Support PNG, JPG, and WebP formats. Handle image fills on shapes. Generate srcset markup for responsive images. Optimize images before storage.</description>
+    </feature>
+    <feature>
+      <name>Figma Mask and Clip Handler</name>
+      <description>Process masking and clipping relationships in Figma. Convert to CSS clip-path, mask-image, or overflow:hidden as appropriate. Handle inverted masks and alpha masks.</description>
+    </feature>
+    <feature>
+      <name>Figma Gradient Parser</name>
+      <description>Parse linear, radial, angular, and diamond gradients. Convert to CSS gradient syntax with accurate color stops and positions. Handle multiple gradient fills layered together.</description>
+    </feature>
+    <feature>
+      <name>Figma Text Node Parser</name>
+      <description>Parse text nodes with full styling: font, size, weight, color, alignment, decoration, transformation. Handle mixed styles within single text blocks. Extract paragraph settings and list formatting.</description>
+    </feature>
+    <feature>
+      <name>Figma Corner Radius Handler</name>
+      <description>Parse corner radius values including individual corner control and smoothing (iOS-style corners). Convert to CSS border-radius. Handle smoothed corners with SVG path approximation when needed.</description>
+    </feature>
+    <feature>
+      <name>Figma Border and Stroke Parser</name>
+      <description>Extract border/stroke properties: width, style (solid, dashed), alignment (inside, center, outside), individual sides. Convert to CSS border properties with proper box-sizing considerations.</description>
+    </feature>
+    <feature>
+      <name>Figma Rich Text Processor</name>
+      <description>Process rich text with inline links, styled spans, and paragraph breaks. Generate proper HTML structure with semantic elements. Handle OpenType features if present.</description>
+    </feature>
+    <feature>
+      <name>Design Token Generation Engine</name>
+      <description>Generate comprehensive design tokens from extracted styles: colors, typography, spacing, shadows, radii. Output in multiple formats (CSS custom properties, JSON, SCSS variables). Support token naming conventions and grouping.</description>
+    </feature>
+    <feature>
+      <name>Semantic Element Detector</name>
+      <description>Identify semantic HTML elements from design patterns: buttons, inputs, links, headings, paragraphs, lists, images. Use node naming, styling, and context to make intelligent element choices. Support customizable detection rules.</description>
+    </feature>
+    <feature>
+      <name>Figma Text Overflow Handler</name>
+      <description>Detect text truncation settings in Figma. Convert to CSS text-overflow, line-clamp, and overflow properties. Handle both single-line and multi-line truncation scenarios.</description>
+    </feature>
+    <feature>
+      <name>Layout Inference Engine</name>
+      <description>Analyze visual positioning to infer semantic layout intent. Detect header/footer/sidebar patterns. Identify navigation structures, card grids, and list layouts. Use heuristics and ML to understand layout purpose beyond raw positions.</description>
+    </feature>
+    <feature>
+      <name>Interactive Element Identifier</name>
+      <description>Identify interactive elements: buttons, links, form inputs, toggles, sliders. Detect hover/pressed/disabled states from component variants. Map interactions to appropriate HTML elements and ARIA roles.</description>
+    </feature>
+    <feature>
+      <name>Form Structure Analyzer</name>
+      <description>Detect form layouts and input groupings. Identify labels, inputs, validation messages, and submit buttons. Generate accessible form markup with proper label associations and fieldset groupings.</description>
+    </feature>
+    <feature>
+      <name>Modal and Overlay Detector</name>
+      <description>Identify modal dialogs, popovers, tooltips, and dropdown overlays. Detect backdrop layers and positioning context. Generate proper ARIA markup for accessibility. Handle focus trap requirements.</description>
+    </feature>
+    <feature>
+      <name>Navigation Pattern Detector</name>
+      <description>Identify navigation patterns: top nav, sidebar nav, breadcrumbs, tabs, pagination. Detect active states and hierarchy. Generate semantic nav markup with proper ARIA landmarks.</description>
+    </feature>
+    <feature>
+      <name>Card and List Pattern Detector</name>
+      <description>Identify repeated card layouts and list patterns. Detect the repeating unit and its variations. Generate appropriate list markup with semantic meaning. Support both grid and linear arrangements.</description>
+    </feature>
+    <feature>
+      <name>Responsive Breakpoint Analyzer</name>
+      <description>Analyze designs across multiple artboard sizes to infer responsive behavior. Identify breakpoint thresholds and layout changes. Detect mobile-first vs desktop-first patterns. Generate media query structure.</description>
+    </feature>
+    <feature>
+      <name>Responsive Variant Mapper</name>
+      <description>Map corresponding elements across different viewport designs. Track which elements appear/disappear at breakpoints. Identify element transformations between sizes. Generate responsive CSS with proper breakpoint handling.</description>
+    </feature>
+    <feature>
+      <name>Accessibility Audit Engine</name>
+      <description>Analyze designs for accessibility issues: color contrast, touch target sizes, text readability, focus visibility. Generate WCAG compliance report with specific recommendations. Flag critical issues that block conversion.</description>
+    </feature>
+    <feature>
+      <name>ARIA Attribute Generator</name>
+      <description>Generate appropriate ARIA attributes for identified UI patterns. Add roles, labels, descriptions, and states. Handle live regions for dynamic content. Support custom ARIA configuration per component type.</description>
+    </feature>
+    <feature>
+      <name>Focus Order Analyzer</name>
+      <description>Analyze visual layout to determine logical focus order. Identify focus traps (modals, popovers). Generate tabindex attributes where natural order is insufficient. Validate against WCAG focus order requirements.</description>
+    </feature>
+    <feature>
+      <name>Component Library Integration Selector</name>
+      <description>Allow integration with existing component libraries: Radix UI, shadcn/ui, Material UI, Chakra UI, Ant Design, custom libraries. Map detected patterns to library components. Support version-specific component APIs.</description>
+    </feature>
+    <feature>
+      <name>Target Framework Selection Interface</name>
+      <description>Allow users to select target framework for code generation: React, Vue, Angular, Svelte, HTML/CSS, or React Native. Show framework-specific options and explain tradeoffs. Remember user preferences across sessions.</description>
+    </feature>
+    <feature>
+      <name>Code Style Configuration Panel</name>
+      <description>Configure code style preferences: indentation, quotes, semicolons, trailing commas, max line length. Support ESLint/Prettier config import. Apply consistent formatting to all generated code.</description>
+    </feature>
+    <feature>
+      <name>Naming Convention Configuration</name>
+      <description>Configure naming conventions: component names (PascalCase, kebab-case), CSS classes (BEM, camelCase, kebab-case), file names, variable names. Support automatic pluralization and prefixing.</description>
+    </feature>
+    <feature>
+      <name>React Code Generator</name>
+      <description>Generate React functional components with hooks. Support JSX syntax, proper prop typing with TypeScript, event handlers, and conditional rendering. Generate clean, idiomatic React code following best practices.</description>
+    </feature>
+    <feature>
+      <name>React TypeScript Integration</name>
+      <description>Generate TypeScript interfaces for React components: props, state, context. Infer types from design data where possible. Support strict mode compliance. Generate proper generic types for reusable components.</description>
+    </feature>
+    <feature>
+      <name>CSS Framework Selection Interface</name>
+      <description>Allow selection of CSS approach: vanilla CSS, Tailwind CSS, CSS Modules, Styled Components, Emotion, SCSS. Show compatibility with selected JS framework. Configure CSS framework-specific options.</description>
+    </feature>
+    <feature>
+      <name>React Hooks Generator</name>
+      <description>Generate custom hooks for reusable logic: useForm, useToggle, useModal, useBreakpoint. Extract common patterns into hooks automatically. Support hook dependencies and cleanup.</description>
+    </feature>
+    <feature>
+      <name>Vue Code Generator</name>
+      <description>Generate Vue 3 single-file components with Composition API. Support template syntax, reactive refs, computed properties, and watchers. Generate clean, idiomatic Vue code following best practices.</description>
+    </feature>
+    <feature>
+      <name>React State Management Generator</name>
+      <description>Generate appropriate state management for interactive components: useState for local state, useReducer for complex state, context for shared state. Identify state from component variants and interactions.</description>
+    </feature>
+    <feature>
+      <name>HTML/CSS Code Generator</name>
+      <description>Generate semantic HTML5 markup with accompanying CSS. Support CSS custom properties, modern layout (flexbox, grid), and responsive design. No framework dependencies for simple projects.</description>
+    </feature>
+    <feature>
+      <name>Svelte Code Generator</name>
+      <description>Generate Svelte components with reactive declarations. Support Svelte template syntax, stores, actions, and transitions. Generate clean, idiomatic Svelte code.</description>
+    </feature>
+    <feature>
+      <name>Tailwind CSS Generator</name>
+      <description>Generate Tailwind CSS class strings from design properties. Map colors to Tailwind palette or custom config. Support responsive variants, dark mode, and arbitrary values. Generate tailwind.config.js for custom design tokens.</description>
+    </feature>
+    <feature>
+      <name>Component Composition Analyzer</name>
+      <description>Analyze design to identify optimal component boundaries. Detect reusable patterns that should be extracted. Suggest component hierarchy based on design structure. Balance reusability vs simplicity.</description>
+    </feature>
+  </implemented_features>
+</project_specification>

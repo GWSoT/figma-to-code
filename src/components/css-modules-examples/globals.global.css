@@ -1,0 +1,111 @@
+/**
+ * Global Styles Module
+ *
+ * This file demonstrates handling global styles within the CSS Modules ecosystem.
+ * Files ending in .global.css are treated as global (not scoped) by our Vite config.
+ *
+ * Use this pattern for:
+ * - Third-party library overrides
+ * - Base element styles
+ * - CSS reset additions
+ * - Styles that must affect elements outside React tree
+ */
+
+/* ========== Global Element Overrides ========== */
+
+/* Example: Override third-party library styles */
+.some-external-library-class {
+  /* Styles here affect the actual class without hashing */
+}
+
+/* ========== Global Utility Classes ========== */
+
+/* These classes are available globally without import */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.no-select {
+  user-select: none;
+}
+
+/* ========== Global Animation Classes ========== */
+
+.animate-fade-in {
+  animation: globalFadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: globalSlideUp 0.3s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: globalSlideDown 0.3s ease-out forwards;
+}
+
+@keyframes globalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes globalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes globalSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== Print Styles ========== */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
+
+/* ========== Reduced Motion Support ========== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

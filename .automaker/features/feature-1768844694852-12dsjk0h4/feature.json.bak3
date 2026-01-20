@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Identify and list all top-level frames within selected pages. Categorize frames by apparent type (screen, component, asset). Show frame dimensions and whether they match common device sizes. Allow bulk selection or individual frame picking.",
+  "title": "Figma Frame Detection and Listing",
+  "dependencies": [
+    "figma-page-selection-interface"
+  ],
+  "priority": 8,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694852-12dsjk0h4",
+  "descriptionHistory": [
+    {
+      "description": "Identify and list all top-level frames within selected pages. Categorize frames by apparent type (screen, component, asset). Show frame dimensions and whether they match common device sizes. Allow bulk selection or individual frame picking.",
+      "timestamp": "2026-01-19T17:44:54.853Z",
+      "source": "initial"
+    }
+  ]
+}

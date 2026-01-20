@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Allow users to select specific pages from a Figma file for conversion. Show page thumbnails and names. Support multi-page selection with clear visual feedback. Display estimated conversion time/complexity per page based on node count.",
+  "title": "Figma Page Selection Interface",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 7,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694851-yn1qyjk1a",
+  "descriptionHistory": [
+    {
+      "description": "Allow users to select specific pages from a Figma file for conversion. Show page thumbnails and names. Support multi-page selection with clear visual feedback. Display estimated conversion time/complexity per page based on node count.",
+      "timestamp": "2026-01-19T17:44:54.852Z",
+      "source": "initial"
+    }
+  ]
+}

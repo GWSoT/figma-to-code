@@ -1,0 +1,99 @@
+/**
+ * Theme Values Module
+ *
+ * Demonstrates ICSS :export for sharing CSS values with JavaScript.
+ * This allows CSS variables to be used in both CSS and JS.
+ *
+ * Usage in JS/TS:
+ * import theme from './theme.values.css'
+ * console.log(theme.primaryColor) // '#3b82f6'
+ */
+
+:root {
+  /* Define CSS custom properties */
+  --theme-primary-color: #3b82f6;
+  --theme-secondary-color: #64748b;
+  --theme-success-color: #22c55e;
+  --theme-warning-color: #f59e0b;
+  --theme-error-color: #ef4444;
+  --theme-background-color: #ffffff;
+  --theme-foreground-color: #0f172a;
+  --theme-muted-color: #f1f5f9;
+  --theme-border-color: #e2e8f0;
+
+  /* Spacing scale */
+  --theme-spacing-xs: 0.25rem;
+  --theme-spacing-sm: 0.5rem;
+  --theme-spacing-md: 1rem;
+  --theme-spacing-lg: 1.5rem;
+  --theme-spacing-xl: 2rem;
+
+  /* Border radius */
+  --theme-radius-sm: 0.25rem;
+  --theme-radius-md: 0.5rem;
+  --theme-radius-lg: 0.75rem;
+  --theme-radius-full: 9999px;
+
+  /* Font sizes */
+  --theme-font-xs: 0.75rem;
+  --theme-font-sm: 0.875rem;
+  --theme-font-md: 1rem;
+  --theme-font-lg: 1.125rem;
+  --theme-font-xl: 1.25rem;
+
+  /* Transitions */
+  --theme-transition-fast: 150ms;
+  --theme-transition-normal: 200ms;
+  --theme-transition-slow: 300ms;
+
+  /* Z-index scale */
+  --theme-z-dropdown: 100;
+  --theme-z-modal: 200;
+  --theme-z-popover: 300;
+  --theme-z-tooltip: 400;
+}
+
+/* Export values to JavaScript */
+:export {
+  /* Colors */
+  primaryColor: var(--theme-primary-color);
+  secondaryColor: var(--theme-secondary-color);
+  successColor: var(--theme-success-color);
+  warningColor: var(--theme-warning-color);
+  errorColor: var(--theme-error-color);
+  backgroundColor: var(--theme-background-color);
+  foregroundColor: var(--theme-foreground-color);
+  mutedColor: var(--theme-muted-color);
+  borderColor: var(--theme-border-color);
+
+  /* Spacing */
+  spacingXs: var(--theme-spacing-xs);
+  spacingSm: var(--theme-spacing-sm);
+  spacingMd: var(--theme-spacing-md);
+  spacingLg: var(--theme-spacing-lg);
+  spacingXl: var(--theme-spacing-xl);
+
+  /* Border radius */
+  radiusSm: var(--theme-radius-sm);
+  radiusMd: var(--theme-radius-md);
+  radiusLg: var(--theme-radius-lg);
+  radiusFull: var(--theme-radius-full);
+
+  /* Font sizes */
+  fontXs: var(--theme-font-xs);
+  fontSm: var(--theme-font-sm);
+  fontMd: var(--theme-font-md);
+  fontLg: var(--theme-font-lg);
+  fontXl: var(--theme-font-xl);
+
+  /* Transitions */
+  transitionFast: var(--theme-transition-fast);
+  transitionNormal: var(--theme-transition-normal);
+  transitionSlow: var(--theme-transition-slow);
+
+  /* Z-index */
+  zDropdown: var(--theme-z-dropdown);
+  zModal: var(--theme-z-modal);
+  zPopover: var(--theme-z-popover);
+  zTooltip: var(--theme-z-tooltip);
+}

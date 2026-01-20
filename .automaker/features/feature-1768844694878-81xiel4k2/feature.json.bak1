@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Analyze designs for accessibility issues: color contrast, touch target sizes, text readability, focus visibility. Generate WCAG compliance report with specific recommendations. Flag critical issues that block conversion.",
+  "title": "Accessibility Audit Engine",
+  "dependencies": [
+    "figma-color-palette-analyzer",
+    "interactive-element-identifier"
+  ],
+  "priority": 39,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694878-81xiel4k2",
+  "descriptionHistory": [
+    {
+      "description": "Analyze designs for accessibility issues: color contrast, touch target sizes, text readability, focus visibility. Generate WCAG compliance report with specific recommendations. Flag critical issues that block conversion.",
+      "timestamp": "2026-01-19T17:44:54.879Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T04:34:12.355Z",
+  "updatedAt": "2026-01-20T04:34:15.125Z"
+}

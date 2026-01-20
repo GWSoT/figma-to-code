@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Upload exported images and SVGs to cloud storage (S3/R2). Generate unique, content-addressed URLs. Set proper cache headers for optimal delivery. Track asset references in database for cleanup and deduplication.",
+  "title": "Asset CDN Upload Pipeline",
+  "dependencies": [
+    "figma-image-export-handler",
+    "figma-vector-graphics-processor"
+  ],
+  "priority": 19,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694861-xxwag5f5b",
+  "descriptionHistory": [
+    {
+      "description": "Upload exported images and SVGs to cloud storage (S3/R2). Generate unique, content-addressed URLs. Set proper cache headers for optimal delivery. Track asset references in database for cleanup and deduplication.",
+      "timestamp": "2026-01-19T17:44:54.862Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:17:15.479Z",
+  "updatedAt": "2026-01-19T18:17:16.251Z"
+}

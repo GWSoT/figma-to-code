@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Analyze visual positioning to infer semantic layout intent. Detect header/footer/sidebar patterns. Identify navigation structures, card grids, and list layouts. Use heuristics and ML to understand layout purpose beyond raw positions.",
+  "title": "Layout Inference Engine",
+  "dependencies": [
+    "figma-auto-layout-parser",
+    "figma-constraints-parser"
+  ],
+  "priority": 30,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694871-s69d4b1tl",
+  "descriptionHistory": [
+    {
+      "description": "Analyze visual positioning to infer semantic layout intent. Detect header/footer/sidebar patterns. Identify navigation structures, card grids, and list layouts. Use heuristics and ML to understand layout purpose beyond raw positions.",
+      "timestamp": "2026-01-19T17:44:54.871Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T19:08:07.126Z",
+  "updatedAt": "2026-01-19T19:08:07.508Z"
+}

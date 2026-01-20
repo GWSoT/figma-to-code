@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Map corresponding elements across different viewport designs. Track which elements appear/disappear at breakpoints. Identify element transformations between sizes. Generate responsive CSS with proper breakpoint handling.",
+  "title": "Responsive Variant Mapper",
+  "dependencies": [
+    "responsive-breakpoint-analyzer"
+  ],
+  "priority": 38,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694877-xl8grj314",
+  "descriptionHistory": [
+    {
+      "description": "Map corresponding elements across different viewport designs. Track which elements appear/disappear at breakpoints. Identify element transformations between sizes. Generate responsive CSS with proper breakpoint handling.",
+      "timestamp": "2026-01-19T17:44:54.878Z",
+      "source": "initial"
+    }
+  ]
+}

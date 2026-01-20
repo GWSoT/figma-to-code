@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Detect text truncation settings in Figma. Convert to CSS text-overflow, line-clamp, and overflow properties. Handle both single-line and multi-line truncation scenarios.",
+  "title": "Figma Text Overflow Handler",
+  "dependencies": [
+    "figma-text-node-parser"
+  ],
+  "priority": 27,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694868-gz4qsg2tx",
+  "descriptionHistory": [
+    {
+      "description": "Detect text truncation settings in Figma. Convert to CSS text-overflow, line-clamp, and overflow properties. Handle both single-line and multi-line truncation scenarios.",
+      "timestamp": "2026-01-19T17:44:54.869Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T19:04:04.290Z"
+}

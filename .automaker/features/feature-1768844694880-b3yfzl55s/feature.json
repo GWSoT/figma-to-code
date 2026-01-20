@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Analyze visual layout to determine logical focus order. Identify focus traps (modals, popovers). Generate tabindex attributes where natural order is insufficient. Validate against WCAG focus order requirements.",
+  "title": "Focus Order Analyzer",
+  "dependencies": [
+    "interactive-element-identifier",
+    "accessibility-audit-engine"
+  ],
+  "priority": 41,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694880-b3yfzl55s",
+  "descriptionHistory": [
+    {
+      "description": "Analyze visual layout to determine logical focus order. Identify focus traps (modals, popovers). Generate tabindex attributes where natural order is insufficient. Validate against WCAG focus order requirements.",
+      "timestamp": "2026-01-19T17:44:54.880Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T04:34:16.319Z",
+  "updatedAt": "2026-01-20T04:39:37.786Z"
+}

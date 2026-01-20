@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Convert Figma blend modes to CSS mix-blend-mode values. Handle unsupported blend modes with fallback strategies. Support blend modes on groups and individual layers.",
+  "title": "Figma Blend Mode Converter",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 21,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694863-b0k8u5uhi",
+  "descriptionHistory": [
+    {
+      "description": "Convert Figma blend modes to CSS mix-blend-mode values. Handle unsupported blend modes with fallback strategies. Support blend modes on groups and individual layers.",
+      "timestamp": "2026-01-19T17:44:54.863Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:19:28.981Z",
+  "updatedAt": "2026-01-19T18:19:29.658Z"
+}

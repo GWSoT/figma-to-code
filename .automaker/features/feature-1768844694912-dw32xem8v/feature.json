@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Save and load project configurations including: target framework, CSS approach, component library, code style, and naming conventions. Support configuration templates. Share configurations across team.",
+  "title": "Project Configuration Manager",
+  "dependencies": [
+    "target-framework-selection-interface",
+    "css-framework-selection-interface"
+  ],
+  "priority": 78,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694912-dw32xem8v",
+  "descriptionHistory": [
+    {
+      "description": "Save and load project configurations including: target framework, CSS approach, component library, code style, and naming conventions. Support configuration templates. Share configurations across team.",
+      "timestamp": "2026-01-19T17:44:54.912Z",
+      "source": "initial"
+    }
+  ]
+}

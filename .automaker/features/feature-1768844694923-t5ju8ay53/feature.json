@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Real-time progress display during conversion. Show current step and estimated time remaining. Display intermediate results as they become available. Support cancellation with partial output.",
+  "title": "Conversion Progress Indicator",
+  "dependencies": [
+    "agentic-task-orchestrator"
+  ],
+  "priority": 90,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694923-t5ju8ay53",
+  "descriptionHistory": [
+    {
+      "description": "Real-time progress display during conversion. Show current step and estimated time remaining. Display intermediate results as they become available. Support cancellation with partial output.",
+      "timestamp": "2026-01-19T17:44:54.923Z",
+      "source": "initial"
+    }
+  ]
+}

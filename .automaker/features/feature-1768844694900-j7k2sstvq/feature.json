@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Orchestrate multi-step agentic workflows for complex conversions. Define task graphs with dependencies. Handle parallel execution where possible. Support human-in-the-loop checkpoints.",
+  "title": "Agentic Task Orchestrator",
+  "dependencies": [
+    "llm-integration-layer"
+  ],
+  "priority": 64,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694900-j7k2sstvq",
+  "descriptionHistory": [
+    {
+      "description": "Orchestrate multi-step agentic workflows for complex conversions. Define task graphs with dependencies. Handle parallel execution where possible. Support human-in-the-loop checkpoints.",
+      "timestamp": "2026-01-19T17:44:54.900Z",
+      "source": "initial"
+    }
+  ]
+}

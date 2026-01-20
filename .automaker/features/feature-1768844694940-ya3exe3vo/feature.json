@@ -1,0 +1,19 @@
+{
+  "category": "enhancement",
+  "description": "Figma plugin to enhance design-to-code workflow. Add code-generation metadata to layers. Preview conversion results in Figma. Quick export to web app.",
+  "title": "Figma Plugin Companion",
+  "dependencies": [
+    "figma-oauth-authentication-integration"
+  ],
+  "priority": 110,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694940-ya3exe3vo",
+  "descriptionHistory": [
+    {
+      "description": "Figma plugin to enhance design-to-code workflow. Add code-generation metadata to layers. Preview conversion results in Figma. Quick export to web app.",
+      "timestamp": "2026-01-19T17:44:54.941Z",
+      "source": "initial"
+    }
+  ]
+}

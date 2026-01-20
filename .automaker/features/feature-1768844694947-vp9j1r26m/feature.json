@@ -1,0 +1,19 @@
+{
+  "category": "enhancement",
+  "description": "Mobile app for viewing conversions and previewing on device. Support iOS and Android. Allow quick design capture and upload. Push notifications for conversion completion.",
+  "title": "Mobile App Companion",
+  "dependencies": [
+    "api-access-for-developers"
+  ],
+  "priority": 118,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694947-vp9j1r26m",
+  "descriptionHistory": [
+    {
+      "description": "Mobile app for viewing conversions and previewing on device. Support iOS and Android. Allow quick design capture and upload. Push notifications for conversion completion.",
+      "timestamp": "2026-01-19T17:44:54.948Z",
+      "source": "initial"
+    }
+  ]
+}

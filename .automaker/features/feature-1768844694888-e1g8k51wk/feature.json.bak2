@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Generate Vue 3 single-file components with Composition API. Support template syntax, reactive refs, computed properties, and watchers. Generate clean, idiomatic Vue code following best practices.",
+  "title": "Vue Code Generator",
+  "dependencies": [
+    "target-framework-selection-interface",
+    "semantic-element-detector"
+  ],
+  "priority": 51,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694888-e1g8k51wk",
+  "descriptionHistory": [
+    {
+      "description": "Generate Vue 3 single-file components with Composition API. Support template syntax, reactive refs, computed properties, and watchers. Generate clean, idiomatic Vue code following best practices.",
+      "timestamp": "2026-01-19T17:44:54.889Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:13:00.223Z"
+}

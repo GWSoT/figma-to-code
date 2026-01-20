@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Handle Figma component variants in code generation. Map variant properties to component props. Generate variant-aware styling (compound variants). Support boolean, enum, and multi-select variants.",
+  "title": "Component Variant Handler",
+  "dependencies": [
+    "prop-interface-generator"
+  ],
+  "priority": 59,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694895-kk9ebcad8",
+  "descriptionHistory": [
+    {
+      "description": "Handle Figma component variants in code generation. Map variant properties to component props. Generate variant-aware styling (compound variants). Support boolean, enum, and multi-select variants.",
+      "timestamp": "2026-01-19T17:44:54.896Z",
+      "source": "initial"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Fetch and display all teams and projects the authenticated user has access to. Cache team/project hierarchy for faster navigation. Show team member counts and project file counts. Handle permission differences between personal, team, and organization files.",
+  "title": "Figma Team and Project Discovery",
+  "dependencies": [
+    "figma-file-browser-interface"
+  ],
+  "priority": 4,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694849-4elhkdgpb",
+  "descriptionHistory": [
+    {
+      "description": "Fetch and display all teams and projects the authenticated user has access to. Cache team/project hierarchy for faster navigation. Show team member counts and project file counts. Handle permission differences between personal, team, and organization files.",
+      "timestamp": "2026-01-19T17:44:54.849Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T17:47:24.315Z"
+}

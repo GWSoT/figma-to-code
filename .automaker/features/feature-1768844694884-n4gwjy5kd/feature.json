@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Configure naming conventions: component names (PascalCase, kebab-case), CSS classes (BEM, camelCase, kebab-case), file names, variable names. Support automatic pluralization and prefixing.",
+  "title": "Naming Convention Configuration",
+  "dependencies": [
+    "code-style-configuration-panel"
+  ],
+  "priority": 46,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694884-n4gwjy5kd",
+  "descriptionHistory": [
+    {
+      "description": "Configure naming conventions: component names (PascalCase, kebab-case), CSS classes (BEM, camelCase, kebab-case), file names, variable names. Support automatic pluralization and prefixing.",
+      "timestamp": "2026-01-19T17:44:54.885Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:05:03.204Z",
+  "updatedAt": "2026-01-20T05:06:25.333Z"
+}

@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Extract all defined styles from Figma files: color styles, text styles, effect styles, and grid styles. Map style IDs to their definitions. Track style usage across the document. Support external styles from team libraries.",
+  "title": "Figma Style Definitions Extractor",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 11,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694855-np8ue7rlh",
+  "descriptionHistory": [
+    {
+      "description": "Extract all defined styles from Figma files: color styles, text styles, effect styles, and grid styles. Map style IDs to their definitions. Track style usage across the document. Support external styles from team libraries.",
+      "timestamp": "2026-01-19T17:44:54.855Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:06:24.494Z",
+  "updatedAt": "2026-01-19T18:06:24.679Z"
+}

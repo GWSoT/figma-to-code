@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Parse Figma constraint settings (left, right, top, bottom, center, scale) for non-auto-layout frames. Translate constraints to appropriate CSS positioning strategies. Handle mixed constraint modes within parent frames.",
+  "title": "Figma Constraints Parser",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 16,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694859-pj7t713cb",
+  "descriptionHistory": [
+    {
+      "description": "Parse Figma constraint settings (left, right, top, bottom, center, scale) for non-auto-layout frames. Translate constraints to appropriate CSS positioning strategies. Handle mixed constraint modes within parent frames.",
+      "timestamp": "2026-01-19T17:44:54.859Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:11:29.841Z",
+  "updatedAt": "2026-01-19T18:11:30.466Z"
+}

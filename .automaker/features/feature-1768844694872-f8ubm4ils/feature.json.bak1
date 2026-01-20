@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Identify interactive elements: buttons, links, form inputs, toggles, sliders. Detect hover/pressed/disabled states from component variants. Map interactions to appropriate HTML elements and ARIA roles.",
+  "title": "Interactive Element Identifier",
+  "dependencies": [
+    "semantic-element-detector",
+    "figma-instance-resolution-engine"
+  ],
+  "priority": 32,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694872-f8ubm4ils",
+  "descriptionHistory": [
+    {
+      "description": "Identify interactive elements: buttons, links, form inputs, toggles, sliders. Detect hover/pressed/disabled states from component variants. Map interactions to appropriate HTML elements and ARIA roles.",
+      "timestamp": "2026-01-19T17:44:54.873Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T19:16:30.128Z",
+  "updatedAt": "2026-01-19T19:16:30.299Z"
+}

@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Generate custom hooks for reusable logic: useForm, useToggle, useModal, useBreakpoint. Extract common patterns into hooks automatically. Support hook dependencies and cleanup.",
+  "title": "React Hooks Generator",
+  "dependencies": [
+    "react-state-management-generator"
+  ],
+  "priority": 50,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694888-xrddu0zww",
+  "descriptionHistory": [
+    {
+      "description": "Generate custom hooks for reusable logic: useForm, useToggle, useModal, useBreakpoint. Extract common patterns into hooks automatically. Support hook dependencies and cleanup.",
+      "timestamp": "2026-01-19T17:44:54.888Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:11:48.220Z"
+}

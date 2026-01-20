@@ -1,0 +1,19 @@
+{
+  "category": "enhancement",
+  "description": "Generate documentation for extracted components. Include prop documentation, usage examples, and accessibility notes. Support Markdown and JSDoc formats. Integrate with doc site generators.",
+  "title": "Documentation Generator",
+  "dependencies": [
+    "prop-interface-generator"
+  ],
+  "priority": 109,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694939-2v7xjuclj",
+  "descriptionHistory": [
+    {
+      "description": "Generate documentation for extracted components. Include prop documentation, usage examples, and accessibility notes. Support Markdown and JSDoc formats. Integrate with doc site generators.",
+      "timestamp": "2026-01-19T17:44:54.940Z",
+      "source": "initial"
+    }
+  ]
+}

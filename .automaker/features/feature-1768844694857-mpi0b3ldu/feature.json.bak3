@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Analyze spacing patterns in the design: padding, margins, gaps. Identify consistent spacing scale (4px, 8px system etc). Map spacing values to CSS custom properties. Detect spacing inconsistencies and suggest normalizations.",
+  "title": "Figma Spacing System Analyzer",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 14,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694857-mpi0b3ldu",
+  "descriptionHistory": [
+    {
+      "description": "Analyze spacing patterns in the design: padding, margins, gaps. Identify consistent spacing scale (4px, 8px system etc). Map spacing values to CSS custom properties. Detect spacing inconsistencies and suggest normalizations.",
+      "timestamp": "2026-01-19T17:44:54.858Z",
+      "source": "initial"
+    }
+  ]
+}

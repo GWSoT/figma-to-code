@@ -1,0 +1,19 @@
+{
+  "category": "enhancement",
+  "description": "Extend code generation beyond web: React Native for mobile, Flutter, SwiftUI, Jetpack Compose. Share design parsing logic across platforms. Handle platform-specific component mapping.",
+  "title": "Multi-platform Code Generation",
+  "dependencies": [
+    "code-generation-agent"
+  ],
+  "priority": 120,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694949-uz9dlqkfn",
+  "descriptionHistory": [
+    {
+      "description": "Extend code generation beyond web: React Native for mobile, Flutter, SwiftUI, Jetpack Compose. Share design parsing logic across platforms. Handle platform-specific component mapping.",
+      "timestamp": "2026-01-19T17:44:54.950Z",
+      "source": "initial"
+    }
+  ]
+}

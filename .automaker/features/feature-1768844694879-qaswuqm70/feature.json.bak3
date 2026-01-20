@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Generate appropriate ARIA attributes for identified UI patterns. Add roles, labels, descriptions, and states. Handle live regions for dynamic content. Support custom ARIA configuration per component type.",
+  "title": "ARIA Attribute Generator",
+  "dependencies": [
+    "accessibility-audit-engine",
+    "semantic-element-detector"
+  ],
+  "priority": 40,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694879-qaswuqm70",
+  "descriptionHistory": [
+    {
+      "description": "Generate appropriate ARIA attributes for identified UI patterns. Add roles, labels, descriptions, and states. Handle live regions for dynamic content. Support custom ARIA configuration per component type.",
+      "timestamp": "2026-01-19T17:44:54.879Z",
+      "source": "initial"
+    }
+  ]
+}

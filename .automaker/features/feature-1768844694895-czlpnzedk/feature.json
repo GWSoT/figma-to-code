@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Generate component prop interfaces from design variations. Identify required vs optional props. Infer prop types from usage patterns. Support default values and documentation comments.",
+  "title": "Prop Interface Generator",
+  "dependencies": [
+    "component-composition-analyzer",
+    "figma-instance-resolution-engine"
+  ],
+  "priority": 58,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694895-czlpnzedk",
+  "descriptionHistory": [
+    {
+      "description": "Generate component prop interfaces from design variations. Identify required vs optional props. Infer prop types from usage patterns. Support default values and documentation comments.",
+      "timestamp": "2026-01-19T17:44:54.895Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:36:59.505Z",
+  "updatedAt": "2026-01-20T05:36:59.764Z"
+}

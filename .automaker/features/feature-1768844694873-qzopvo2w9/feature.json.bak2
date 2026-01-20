@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Detect form layouts and input groupings. Identify labels, inputs, validation messages, and submit buttons. Generate accessible form markup with proper label associations and fieldset groupings.",
+  "title": "Form Structure Analyzer",
+  "dependencies": [
+    "interactive-element-identifier"
+  ],
+  "priority": 33,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694873-qzopvo2w9",
+  "descriptionHistory": [
+    {
+      "description": "Detect form layouts and input groupings. Identify labels, inputs, validation messages, and submit buttons. Generate accessible form markup with proper label associations and fieldset groupings.",
+      "timestamp": "2026-01-19T17:44:54.873Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T19:16:30.303Z"
+}

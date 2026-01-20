@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Manage LLM context window limits intelligently. Prioritize most relevant design information. Chunk large designs for multi-turn generation. Track token usage and optimize for cost.",
+  "title": "Context Window Manager",
+  "dependencies": [
+    "llm-integration-layer"
+  ],
+  "priority": 63,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694899-nbuk8m8xr",
+  "descriptionHistory": [
+    {
+      "description": "Manage LLM context window limits intelligently. Prioritize most relevant design information. Chunk large designs for multi-turn generation. Track token usage and optimize for cost.",
+      "timestamp": "2026-01-19T17:44:54.899Z",
+      "source": "initial"
+    }
+  ]
+}

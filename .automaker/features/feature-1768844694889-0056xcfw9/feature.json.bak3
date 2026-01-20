@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Generate Svelte components with reactive declarations. Support Svelte template syntax, stores, actions, and transitions. Generate clean, idiomatic Svelte code.",
+  "title": "Svelte Code Generator",
+  "dependencies": [
+    "target-framework-selection-interface",
+    "semantic-element-detector"
+  ],
+  "priority": 52,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694889-0056xcfw9",
+  "descriptionHistory": [
+    {
+      "description": "Generate Svelte components with reactive declarations. Support Svelte template syntax, stores, actions, and transitions. Generate clean, idiomatic Svelte code.",
+      "timestamp": "2026-01-19T17:44:54.889Z",
+      "source": "initial"
+    }
+  ]
+}

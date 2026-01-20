@@ -1,0 +1,17 @@
+{
+  "category": "feature",
+  "description": "Allow users to select target framework for code generation: React, Vue, Angular, Svelte, HTML/CSS, or React Native. Show framework-specific options and explain tradeoffs. Remember user preferences across sessions.",
+  "title": "Target Framework Selection Interface",
+  "dependencies": [],
+  "priority": 42,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694881-r8z0cv4in",
+  "descriptionHistory": [
+    {
+      "description": "Allow users to select target framework for code generation: React, Vue, Angular, Svelte, HTML/CSS, or React Native. Show framework-specific options and explain tradeoffs. Remember user preferences across sessions.",
+      "timestamp": "2026-01-19T17:44:54.881Z",
+      "source": "initial"
+    }
+  ]
+}

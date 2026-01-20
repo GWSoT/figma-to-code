@@ -1,0 +1,18 @@
+{
+  "category": "feature",
+  "description": "Implement OAuth 2.0 authentication flow with Figma API. Users should be able to connect their Figma accounts securely. Store access tokens and refresh tokens in the database with proper encryption. Handle token refresh automatically when tokens expire. Support multiple Figma accounts per user for agencies/teams.",
+  "title": "Figma OAuth Authentication Integration",
+  "dependencies": [],
+  "priority": 1,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694845-4p8o7orx1",
+  "descriptionHistory": [
+    {
+      "description": "Implement OAuth 2.0 authentication flow with Figma API. Users should be able to connect their Figma accounts securely. Store access tokens and refresh tokens in the database with proper encryption. Handle token refresh automatically when tokens expire. Support multiple Figma accounts per user for agencies/teams.",
+      "timestamp": "2026-01-19T17:44:54.845Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T17:45:48.310Z"
+}

@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Identify navigation patterns: top nav, sidebar nav, breadcrumbs, tabs, pagination. Detect active states and hierarchy. Generate semantic nav markup with proper ARIA landmarks.",
+  "title": "Navigation Pattern Detector",
+  "dependencies": [
+    "interactive-element-identifier"
+  ],
+  "priority": 34,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694874-nna98s82k",
+  "descriptionHistory": [
+    {
+      "description": "Identify navigation patterns: top nav, sidebar nav, breadcrumbs, tabs, pagination. Detect active states and hierarchy. Generate semantic nav markup with proper ARIA landmarks.",
+      "timestamp": "2026-01-19T17:44:54.874Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T19:24:22.690Z",
+  "updatedAt": "2026-01-19T19:35:05.038Z"
+}

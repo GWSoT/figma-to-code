@@ -1,0 +1,19 @@
+{
+  "category": "enhancement",
+  "description": "Allow users to create custom plugins for specialized conversions. Provide plugin API and SDK. Support plugin marketplace. Handle plugin sandboxing for security.",
+  "title": "Custom Plugin System",
+  "dependencies": [
+    "api-access-for-developers"
+  ],
+  "priority": 115,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694944-1ykjhjrjw",
+  "descriptionHistory": [
+    {
+      "description": "Allow users to create custom plugins for specialized conversions. Provide plugin API and SDK. Support plugin marketplace. Handle plugin sandboxing for security.",
+      "timestamp": "2026-01-19T17:44:54.945Z",
+      "source": "initial"
+    }
+  ]
+}

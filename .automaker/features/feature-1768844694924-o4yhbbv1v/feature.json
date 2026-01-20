@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Guided onboarding for new users. Step-by-step Figma connection setup. Sample project walkthrough. Feature discovery tooltips. Quick-start templates.",
+  "title": "User Onboarding Flow",
+  "dependencies": [
+    "figma-oauth-authentication-integration"
+  ],
+  "priority": 91,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694924-o4yhbbv1v",
+  "descriptionHistory": [
+    {
+      "description": "Guided onboarding for new users. Step-by-step Figma connection setup. Sample project walkthrough. Feature discovery tooltips. Quick-start templates.",
+      "timestamp": "2026-01-19T17:44:54.924Z",
+      "source": "initial"
+    }
+  ]
+}

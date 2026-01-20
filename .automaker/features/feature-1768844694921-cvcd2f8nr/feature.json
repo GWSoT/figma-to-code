@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Track and display usage metrics: conversions completed, components generated, time saved estimates. Show trends over time. Support team-level analytics for enterprise.",
+  "title": "Usage Analytics Dashboard",
+  "dependencies": [
+    "conversion-history-tracker"
+  ],
+  "priority": 88,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694921-cvcd2f8nr",
+  "descriptionHistory": [
+    {
+      "description": "Track and display usage metrics: conversions completed, components generated, time saved estimates. Show trends over time. Support team-level analytics for enterprise.",
+      "timestamp": "2026-01-19T17:44:54.921Z",
+      "source": "initial"
+    }
+  ]
+}

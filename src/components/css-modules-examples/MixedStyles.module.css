@@ -1,0 +1,189 @@
+/**
+ * Mixed Styles Module
+ *
+ * Demonstrates using :global() selector within a CSS Module
+ * for styles that need to target non-scoped class names.
+ *
+ * Use cases:
+ * - Styling third-party component children
+ * - Targeting classes added dynamically by JS libraries
+ * - Working with CMS-generated HTML
+ */
+
+/* Scoped wrapper class */
+.container {
+  position: relative;
+}
+
+/*
+ * :global() selector prevents class name hashing
+ * Useful for targeting classes from external libraries
+ */
+.container :global(.third-party-class) {
+  /* This targets actual .third-party-class, not a hashed version */
+  color: var(--foreground);
+}
+
+/*
+ * You can mix scoped and global selectors
+ * Only the :global() parts remain unhashed
+ */
+.wrapper :global(.external-modal) .innerContent {
+  /* .wrapper and .innerContent are scoped (hashed) */
+  /* .external-modal remains as-is */
+  padding: 1rem;
+}
+
+/*
+ * Target global state classes (often added by JS)
+ * Common pattern for libraries like react-select, react-datepicker, etc.
+ */
+.selectWrapper :global(.react-select__control) {
+  border-color: var(--border);
+  background-color: var(--background);
+}
+
+.selectWrapper :global(.react-select__control--is-focused) {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.selectWrapper :global(.react-select__menu) {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+}
+
+.selectWrapper :global(.react-select__option--is-selected) {
+  background-color: var(--primary);
+}
+
+.selectWrapper :global(.react-select__option--is-focused) {
+  background-color: var(--accent);
+}
+
+/*
+ * Targeting data attributes (often used by headless UI libraries)
+ */
+.dropdown :global([data-state="open"]) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown :global([data-state="closed"]) {
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+}
+
+/*
+ * Working with Radix UI primitives
+ */
+.dialogOverlay :global([data-radix-portal]) {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+/*
+ * Styling markdown/CMS content where class names aren't known
+ */
+.markdownContent :global(h1),
+.markdownContent :global(h2),
+.markdownContent :global(h3) {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.markdownContent :global(h1) {
+  font-size: 2rem;
+}
+
+.markdownContent :global(h2) {
+  font-size: 1.5rem;
+}
+
+.markdownContent :global(h3) {
+  font-size: 1.25rem;
+}
+
+.markdownContent :global(p) {
+  margin-bottom: 1em;
+  line-height: 1.7;
+}
+
+.markdownContent :global(code) {
+  background-color: var(--muted);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.markdownContent :global(pre) {
+  background-color: var(--muted);
+  padding: 1rem;
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+.markdownContent :global(pre code) {
+  background-color: transparent;
+  padding: 0;
+}
+
+.markdownContent :global(a) {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.markdownContent :global(a:hover) {
+  text-decoration: none;
+}
+
+.markdownContent :global(ul),
+.markdownContent :global(ol) {
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.markdownContent :global(li) {
+  margin-bottom: 0.25em;
+}
+
+.markdownContent :global(blockquote) {
+  border-left: 4px solid var(--border);
+  padding-left: 1em;
+  margin: 1em 0;
+  font-style: italic;
+  color: var(--muted-foreground);
+}
+
+.markdownContent :global(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.markdownContent :global(th),
+.markdownContent :global(td) {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.markdownContent :global(th) {
+  background-color: var(--muted);
+  font-weight: 600;
+}
+
+/*
+ * Define a fully global block within a module using @global rule
+ */
+:global {
+  .css-modules-demo-global {
+    /* This class is fully global */
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+  }
+}

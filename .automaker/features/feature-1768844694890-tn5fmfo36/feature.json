@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Generate semantic HTML5 markup with accompanying CSS. Support CSS custom properties, modern layout (flexbox, grid), and responsive design. No framework dependencies for simple projects.",
+  "title": "HTML/CSS Code Generator",
+  "dependencies": [
+    "target-framework-selection-interface",
+    "semantic-element-detector"
+  ],
+  "priority": 53,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694890-tn5fmfo36",
+  "descriptionHistory": [
+    {
+      "description": "Generate semantic HTML5 markup with accompanying CSS. Support CSS custom properties, modern layout (flexbox, grid), and responsive design. No framework dependencies for simple projects.",
+      "timestamp": "2026-01-19T17:44:54.891Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:16:45.224Z",
+  "updatedAt": "2026-01-20T05:18:14.512Z"
+}

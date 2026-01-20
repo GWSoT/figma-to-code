@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Generate TypeScript interfaces for React components: props, state, context. Infer types from design data where possible. Support strict mode compliance. Generate proper generic types for reusable components.",
+  "title": "React TypeScript Integration",
+  "dependencies": [
+    "react-code-generator"
+  ],
+  "priority": 48,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694886-ph6lpde8z",
+  "descriptionHistory": [
+    {
+      "description": "Generate TypeScript interfaces for React components: props, state, context. Infer types from design data where possible. Support strict mode compliance. Generate proper generic types for reusable components.",
+      "timestamp": "2026-01-19T17:44:54.886Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:08:03.206Z",
+  "updatedAt": "2026-01-20T05:08:04.379Z"
+}

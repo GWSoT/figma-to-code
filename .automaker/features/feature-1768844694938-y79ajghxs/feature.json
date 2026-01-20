@@ -1,0 +1,20 @@
+{
+  "category": "enhancement",
+  "description": "Generate end-to-end tests for user flows. Support Playwright or Cypress frameworks. Cover navigation, form submission, and key interactions. Generate page objects from components.",
+  "title": "E2E Test Generation",
+  "dependencies": [
+    "unit-test-generation",
+    "navigation-pattern-detector"
+  ],
+  "priority": 108,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694938-y79ajghxs",
+  "descriptionHistory": [
+    {
+      "description": "Generate end-to-end tests for user flows. Support Playwright or Cypress frameworks. Cover navigation, form submission, and key interactions. Generate page objects from components.",
+      "timestamp": "2026-01-19T17:44:54.939Z",
+      "source": "initial"
+    }
+  ]
+}

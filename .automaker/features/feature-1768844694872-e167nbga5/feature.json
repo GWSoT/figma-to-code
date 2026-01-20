@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Identify semantic HTML elements from design patterns: buttons, inputs, links, headings, paragraphs, lists, images. Use node naming, styling, and context to make intelligent element choices. Support customizable detection rules.",
+  "title": "Semantic Element Detector",
+  "dependencies": [
+    "layout-inference-engine"
+  ],
+  "priority": 31,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694872-e167nbga5",
+  "descriptionHistory": [
+    {
+      "description": "Identify semantic HTML elements from design patterns: buttons, inputs, links, headings, paragraphs, lists, images. Use node naming, styling, and context to make intelligent element choices. Support customizable detection rules.",
+      "timestamp": "2026-01-19T17:44:54.872Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T19:08:07.647Z",
+  "updatedAt": "2026-01-19T19:09:30.743Z"
+}

@@ -1,0 +1,19 @@
+{
+  "category": "enhancement",
+  "description": "Deep integration with Figma Dev Mode features. Import ready-for-dev specifications. Support code snippets from Dev Mode. Sync inspection data bidirectionally.",
+  "title": "Figma Dev Mode Integration",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 119,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694949-s2j9rhnl0",
+  "descriptionHistory": [
+    {
+      "description": "Deep integration with Figma Dev Mode features. Import ready-for-dev specifications. Support code snippets from Dev Mode. Sync inspection data bidirectionally.",
+      "timestamp": "2026-01-19T17:44:54.949Z",
+      "source": "initial"
+    }
+  ]
+}

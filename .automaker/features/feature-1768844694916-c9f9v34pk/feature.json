@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Command-line interface for design-to-code conversion. Support headless conversion with configuration files. Enable CI/CD integration for automated design sync. Output progress and errors to terminal.",
+  "title": "CLI Integration",
+  "dependencies": [
+    "export-options-panel"
+  ],
+  "priority": 82,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694916-c9f9v34pk",
+  "descriptionHistory": [
+    {
+      "description": "Command-line interface for design-to-code conversion. Support headless conversion with configuration files. Enable CI/CD integration for automated design sync. Output progress and errors to terminal.",
+      "timestamp": "2026-01-19T17:44:54.916Z",
+      "source": "initial"
+    }
+  ]
+}

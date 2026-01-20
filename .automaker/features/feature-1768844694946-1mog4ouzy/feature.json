@@ -1,0 +1,19 @@
+{
+  "category": "enhancement",
+  "description": "Enable offline access to previously loaded Figma files. Cache conversion results locally. Sync changes when back online. Handle conflict resolution.",
+  "title": "Offline Mode Support",
+  "dependencies": [
+    "figma-file-metadata-fetcher"
+  ],
+  "priority": 117,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694946-1mog4ouzy",
+  "descriptionHistory": [
+    {
+      "description": "Enable offline access to previously loaded Figma files. Cache conversion results locally. Sync changes when back online. Handle conflict resolution.",
+      "timestamp": "2026-01-19T17:44:54.947Z",
+      "source": "initial"
+    }
+  ]
+}

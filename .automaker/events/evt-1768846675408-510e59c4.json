@@ -1,0 +1,10 @@
+{
+  "id": "evt-1768846675408-510e59c4",
+  "trigger": "feature_success",
+  "timestamp": "2026-01-19T18:17:55.408Z",
+  "projectPath": "/home/rainman/figma-to-code/figma-to-code",
+  "projectName": "figma-to-code",
+  "featureId": "feature-1768844694861-xxwag5f5b",
+  "error": "Feature completed in 39s - auto-verified",
+  "passes": true
+}

@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "REST and GraphQL API for programmatic access. API key management with scopes. Rate limiting and usage tracking. Comprehensive API documentation.",
+  "title": "API Access for Developers",
+  "dependencies": [
+    "usage-limits-and-quotas"
+  ],
+  "priority": 99,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694931-dcj2wbld4",
+  "descriptionHistory": [
+    {
+      "description": "REST and GraphQL API for programmatic access. API key management with scopes. Rate limiting and usage tracking. Comprehensive API documentation.",
+      "timestamp": "2026-01-19T17:44:54.931Z",
+      "source": "initial"
+    }
+  ]
+}

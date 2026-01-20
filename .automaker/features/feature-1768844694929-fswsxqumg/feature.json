@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Tiered subscription plans: free, pro, enterprise. Usage-based billing for conversions. Stripe integration for payments. Plan upgrade/downgrade flows.",
+  "title": "Subscription and Billing System",
+  "dependencies": [
+    "usage-analytics-dashboard"
+  ],
+  "priority": 97,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694929-fswsxqumg",
+  "descriptionHistory": [
+    {
+      "description": "Tiered subscription plans: free, pro, enterprise. Usage-based billing for conversions. Stripe integration for payments. Plan upgrade/downgrade flows.",
+      "timestamp": "2026-01-19T17:44:54.929Z",
+      "source": "initial"
+    }
+  ]
+}

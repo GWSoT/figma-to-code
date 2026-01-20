@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Parse corner radius values including individual corner control and smoothing (iOS-style corners). Convert to CSS border-radius. Handle smoothed corners with SVG path approximation when needed.",
+  "title": "Figma Corner Radius Handler",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 25,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694867-ij64olgt2",
+  "descriptionHistory": [
+    {
+      "description": "Parse corner radius values including individual corner control and smoothing (iOS-style corners). Convert to CSS border-radius. Handle smoothed corners with SVG path approximation when needed.",
+      "timestamp": "2026-01-19T17:44:54.867Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:45:16.266Z"
+}

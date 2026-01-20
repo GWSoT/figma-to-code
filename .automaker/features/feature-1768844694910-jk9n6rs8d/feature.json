@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Display all exported assets with preview thumbnails. Show asset metadata (size, format, usage). Allow re-export with different settings. Track asset references in code.",
+  "title": "Asset Management Panel",
+  "dependencies": [
+    "asset-cdn-upload-pipeline"
+  ],
+  "priority": 76,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694910-jk9n6rs8d",
+  "descriptionHistory": [
+    {
+      "description": "Display all exported assets with preview thumbnails. Show asset metadata (size, format, usage). Allow re-export with different settings. Track asset references in code.",
+      "timestamp": "2026-01-19T17:44:54.911Z",
+      "source": "initial"
+    }
+  ]
+}

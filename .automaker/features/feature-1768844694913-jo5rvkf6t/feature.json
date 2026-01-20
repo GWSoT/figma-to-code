@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Configure export settings: file structure, component organization, asset handling, README generation. Preview export structure before download. Support incremental export of changes.",
+  "title": "Export Options Panel",
+  "dependencies": [
+    "project-configuration-manager"
+  ],
+  "priority": 79,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694913-jo5rvkf6t",
+  "descriptionHistory": [
+    {
+      "description": "Configure export settings: file structure, component organization, asset handling, README generation. Preview export structure before download. Support incremental export of changes.",
+      "timestamp": "2026-01-19T17:44:54.913Z",
+      "source": "initial"
+    }
+  ]
+}

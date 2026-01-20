@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Parse Figma auto-layout properties and translate to flexbox/grid concepts. Handle primary axis direction, alignment, spacing modes, padding, and wrap behavior. Support nested auto-layouts with mixed configurations.",
+  "title": "Figma Auto-Layout Parser",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 15,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694858-o313dhsyh",
+  "descriptionHistory": [
+    {
+      "description": "Parse Figma auto-layout properties and translate to flexbox/grid concepts. Handle primary axis direction, alignment, spacing modes, padding, and wrap behavior. Support nested auto-layouts with mixed configurations.",
+      "timestamp": "2026-01-19T17:44:54.858Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:10:17.565Z",
+  "updatedAt": "2026-01-19T18:11:28.025Z"
+}

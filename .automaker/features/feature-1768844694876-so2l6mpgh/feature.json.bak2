@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Identify modal dialogs, popovers, tooltips, and dropdown overlays. Detect backdrop layers and positioning context. Generate proper ARIA markup for accessibility. Handle focus trap requirements.",
+  "title": "Modal and Overlay Detector",
+  "dependencies": [
+    "semantic-element-detector"
+  ],
+  "priority": 36,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694876-so2l6mpgh",
+  "descriptionHistory": [
+    {
+      "description": "Identify modal dialogs, popovers, tooltips, and dropdown overlays. Detect backdrop layers and positioning context. Generate proper ARIA markup for accessibility. Handle focus trap requirements.",
+      "timestamp": "2026-01-19T17:44:54.876Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T19:25:55.687Z"
+}

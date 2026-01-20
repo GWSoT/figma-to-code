@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Allow users to annotate generated code with custom directives. Support preserve blocks that survive regeneration. Enable component-level customization hints. Parse annotations during merge.",
+  "title": "Custom Code Annotation System",
+  "dependencies": [
+    "code-merge-engine"
+  ],
+  "priority": 87,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694920-nv99sng39",
+  "descriptionHistory": [
+    {
+      "description": "Allow users to annotate generated code with custom directives. Support preserve blocks that survive regeneration. Enable component-level customization hints. Parse annotations during merge.",
+      "timestamp": "2026-01-19T17:44:54.921Z",
+      "source": "initial"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Integrated code editor with syntax highlighting for all supported languages. Support find/replace, multiple cursors, and code folding. Include error highlighting and autocomplete.",
+  "title": "Code Editor with Syntax Highlighting",
+  "dependencies": [
+    "split-view-editor-interface"
+  ],
+  "priority": 72,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694907-e47i1dnbj",
+  "descriptionHistory": [
+    {
+      "description": "Integrated code editor with syntax highlighting for all supported languages. Support find/replace, multiple cursors, and code folding. Include error highlighting and autocomplete.",
+      "timestamp": "2026-01-19T17:44:54.908Z",
+      "source": "initial"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Identify repeated card layouts and list patterns. Detect the repeating unit and its variations. Generate appropriate list markup with semantic meaning. Support both grid and linear arrangements.",
+  "title": "Card and List Pattern Detector",
+  "dependencies": [
+    "layout-inference-engine"
+  ],
+  "priority": 35,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694875-ihvbfq697",
+  "descriptionHistory": [
+    {
+      "description": "Identify repeated card layouts and list patterns. Detect the repeating unit and its variations. Generate appropriate list markup with semantic meaning. Support both grid and linear arrangements.",
+      "timestamp": "2026-01-19T17:44:54.875Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T19:25:29.257Z"
+}

@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Enforce plan-based usage limits: conversions per month, team members, storage. Display usage warnings approaching limits. Support quota overage handling.",
+  "title": "Usage Limits and Quotas",
+  "dependencies": [
+    "subscription-and-billing-system"
+  ],
+  "priority": 98,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694930-cjcstuhm6",
+  "descriptionHistory": [
+    {
+      "description": "Enforce plan-based usage limits: conversions per month, team members, storage. Display usage warnings approaching limits. Support quota overage handling.",
+      "timestamp": "2026-01-19T17:44:54.930Z",
+      "source": "initial"
+    }
+  ]
+}

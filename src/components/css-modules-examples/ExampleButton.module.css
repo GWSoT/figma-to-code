@@ -1,0 +1,184 @@
+/**
+ * ExampleButton CSS Module
+ *
+ * Demonstrates CSS Module composition feature:
+ * - composes from shared module
+ * - composes from local classes
+ * - Proper BEM-like naming
+ */
+
+/* Import shared utilities via composition */
+
+/* Base button styles */
+.button {
+  composes: flexCenter from "./shared.module.css";
+  composes: transitionAll from "./shared.module.css";
+  composes: focusRing from "./shared.module.css";
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  font-weight: 500;
+  border: 1px solid transparent;
+  user-select: none;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ========== Variant Styles ========== */
+
+.primary {
+  composes: button;
+  background-color: var(--primary, #3b82f6);
+  color: var(--primary-foreground, #ffffff);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--primary-hover, #2563eb);
+}
+
+.secondary {
+  composes: button;
+  background-color: var(--secondary, #f1f5f9);
+  color: var(--secondary-foreground, #0f172a);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--secondary-hover, #e2e8f0);
+}
+
+.destructive {
+  composes: button;
+  background-color: var(--destructive, #ef4444);
+  color: var(--destructive-foreground, #ffffff);
+}
+
+.destructive:hover:not(:disabled) {
+  background-color: var(--destructive-hover, #dc2626);
+}
+
+.outline {
+  composes: button;
+  background-color: transparent;
+  border-color: var(--border, #e2e8f0);
+  color: var(--foreground, #0f172a);
+}
+
+.outline:hover:not(:disabled) {
+  background-color: var(--accent, #f1f5f9);
+  border-color: var(--accent, #f1f5f9);
+}
+
+.ghost {
+  composes: button;
+  background-color: transparent;
+  color: var(--foreground, #0f172a);
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--accent, #f1f5f9);
+}
+
+.link {
+  composes: button;
+  background-color: transparent;
+  color: var(--primary, #3b82f6);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.link:hover:not(:disabled) {
+  text-decoration: none;
+}
+
+/* ========== Size Styles ========== */
+
+.small {
+  height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.75rem;
+  border-radius: calc(var(--radius, 0.5rem) * 0.75);
+  gap: 0.25rem;
+}
+
+.medium {
+  height: 2.5rem;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  border-radius: var(--radius, 0.5rem);
+  gap: 0.5rem;
+}
+
+.large {
+  height: 3rem;
+  padding: 0 1.5rem;
+  font-size: 1rem;
+  border-radius: calc(var(--radius, 0.5rem) * 1.25);
+  gap: 0.5rem;
+}
+
+.icon {
+  /* Icon-only button - square aspect ratio */
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+/* ========== Icon Styles ========== */
+
+.iconWrapper {
+  composes: flexCenter from "./shared.module.css";
+  flex-shrink: 0;
+}
+
+.iconLeft {
+  composes: iconWrapper;
+  margin-right: 0.25rem;
+}
+
+.iconRight {
+  composes: iconWrapper;
+  margin-left: 0.25rem;
+}
+
+/* ========== Loading State ========== */
+
+.loading {
+  position: relative;
+  color: transparent;
+}
+
+.loading > * {
+  visibility: hidden;
+}
+
+.spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinnerIcon {
+  width: 1em;
+  height: 1em;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========== Full Width ========== */
+
+.fullWidth {
+  width: 100%;
+}

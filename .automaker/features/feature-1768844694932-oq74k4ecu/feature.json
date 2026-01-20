@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Send webhooks for conversion events. Configurable webhook endpoints per event type. Webhook signature verification. Retry logic for failed deliveries.",
+  "title": "Webhook Event System",
+  "dependencies": [
+    "api-access-for-developers"
+  ],
+  "priority": 100,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694932-oq74k4ecu",
+  "descriptionHistory": [
+    {
+      "description": "Send webhooks for conversion events. Configurable webhook endpoints per event type. Webhook signature verification. Retry logic for failed deliveries.",
+      "timestamp": "2026-01-19T17:44:54.932Z",
+      "source": "initial"
+    }
+  ]
+}

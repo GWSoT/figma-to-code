@@ -1,0 +1,20 @@
+{
+  "category": "enhancement",
+  "description": "Allow multiple users to view and edit conversion simultaneously. Show cursor positions and selections. Support real-time chat. Handle concurrent edits gracefully.",
+  "title": "Real-time Collaboration",
+  "dependencies": [
+    "team-workspace-management",
+    "split-view-editor-interface"
+  ],
+  "priority": 113,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694943-uwbocerkp",
+  "descriptionHistory": [
+    {
+      "description": "Allow multiple users to view and edit conversion simultaneously. Show cursor positions and selections. Support real-time chat. Handle concurrent edits gracefully.",
+      "timestamp": "2026-01-19T17:44:54.943Z",
+      "source": "initial"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Generate React functional components with hooks. Support JSX syntax, proper prop typing with TypeScript, event handlers, and conditional rendering. Generate clean, idiomatic React code following best practices.",
+  "title": "React Code Generator",
+  "dependencies": [
+    "target-framework-selection-interface",
+    "semantic-element-detector"
+  ],
+  "priority": 47,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694885-85k5iev7e",
+  "descriptionHistory": [
+    {
+      "description": "Generate React functional components with hooks. Support JSX syntax, proper prop typing with TypeScript, event handlers, and conditional rendering. Generate clean, idiomatic React code following best practices.",
+      "timestamp": "2026-01-19T17:44:54.885Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:06:27.200Z",
+  "updatedAt": "2026-01-20T05:06:28.103Z"
+}

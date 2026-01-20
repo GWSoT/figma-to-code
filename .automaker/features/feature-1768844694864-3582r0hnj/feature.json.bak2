@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Process masking and clipping relationships in Figma. Convert to CSS clip-path, mask-image, or overflow:hidden as appropriate. Handle inverted masks and alpha masks.",
+  "title": "Figma Mask and Clip Handler",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 22,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694864-3582r0hnj",
+  "descriptionHistory": [
+    {
+      "description": "Process masking and clipping relationships in Figma. Convert to CSS clip-path, mask-image, or overflow:hidden as appropriate. Handle inverted masks and alpha masks.",
+      "timestamp": "2026-01-19T17:44:54.864Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:27:20.354Z"
+}

@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Configure code style preferences: indentation, quotes, semicolons, trailing commas, max line length. Support ESLint/Prettier config import. Apply consistent formatting to all generated code.",
+  "title": "Code Style Configuration Panel",
+  "dependencies": [
+    "target-framework-selection-interface"
+  ],
+  "priority": 45,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694884-kz1kt515q",
+  "descriptionHistory": [
+    {
+      "description": "Configure code style preferences: indentation, quotes, semicolons, trailing commas, max line length. Support ESLint/Prettier config import. Apply consistent formatting to all generated code.",
+      "timestamp": "2026-01-19T17:44:54.884Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:03:51.197Z",
+  "updatedAt": "2026-01-20T05:03:52.670Z"
+}

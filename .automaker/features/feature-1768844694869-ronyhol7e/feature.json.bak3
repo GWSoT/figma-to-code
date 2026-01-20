@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Process rich text with inline links, styled spans, and paragraph breaks. Generate proper HTML structure with semantic elements. Handle OpenType features if present.",
+  "title": "Figma Rich Text Processor",
+  "dependencies": [
+    "figma-text-node-parser"
+  ],
+  "priority": 28,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694869-ronyhol7e",
+  "descriptionHistory": [
+    {
+      "description": "Process rich text with inline links, styled spans, and paragraph breaks. Generate proper HTML structure with semantic elements. Handle OpenType features if present.",
+      "timestamp": "2026-01-19T17:44:54.869Z",
+      "source": "initial"
+    }
+  ]
+}

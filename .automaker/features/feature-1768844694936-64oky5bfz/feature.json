@@ -1,0 +1,19 @@
+{
+  "category": "enhancement",
+  "description": "Prepare generated code for internationalization. Extract text strings to translation files. Support RTL layout detection. Handle date/number formatting patterns.",
+  "title": "Internationalization Preparation",
+  "dependencies": [
+    "figma-text-node-parser"
+  ],
+  "priority": 105,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694936-64oky5bfz",
+  "descriptionHistory": [
+    {
+      "description": "Prepare generated code for internationalization. Extract text strings to translation files. Support RTL layout detection. Handle date/number formatting patterns.",
+      "timestamp": "2026-01-19T17:44:54.936Z",
+      "source": "initial"
+    }
+  ]
+}

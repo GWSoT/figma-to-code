@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Export raster images from Figma at multiple resolutions (1x, 2x, 3x). Support PNG, JPG, and WebP formats. Handle image fills on shapes. Generate srcset markup for responsive images. Optimize images before storage.",
+  "title": "Figma Image Export Handler",
+  "dependencies": [
+    "figma-document-tree-parser"
+  ],
+  "priority": 18,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694861-uowcdhu2i",
+  "descriptionHistory": [
+    {
+      "description": "Export raster images from Figma at multiple resolutions (1x, 2x, 3x). Support PNG, JPG, and WebP formats. Handle image fills on shapes. Generate srcset markup for responsive images. Optimize images before storage.",
+      "timestamp": "2026-01-19T17:44:54.861Z",
+      "source": "initial"
+    }
+  ]
+}

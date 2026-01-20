@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Display Figma layer hierarchy in navigable tree view. Show layer types with icons. Support expand/collapse, search, and filtering. Highlight corresponding code on selection.",
+  "title": "Layer Tree Panel",
+  "dependencies": [
+    "split-view-editor-interface",
+    "figma-document-tree-parser"
+  ],
+  "priority": 74,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694909-9luhwt4jx",
+  "descriptionHistory": [
+    {
+      "description": "Display Figma layer hierarchy in navigable tree view. Show layer types with icons. Support expand/collapse, search, and filtering. Highlight corresponding code on selection.",
+      "timestamp": "2026-01-19T17:44:54.909Z",
+      "source": "initial"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Extract all typography settings: font families, sizes, weights, line heights, letter spacing. Identify typographic scale and hierarchy. Map fonts to web-safe alternatives and Google Fonts. Generate font-face declarations for custom fonts.",
+  "title": "Figma Typography System Analyzer",
+  "dependencies": [
+    "figma-style-definitions-extractor"
+  ],
+  "priority": 13,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694856-0rqpw0nq1",
+  "descriptionHistory": [
+    {
+      "description": "Extract all typography settings: font families, sizes, weights, line heights, letter spacing. Identify typographic scale and hierarchy. Map fonts to web-safe alternatives and Google Fonts. Generate font-face declarations for custom fonts.",
+      "timestamp": "2026-01-19T17:44:54.857Z",
+      "source": "initial"
+    }
+  ]
+}

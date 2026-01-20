@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Resolve all component instances to their main components. Handle nested instances and overrides at multiple levels. Track which properties are overridden vs inherited. Support external component references from linked libraries.",
+  "title": "Figma Instance Resolution Engine",
+  "dependencies": [
+    "figma-component-library-extractor"
+  ],
+  "priority": 10,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694854-w0vmuncwk",
+  "descriptionHistory": [
+    {
+      "description": "Resolve all component instances to their main components. Handle nested instances and overrides at multiple levels. Track which properties are overridden vs inherited. Support external component references from linked libraries.",
+      "timestamp": "2026-01-19T17:44:54.855Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:02:18.341Z"
+}

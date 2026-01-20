@@ -1,0 +1,19 @@
+{
+  "category": "feature",
+  "description": "Curated library of conversion templates for common UI patterns. Templates for landing pages, dashboards, forms, e-commerce. Customizable templates with configuration options.",
+  "title": "Template Library",
+  "dependencies": [
+    "project-configuration-manager"
+  ],
+  "priority": 93,
+  "status": "backlog",
+  "branchName": "master",
+  "id": "feature-1768844694926-4ul0xjev2",
+  "descriptionHistory": [
+    {
+      "description": "Curated library of conversion templates for common UI patterns. Templates for landing pages, dashboards, forms, e-commerce. Customizable templates with configuration options.",
+      "timestamp": "2026-01-19T17:44:54.926Z",
+      "source": "initial"
+    }
+  ]
+}

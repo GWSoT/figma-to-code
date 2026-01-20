@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Analyze all colors used in the design including fills, strokes, shadows, and gradients. Group similar colors within configurable threshold. Identify primary, secondary, and accent colors. Map to nearest named CSS colors for reference. Generate color contrast accessibility report.",
+  "title": "Figma Color Palette Analyzer",
+  "dependencies": [
+    "figma-style-definitions-extractor"
+  ],
+  "priority": 12,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694856-45ydv0dsg",
+  "descriptionHistory": [
+    {
+      "description": "Analyze all colors used in the design including fills, strokes, shadows, and gradients. Group similar colors within configurable threshold. Identify primary, secondary, and accent colors. Map to nearest named CSS colors for reference. Generate color contrast accessibility report.",
+      "timestamp": "2026-01-19T17:44:54.856Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-19T18:07:35.564Z"
+}

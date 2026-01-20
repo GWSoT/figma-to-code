@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Generate Tailwind CSS class strings from design properties. Map colors to Tailwind palette or custom config. Support responsive variants, dark mode, and arbitrary values. Generate tailwind.config.js for custom design tokens.",
+  "title": "Tailwind CSS Generator",
+  "dependencies": [
+    "css-framework-selection-interface",
+    "design-token-generation-engine"
+  ],
+  "priority": 54,
+  "status": "verified",
+  "branchName": "master",
+  "id": "feature-1768844694891-5ng9l5akq",
+  "descriptionHistory": [
+    {
+      "description": "Generate Tailwind CSS class strings from design properties. Map colors to Tailwind palette or custom config. Support responsive variants, dark mode, and arbitrary values. Generate tailwind.config.js for custom design tokens.",
+      "timestamp": "2026-01-19T17:44:54.891Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T05:18:16.420Z",
+  "updatedAt": "2026-01-20T05:35:35.407Z"
+}
