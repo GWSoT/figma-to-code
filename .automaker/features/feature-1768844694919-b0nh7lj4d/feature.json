@@ -7,7 +7,7 @@
     "conversion-history-tracker"
   ],
   "priority": 85,
-  "status": "backlog",
+  "status": "verified",
   "branchName": "master",
   "id": "feature-1768844694919-b0nh7lj4d",
   "descriptionHistory": [
@@ -16,5 +16,7 @@
       "timestamp": "2026-01-19T17:44:54.919Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T08:17:59.296Z",
+  "updatedAt": "2026-01-20T08:19:28.053Z"
 }

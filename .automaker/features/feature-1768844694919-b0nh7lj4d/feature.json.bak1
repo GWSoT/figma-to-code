@@ -1,0 +1,22 @@
+{
+  "category": "feature",
+  "description": "Detect changes in Figma designs since last conversion. Highlight added, modified, and removed elements. Support incremental re-conversion of only changed portions. Send notifications for design updates.",
+  "title": "Figma Change Detection",
+  "dependencies": [
+    "figma-file-metadata-fetcher",
+    "conversion-history-tracker"
+  ],
+  "priority": 85,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694919-b0nh7lj4d",
+  "descriptionHistory": [
+    {
+      "description": "Detect changes in Figma designs since last conversion. Highlight added, modified, and removed elements. Support incremental re-conversion of only changed portions. Send notifications for design updates.",
+      "timestamp": "2026-01-19T17:44:54.919Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T08:17:59.296Z",
+  "updatedAt": "2026-01-20T08:17:59.867Z"
+}

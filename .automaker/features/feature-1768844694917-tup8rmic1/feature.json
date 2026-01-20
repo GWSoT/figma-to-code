@@ -6,7 +6,7 @@
     "cli-integration"
   ],
   "priority": 83,
-  "status": "backlog",
+  "status": "verified",
   "branchName": "master",
   "id": "feature-1768844694917-tup8rmic1",
   "descriptionHistory": [
@@ -15,5 +15,7 @@
       "timestamp": "2026-01-19T17:44:54.917Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T08:17:59.015Z",
+  "updatedAt": "2026-01-20T08:19:45.955Z"
 }

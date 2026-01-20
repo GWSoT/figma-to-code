@@ -12,6 +12,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useCallback } from "react";
 import { CodePreview, VIEWPORT_PRESETS } from "~/components/CodePreview";
 import { IntegratedCodeEditor, type EditorError } from "~/components/IntegratedCodeEditor";
+import { DesignTokenPanel, type DesignTokenWithUsage, type TokenUsage } from "~/components/DesignTokenPanel";
 import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
 import {
@@ -37,9 +38,13 @@ import {
   Settings,
   Download,
   ArrowLeft,
+  Palette,
+  FolderArchive,
 } from "lucide-react";
 import type { GeneratedFile, FrameworkType, StylingType } from "~/utils/code-generation-agent/types";
 import { Link } from "@tanstack/react-router";
+import { ExportCodeDialog } from "~/components/ExportCodeDialog";
+import type { DesignTokenExport } from "~/utils/code-export";
 
 // ============================================================================
 // Types
@@ -73,6 +78,141 @@ export const Route = createFileRoute("/dashboard/preview")({
 // ============================================================================
 // Demo/Example Files
 // ============================================================================
+
+/** Example design tokens for demonstration */
+const DEMO_TOKENS: DesignTokenWithUsage[] = [
+  {
+    name: "primary",
+    value: "#3B82F6",
+    type: "color",
+    figmaStyleName: "Primary/500",
+    description: "Primary brand color",
+    usages: [
+      { componentName: "Card", propertyName: "bg-primary", lineNumber: 95 },
+      { componentName: "Button", propertyName: "bg-primary", lineNumber: 12 },
+    ],
+  },
+  {
+    name: "secondary",
+    value: "#6B7280",
+    type: "color",
+    figmaStyleName: "Gray/500",
+    usages: [
+      { componentName: "Card", propertyName: "text-secondary" },
+    ],
+  },
+  {
+    name: "background",
+    value: "#FFFFFF",
+    type: "color",
+    figmaStyleName: "Background/Default",
+  },
+  {
+    name: "destructive",
+    value: "#EF4444",
+    type: "color",
+    figmaStyleName: "Error/500",
+  },
+  {
+    name: "text-base",
+    value: "16px",
+    type: "fontSize",
+    figmaStyleName: "Body/Regular",
+    usages: [
+      { componentName: "Card", propertyName: "text-base", lineNumber: 115 },
+    ],
+  },
+  {
+    name: "text-xl",
+    value: "20px",
+    type: "fontSize",
+    figmaStyleName: "Heading/H3",
+    usages: [
+      { componentName: "Card", propertyName: "text-xl", lineNumber: 112 },
+    ],
+  },
+  {
+    name: "text-sm",
+    value: "14px",
+    type: "fontSize",
+    figmaStyleName: "Body/Small",
+  },
+  {
+    name: "font-sans",
+    value: '"Inter", system-ui, sans-serif',
+    type: "fontFamily",
+    figmaStyleName: "Font/Primary",
+  },
+  {
+    name: "font-bold",
+    value: "700",
+    type: "fontWeight",
+    figmaStyleName: "Weight/Bold",
+  },
+  {
+    name: "font-medium",
+    value: "500",
+    type: "fontWeight",
+    figmaStyleName: "Weight/Medium",
+  },
+  {
+    name: "leading-relaxed",
+    value: "1.625",
+    type: "lineHeight",
+    figmaStyleName: "Leading/Relaxed",
+  },
+  {
+    name: "spacing-4",
+    value: "16px",
+    type: "spacing",
+    usages: [
+      { componentName: "Card", propertyName: "p-4" },
+    ],
+  },
+  {
+    name: "spacing-6",
+    value: "24px",
+    type: "spacing",
+    usages: [
+      { componentName: "Card", propertyName: "p-6", lineNumber: 111 },
+    ],
+  },
+  {
+    name: "spacing-2",
+    value: "8px",
+    type: "spacing",
+  },
+  {
+    name: "rounded-xl",
+    value: "12px",
+    type: "borderRadius",
+    figmaStyleName: "Radius/XL",
+    usages: [
+      { componentName: "Card", propertyName: "rounded-xl", lineNumber: 95 },
+    ],
+  },
+  {
+    name: "rounded-md",
+    value: "6px",
+    type: "borderRadius",
+    figmaStyleName: "Radius/MD",
+  },
+  {
+    name: "shadow-lg",
+    value: "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)",
+    type: "boxShadow",
+    figmaStyleName: "Shadow/Large",
+    usages: [
+      { componentName: "Card", propertyName: "shadow-lg", lineNumber: 95 },
+    ],
+  },
+  {
+    name: "shadow-xl",
+    value: "0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)",
+    type: "boxShadow",
+    figmaStyleName: "Shadow/XL",
+  },
+];
 
 /** Example generated files for demonstration */
 const DEMO_FILES: GeneratedFile[] = [
@@ -238,6 +378,8 @@ function PreviewPage() {
   const [activeTab, setActiveTab] = useState<string>("preview");
   const [previewReady, setPreviewReady] = useState(false);
   const [editorErrors, setEditorErrors] = useState<EditorError[]>([]);
+  const [tokens, setTokens] = useState<DesignTokenWithUsage[]>(DEMO_TOKENS);
+  const [exportDialogOpen, setExportDialogOpen] = useState(false);
 
   // Handle code changes for hot reload
   const handleCodeChange = useCallback((content: string) => {
@@ -269,11 +411,68 @@ function PreviewPage() {
     });
   }, [files]);
 
+  // Handle token editing
+  const handleTokenEdit = useCallback((token: DesignTokenWithUsage, newValue: string) => {
+    setTokens((prev) =>
+      prev.map((t) =>
+        t.name === token.name && t.type === token.type
+          ? { ...t, value: newValue }
+          : t
+      )
+    );
+  }, []);
+
+  // Handle token renaming
+  const handleTokenRename = useCallback((token: DesignTokenWithUsage, newName: string) => {
+    setTokens((prev) =>
+      prev.map((t) =>
+        t.name === token.name && t.type === token.type
+          ? { ...t, name: newName }
+          : t
+      )
+    );
+  }, []);
+
+  // Handle token deletion
+  const handleTokenDelete = useCallback((token: DesignTokenWithUsage) => {
+    setTokens((prev) =>
+      prev.filter((t) => !(t.name === token.name && t.type === token.type))
+    );
+  }, []);
+
+  // Handle usage click - navigate to the line in code
+  const handleUsageClick = useCallback((token: DesignTokenWithUsage, usage: TokenUsage) => {
+    // Find the file that contains this component
+    const targetFile = files.find((f) => f.path.includes(usage.componentName));
+    if (targetFile) {
+      setSelectedFile(targetFile);
+      setActiveTab("preview");
+      // Note: In a real implementation, we would scroll to the line number
+      console.log(`Navigate to ${usage.componentName}:${usage.lineNumber}`);
+    }
+  }, [files]);
+
   // Extract width and height from search params
   const initialWidth = search.width || 375;
   const initialHeight = search.height || 667;
 
+  // Convert tokens to export format (filter to only supported types)
+  const exportableTypes = ["color", "fontSize", "spacing", "borderRadius", "boxShadow", "fontFamily", "fontWeight", "lineHeight"] as const;
+  const exportTokens: DesignTokenExport[] = tokens
+    .filter((token) => exportableTypes.includes(token.type as typeof exportableTypes[number]))
+    .map((token) => ({
+      name: token.name,
+      value: token.value,
+      type: token.type as DesignTokenExport["type"],
+    }));
+
+  // Derive component name from first file
+  const componentName = files.length > 0
+    ? files[0].path.replace(/\.(tsx?|jsx?|vue|svelte)$/, "")
+    : "Component";
+
   return (
+    <>
     <div className="h-[calc(100vh-4rem)] flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b">
@@ -297,7 +496,16 @@ function PreviewPage() {
           </Badge>
           <Button variant="outline" size="sm" onClick={handleDownload}>
             <Download className="h-4 w-4 mr-2" />
-            Download All
+            Download Files
+          </Button>
+          <Button
+            variant="default"
+            size="sm"
+            onClick={() => setExportDialogOpen(true)}
+            data-testid="export-zip-button"
+          >
+            <FolderArchive className="h-4 w-4 mr-2" />
+            Export ZIP
           </Button>
         </div>
       </div>
@@ -313,6 +521,13 @@ function PreviewPage() {
                   <TabsTrigger value="preview" className="flex items-center gap-2">
                     <Code2 className="h-4 w-4" />
                     Code
+                  </TabsTrigger>
+                  <TabsTrigger value="tokens" className="flex items-center gap-2" data-testid="tokens-tab">
+                    <Palette className="h-4 w-4" />
+                    Tokens
+                    <Badge variant="secondary" className="text-[10px] ml-1">
+                      {tokens.length}
+                    </Badge>
                   </TabsTrigger>
                   <TabsTrigger value="settings" className="flex items-center gap-2">
                     <Settings className="h-4 w-4" />
@@ -331,6 +546,19 @@ function PreviewPage() {
                   theme="vs-dark"
                   showMinimap={true}
                   wordWrap="on"
+                />
+              </TabsContent>
+
+              <TabsContent value="tokens" className="flex-1 m-0 overflow-hidden" data-testid="tokens-tab-content">
+                <DesignTokenPanel
+                  tokens={tokens}
+                  editable={true}
+                  groupBy="type"
+                  onTokenEdit={handleTokenEdit}
+                  onTokenRename={handleTokenRename}
+                  onTokenDelete={handleTokenDelete}
+                  onUsageClick={handleUsageClick}
+                  className="h-full"
                 />
               </TabsContent>
 
@@ -380,6 +608,18 @@ function PreviewPage() {
         </ResizablePanelGroup>
       </div>
     </div>
+
+    {/* Export Code Dialog */}
+    <ExportCodeDialog
+      open={exportDialogOpen}
+      onOpenChange={setExportDialogOpen}
+      files={files}
+      componentName={componentName}
+      framework={framework}
+      styling={styling}
+      designTokens={exportTokens}
+    />
+    </>
   );
 }
 

@@ -36,6 +36,13 @@
       "when": 1768848000000,
       "tag": "0004_responsive_mappings",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1768893627088,
+      "tag": "0005_sticky_hedge_knight",
+      "breakpoints": true
     }
   ]
 }

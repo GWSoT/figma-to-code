@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Merge newly generated code with existing code preserving manual changes. Use AST-based merging for intelligent conflict resolution. Support different merge strategies per file type. Preview merge results before applying.",
+  "title": "Code Merge Engine",
+  "dependencies": [
+    "figma-change-detection"
+  ],
+  "priority": 86,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694920-4c3mjqqeo",
+  "descriptionHistory": [
+    {
+      "description": "Merge newly generated code with existing code preserving manual changes. Use AST-based merging for intelligent conflict resolution. Support different merge strategies per file type. Preview merge results before applying.",
+      "timestamp": "2026-01-19T17:44:54.920Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T08:17:59.421Z"
+}

@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "VS Code extension for in-editor design-to-code workflow. Show Figma designs in sidebar. Generate code directly into project. Support bi-directional sync.",
+  "title": "VS Code Extension Integration",
+  "dependencies": [
+    "cli-integration"
+  ],
+  "priority": 83,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694917-tup8rmic1",
+  "descriptionHistory": [
+    {
+      "description": "VS Code extension for in-editor design-to-code workflow. Show Figma designs in sidebar. Generate code directly into project. Support bi-directional sync.",
+      "timestamp": "2026-01-19T17:44:54.917Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T08:17:59.015Z"
+}

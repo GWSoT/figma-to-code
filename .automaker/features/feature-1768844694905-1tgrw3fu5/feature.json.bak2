@@ -7,7 +7,7 @@
     "html-css-code-generator"
   ],
   "priority": 70,
-  "status": "backlog",
+  "status": "in_progress",
   "branchName": "master",
   "id": "feature-1768844694905-1tgrw3fu5",
   "descriptionHistory": [
@@ -16,5 +16,6 @@
       "timestamp": "2026-01-19T17:44:54.906Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T06:56:42.738Z"
 }

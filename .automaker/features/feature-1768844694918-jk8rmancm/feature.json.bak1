@@ -1,0 +1,20 @@
+{
+  "category": "feature",
+  "description": "Track history of all conversions per user. Store conversion settings, input designs, and output code. Enable re-running past conversions with updated settings. Support version comparison.",
+  "title": "Conversion History Tracker",
+  "dependencies": [
+    "project-configuration-manager"
+  ],
+  "priority": 84,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694918-jk8rmancm",
+  "descriptionHistory": [
+    {
+      "description": "Track history of all conversions per user. Store conversion settings, input designs, and output code. Enable re-running past conversions with updated settings. Support version comparison.",
+      "timestamp": "2026-01-19T17:44:54.918Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T08:17:59.147Z"
+}

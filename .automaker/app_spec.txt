@@ -326,5 +326,29 @@
       <name>Asset Management Panel</name>
       <description>Display all exported assets with preview thumbnails. Show asset metadata (size, format, usage). Allow re-export with different settings. Track asset references in code.</description>
     </feature>
+    <feature>
+      <name>Code Preview Renderer</name>
+      <description>Render generated code in real-time preview. Support hot reloading during editing. Match Figma viewport sizes. Allow interactive testing of generated components.</description>
+    </feature>
+    <feature>
+      <name>Export Options Panel</name>
+      <description>Configure export settings: file structure, component organization, asset handling, README generation. Preview export structure before download. Support incremental export of changes.</description>
+    </feature>
+    <feature>
+      <name>Project Configuration Manager</name>
+      <description>Save and load project configurations including: target framework, CSS approach, component library, code style, and naming conventions. Support configuration templates. Share configurations across team.</description>
+    </feature>
+    <feature>
+      <name>Code Merge Engine</name>
+      <description>Merge newly generated code with existing code preserving manual changes. Use AST-based merging for intelligent conflict resolution. Support different merge strategies per file type. Preview merge results before applying.</description>
+    </feature>
+    <feature>
+      <name>Figma Change Detection</name>
+      <description>Detect changes in Figma designs since last conversion. Highlight added, modified, and removed elements. Support incremental re-conversion of only changed portions. Send notifications for design updates.</description>
+    </feature>
+    <feature>
+      <name>VS Code Extension Integration</name>
+      <description>VS Code extension for in-editor design-to-code workflow. Show Figma designs in sidebar. Generate code directly into project. Support bi-directional sync.</description>
+    </feature>
   </implemented_features>
 </project_specification>

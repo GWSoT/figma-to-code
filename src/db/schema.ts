@@ -765,3 +765,200 @@ export type CreateElementTransformationData = typeof elementTransformation.$infe
 
 export type BreakpointChange = typeof breakpointChange.$inferSelect;
 export type CreateBreakpointChangeData = typeof breakpointChange.$inferInsert;
+
+// ============================================
+// Project Configuration Tables
+// ============================================
+
+/** Code style convention options */
+export type CodeStyle = "camelCase" | "kebab-case" | "PascalCase" | "snake_case";
+
+/** Component file structure options */
+export type ComponentStructure = "flat" | "folder" | "feature-based";
+
+// Project Configuration - Stores saved configurations for code generation
+export const projectConfiguration = pgTable(
+  "project_configuration",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    // Configuration metadata
+    name: text("name").notNull(),
+    description: text("description"),
+    isDefault: boolean("is_default")
+      .$default(() => false)
+      .notNull(),
+    isTemplate: boolean("is_template")
+      .$default(() => false)
+      .notNull(),
+    // Target framework settings
+    jsFramework: text("js_framework").notNull(), // "react" | "vue" | "angular" | "svelte" | "nextjs" | "nuxt" | "vanilla"
+    cssFramework: text("css_framework").notNull(), // "vanilla-css" | "tailwind" | "css-modules" | "styled-components" | "emotion" | "scss"
+    // CSS framework-specific options (JSON)
+    cssOptions: text("css_options").notNull(), // JSON string of framework-specific options
+    // Code style settings
+    codeStyle: text("code_style")
+      .$default(() => "camelCase")
+      .notNull(), // Variable and function naming convention
+    componentNaming: text("component_naming")
+      .$default(() => "PascalCase")
+      .notNull(), // Component naming convention
+    fileNaming: text("file_naming")
+      .$default(() => "kebab-case")
+      .notNull(), // File naming convention
+    componentStructure: text("component_structure")
+      .$default(() => "folder")
+      .notNull(), // "flat" | "folder" | "feature-based"
+    // Additional code generation options (JSON)
+    additionalOptions: text("additional_options"), // JSON for extensibility
+    // Sharing settings
+    isShared: boolean("is_shared")
+      .$default(() => false)
+      .notNull(),
+    sharedWithTeam: text("shared_with_team"), // Team ID if shared with specific team
+    // Timestamps
+    createdAt: timestamp("created_at")
+      .$defaultFn(() => new Date())
+      .notNull(),
+    updatedAt: timestamp("updated_at")
+      .$defaultFn(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    index("idx_project_configuration_user_id").on(table.userId),
+    index("idx_project_configuration_is_template").on(table.isTemplate),
+    index("idx_project_configuration_is_shared").on(table.isShared),
+  ]
+);
+
+// Project Configuration relations
+export const projectConfigurationRelations = relations(
+  projectConfiguration,
+  ({ one }) => ({
+    user: one(user, {
+      fields: [projectConfiguration.userId],
+      references: [user.id],
+    }),
+  })
+);
+
+// Type exports for Project Configuration
+export type ProjectConfiguration = typeof projectConfiguration.$inferSelect;
+export type CreateProjectConfigurationData = typeof projectConfiguration.$inferInsert;
+export type UpdateProjectConfigurationData = Partial<
+  Omit<CreateProjectConfigurationData, "id" | "userId" | "createdAt">
+>;
+
+// ============================================
+// Conversion History Tables
+// ============================================
+
+/** Conversion status type */
+export type ConversionStatus = "pending" | "processing" | "completed" | "failed";
+
+/** Conversion type - what kind of conversion was performed */
+export type ConversionType = "code-generation" | "image-export" | "full-export" | "preview";
+
+// Conversion History - Tracks all conversions performed by users
+export const conversionHistory = pgTable(
+  "conversion_history",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    figmaAccountId: text("figma_account_id")
+      .references(() => figmaAccount.id, { onDelete: "set null" }),
+    // Figma source information
+    fileKey: text("file_key").notNull(),
+    fileName: text("file_name"),
+    nodeId: text("node_id").notNull(),
+    nodeName: text("node_name").notNull(),
+    nodeType: text("node_type"), // "frame" | "component" | "section" etc.
+    // Conversion type and settings
+    conversionType: text("conversion_type").notNull(), // "code-generation" | "image-export" | "full-export" | "preview"
+    // Configuration used (stored as snapshot for historical reference)
+    configurationId: text("configuration_id")
+      .references(() => projectConfiguration.id, { onDelete: "set null" }),
+    configurationSnapshot: text("configuration_snapshot"), // JSON snapshot of settings at time of conversion
+    // Framework and styling settings (denormalized for quick filtering)
+    jsFramework: text("js_framework"),
+    cssFramework: text("css_framework"),
+    // Output information
+    outputCode: text("output_code"), // Generated code (stored for comparison)
+    outputCodeLines: integer("output_code_lines"),
+    outputFormat: text("output_format"), // "tsx" | "vue" | "html" etc.
+    // Export assets info (if applicable)
+    exportedAssetsCount: integer("exported_assets_count"),
+    exportedAssetsJson: text("exported_assets_json"), // JSON array of asset info
+    // Performance metrics
+    durationMs: integer("duration_ms"), // Time taken to complete conversion
+    // Status tracking
+    status: text("status")
+      .$default(() => "pending")
+      .notNull(),
+    errorMessage: text("error_message"),
+    // Version tracking for comparison
+    version: integer("version")
+      .$default(() => 1)
+      .notNull(),
+    parentConversionId: text("parent_conversion_id"), // For re-run tracking
+    // Metadata
+    tags: text("tags"), // JSON array of user-defined tags
+    notes: text("notes"), // User notes about this conversion
+    isFavorite: boolean("is_favorite")
+      .$default(() => false)
+      .notNull(),
+    // Timestamps
+    createdAt: timestamp("created_at")
+      .$defaultFn(() => new Date())
+      .notNull(),
+    updatedAt: timestamp("updated_at")
+      .$defaultFn(() => new Date())
+      .notNull(),
+    completedAt: timestamp("completed_at"),
+  },
+  (table) => [
+    index("idx_conversion_history_user_id").on(table.userId),
+    index("idx_conversion_history_figma_account_id").on(table.figmaAccountId),
+    index("idx_conversion_history_file_key").on(table.fileKey),
+    index("idx_conversion_history_node_id").on(table.nodeId),
+    index("idx_conversion_history_status").on(table.status),
+    index("idx_conversion_history_conversion_type").on(table.conversionType),
+    index("idx_conversion_history_created_at").on(table.createdAt),
+    index("idx_conversion_history_is_favorite").on(table.isFavorite),
+    index("idx_conversion_history_parent_id").on(table.parentConversionId),
+  ]
+);
+
+// Conversion History relations
+export const conversionHistoryRelations = relations(
+  conversionHistory,
+  ({ one }) => ({
+    user: one(user, {
+      fields: [conversionHistory.userId],
+      references: [user.id],
+    }),
+    figmaAccount: one(figmaAccount, {
+      fields: [conversionHistory.figmaAccountId],
+      references: [figmaAccount.id],
+    }),
+    configuration: one(projectConfiguration, {
+      fields: [conversionHistory.configurationId],
+      references: [projectConfiguration.id],
+    }),
+    parentConversion: one(conversionHistory, {
+      fields: [conversionHistory.parentConversionId],
+      references: [conversionHistory.id],
+    }),
+  })
+);
+
+// Type exports for Conversion History
+export type ConversionHistory = typeof conversionHistory.$inferSelect;
+export type CreateConversionHistoryData = typeof conversionHistory.$inferInsert;
+export type UpdateConversionHistoryData = Partial<
+  Omit<CreateConversionHistoryData, "id" | "userId" | "createdAt">
+>;

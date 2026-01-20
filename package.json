@@ -48,6 +48,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.7",
+    "jszip": "^3.10.1",
     "lucide-react": "^0.554.0",
     "monaco-editor": "^0.55.1",
     "nitro": "^3.0.1-alpha.1",
@@ -69,6 +70,7 @@
   "devDependencies": {
     "@playwright/test": "^1.57.0",
     "@tailwindcss/vite": "^4.1.17",
+    "@types/jszip": "^3.4.0",
     "@types/node": "^24.10.1",
     "@types/nprogress": "^0.2.3",
     "@types/pg": "^8.15.6",

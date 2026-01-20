@@ -1,0 +1,21 @@
+{
+  "category": "feature",
+  "description": "Export generated code as downloadable ZIP file. Include all components, styles, assets, and configuration files. Generate proper directory structure. Include setup instructions in README.",
+  "title": "ZIP Download Export",
+  "dependencies": [
+    "export-options-panel"
+  ],
+  "priority": 80,
+  "status": "in_progress",
+  "branchName": "master",
+  "id": "feature-1768844694914-ycl7dou27",
+  "descriptionHistory": [
+    {
+      "description": "Export generated code as downloadable ZIP file. Include all components, styles, assets, and configuration files. Generate proper directory structure. Include setup instructions in README.",
+      "timestamp": "2026-01-19T17:44:54.914Z",
+      "source": "initial"
+    }
+  ],
+  "startedAt": "2026-01-20T07:19:57.240Z",
+  "updatedAt": "2026-01-20T07:19:59.529Z"
+}
