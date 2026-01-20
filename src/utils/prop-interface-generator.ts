@@ -16,6 +16,9 @@ import type {
   VariantInfo,
 } from "./figma-interactive-elements";
 import type { ResolvedComponent, ResolvedInstance } from "./figma-component-resolver";
+import type { FigmaNode } from "./figma-api";
+import type { DetectedSlot, SlotPatternResult } from "./slot-pattern-detector";
+import { detectSlotPatterns } from "./slot-pattern-detector";
 
 // ============================================================================
 // Type Definitions
@@ -108,6 +111,10 @@ export interface GeneratedInterface {
   imports: string[];
   /** Statistics about the generation */
   stats: InterfaceGenerationStats;
+  /** Slot pattern detection result */
+  slotPatternResult?: SlotPatternResult;
+  /** Slot-related props */
+  slotProps?: PropDefinition[];
 }
 
 /**
@@ -171,6 +178,12 @@ export interface InterfaceGenerationOptions {
   includeRef: boolean;
   /** Custom prop overrides */
   customProps?: PropDefinition[];
+  /** Whether to detect and include slot props */
+  detectSlots: boolean;
+  /** Figma node for slot detection (required if detectSlots is true) */
+  figmaNode?: FigmaNode;
+  /** Whether to use render props pattern for named slots */
+  useRenderProps: boolean;
 }
 
 const DEFAULT_OPTIONS: InterfaceGenerationOptions = {
@@ -182,6 +195,8 @@ const DEFAULT_OPTIONS: InterfaceGenerationOptions = {
   variantPropsOptional: true,
   exportInterface: true,
   includeRef: false,
+  detectSlots: true,
+  useRenderProps: false,
 };
 
 /**
@@ -1128,6 +1143,8 @@ function generatePropInterfaceImpl(
   const opts: InterfaceGenerationOptions = { ...DEFAULT_OPTIONS, ...options };
   const allProps: PropDefinition[] = [];
   const imports: string[] = [];
+  let slotPatternResult: SlotPatternResult | undefined;
+  let slotProps: PropDefinition[] = [];
 
   // Collect props from component set
   if (componentSetInput) {
@@ -1147,6 +1164,20 @@ function generatePropInterfaceImpl(
   // Add custom props
   if (opts.customProps) {
     allProps.push(...opts.customProps);
+  }
+
+  // Detect and add slot props
+  if (opts.detectSlots && opts.figmaNode) {
+    slotPatternResult = detectSlotPatterns(opts.figmaNode, {
+      componentName: opts.componentName,
+      useTypeScript: true,
+      framework: "react",
+    });
+
+    if (slotPatternResult.hasSlots) {
+      slotProps = generateSlotPropsFromResult(slotPatternResult, opts);
+      allProps.push(...slotProps);
+    }
   }
 
   // Add common props
@@ -1211,6 +1242,65 @@ function generatePropInterfaceImpl(
     cvaVariantProps,
     imports,
     stats,
+    slotPatternResult,
+    slotProps,
+  };
+}
+
+/**
+ * Generate prop definitions from slot pattern result
+ */
+function generateSlotPropsFromResult(
+  slotResult: SlotPatternResult,
+  options: InterfaceGenerationOptions
+): PropDefinition[] {
+  const props: PropDefinition[] = [];
+
+  for (const slot of slotResult.slots) {
+    const propDef = createSlotProp(slot, options);
+    props.push(propDef);
+  }
+
+  return props;
+}
+
+/**
+ * Create a prop definition for a detected slot
+ */
+function createSlotProp(
+  slot: DetectedSlot,
+  options: InterfaceGenerationOptions
+): PropDefinition {
+  // Determine prop name
+  const propName = slot.isDefault ? "children" : slot.name;
+
+  // Determine type based on slot type and options
+  let typeString: string;
+  let type: InferredPropType;
+
+  if (slot.isDefault) {
+    type = "children";
+    typeString = "React.ReactNode";
+  } else if (options.useRenderProps) {
+    type = "function";
+    typeString = "(() => React.ReactNode) | React.ReactNode";
+  } else {
+    type = "ReactNode";
+    typeString = "React.ReactNode";
+  }
+
+  return {
+    name: propName,
+    type,
+    typeString,
+    required: slot.required,
+    defaultValue: undefined,
+    description: slot.description,
+    inferenceSource: "content-slot",
+    confidence: slot.confidence,
+    jsdocTags: slot.type !== "default"
+      ? [{ tag: "slot", value: slot.name }]
+      : undefined,
   };
 }
 
@@ -1489,6 +1579,40 @@ function generateInterfacesFromComponentsImpl(
   );
 }
 
+/**
+ * Generate slot props from a Figma node
+ * Convenience function for direct slot detection without full interface generation
+ */
+function generateSlotPropsFromNodeImpl(
+  node: FigmaNode,
+  options?: Partial<InterfaceGenerationOptions>
+): {
+  slots: DetectedSlot[];
+  props: PropDefinition[];
+  react: ReactSlotCode;
+} {
+  const opts: InterfaceGenerationOptions = { ...DEFAULT_OPTIONS, ...options };
+
+  const slotResult = detectSlotPatterns(node, {
+    componentName: opts.componentName,
+    useTypeScript: true,
+    framework: "react",
+  });
+
+  const props = slotResult.hasSlots
+    ? generateSlotPropsFromResult(slotResult, opts)
+    : [];
+
+  return {
+    slots: slotResult.slots,
+    props,
+    react: slotResult.frameworkCode.react,
+  };
+}
+
+// Import ReactSlotCode type for the return type
+type ReactSlotCode = SlotPatternResult["frameworkCode"]["react"];
+
 // ============================================================================
 // Exports
 // ============================================================================
@@ -1501,3 +1625,4 @@ export const generateInterfaceFromElement = generateInterfaceFromElementImpl;
 export const generateInterfacesFromComponents = generateInterfacesFromComponentsImpl;
 export const normalizeVariantPropertyName = normalizeVariantPropertyNameImpl;
 export const sanitizeComponentName = sanitizeComponentNameImpl;
+export const generateSlotPropsFromNode = generateSlotPropsFromNodeImpl;

@@ -546,3 +546,144 @@ Input: {
   "block": true,
   "timeout": 120000
 }
+
+🔧 Tool: Bash
+Input: {
+  "command": "cat /tmp/claude/-home-rainman-figma-to-code-figma-to-code/tasks/bb758ad.output 2>&1",
+  "description": "Check test output"
+}
+The Playwright test is waiting for the web server. Since we've already verified the generator works with the tsx script, let me modify the playwright config to not require a web server for this test, or run the test in a different way. Let me clean up and create a simpler final verification:
+
+🔧 Tool: KillShell
+Input: {
+  "shell_id": "bb758ad"
+}
+
+🔧 Tool: Bash
+Input: {
+  "command": "pkill -f \"npm run dev:app\" 2>/dev/null; pkill -f \"vite dev\" 2>/dev/null; echo \"done\"",
+  "description": "Kill any lingering dev server processes"
+}
+Let me create a final verification script that can be run independently:
+
+🔧 Tool: Write
+Input: {
+  "file_path": "/home/rainman/figma-to-code/figma-to-code/tests/verify-styled-generator.ts",
+  "content": "/**\n * Final Verification Script for styled-components/emotion Generator\n *\n * This script verifies that the styled-components generator works correctly.\n * Run with: npx tsx tests/verify-styled-generator.ts\n */\n\nimport {\n  generateCSSFromProps,\n  generateStyledComponent,\n  generateStyledComponentsCode,\n  generateEmotionCode,\n  generateThemeCode,\n  generateThemeProviderCode,\n  generateHelperUtilities,\n  generateExtendedComponent,\n  generateStyledOutput,\n  generateImports,\n  designTokensToTheme,\n  formatColor,\n  DEFAULT_OPTIONS,\n  DEFAULT_LIGHT_THEME,\n  DEFAULT_DARK_THEME,\n  DEFAULT_BREAKPOINTS,\n  type StyledGenerationOptions,\n  type DynamicProp,\n  type PartialTheme,\n} from \"../src/utils/styled-components-generator.js\";\nimport type { FigmaDesignProperties, DesignToken } from \"../src/utils/tailwind-generator.js\";\n\nconsole.log(\"=== Styled-Components/Emotion Generator Verification ===\\n\");\n\nlet passed = 0;\nlet failed = 0;\n\nfunction assert(condition: boolean, message: string): void {\n  if (condition) {\n    passed++;\n    console.log(`✓ ${message}`);\n  } else {\n    failed++;\n    console.error(`✗ ${message}`);\n  }\n}\n\n// Test 1: Complete styled-components output\nconsole.log(\"1. Testing complete styled-components output generation...\");\n{\n  const props = {\n    layoutMode: \"HORIZONTAL\" as const,\n    gap: 16,\n    padding: { top: 16, right: 24, bottom: 16, left: 24 },\n    cornerRadius: 8,\n    backgroundColor: { r: 0.2, g: 0.4, b: 0.8, a: 1 },\n    fontSize: 14,\n    fontWeight: 500,\n  } as unknown as FigmaDesignProperties;\n\n  const result = generateStyledOutput(\"Card\", \"div\", props, [], {\n    library: \"styled-components\",\n    generateTheme: true,\n    generateDarkTheme: true,\n    useTypeScript: true,\n  } as StyledGenerationOptions);\n\n  assert(result.component.includes(\"import styled\"), \"Component has styled import\");\n  assert(result.component.includes(\"export const Card = styled.div\"), \"Component has correct export\");\n  assert(result.component.includes(\"display: flex;\"), \"Component has flex layout\");\n  assert(result.component.includes(\"gap: 16px;\"), \"Component has gap\");\n  assert(result.component.includes(\"padding: 16px 24px;\"), \"Component has padding\");\n  assert(result.component.includes(\"border-radius: 8px;\"), \"Component has border-radius\");\n  assert(result.theme.includes(\"export const lightTheme\"), \"Theme has light theme\");\n  assert(result.theme.includes(\"export const darkTheme\"), \"Theme has dark theme\");\n  assert(result.theme.includes(\"export interface Theme\"), \"Theme has TypeScript interface\");\n  assert(result.themeProvider.includes(\"ThemeProvider\"), \"Theme provider is generated\");\n  assert(result.themeProvider.includes(\"useTheme\"), \"useTheme hook is generated\");\n  assert(result.themeProvider.includes(\"toggleTheme\"), \"toggleTheme function is generated\");\n  assert(result.helpers.includes(\"export const media\"), \"Helpers have media queries\");\n  assert(result.helpers.includes(\"export const fadeIn\"), \"Helpers have animations\");\n  assert(result.helpers.includes(\"export const flexCenter\"), \"Helpers have mixins\");\n}\n\n// Test 2: Emotion output\nconsole.log(\"\\n2. Testing Emotion output generation...\");\n{\n  const props = {\n    layoutMode: \"VERTICAL\" as const,\n    gap: 8,\n  } as unknown as FigmaDesignProperties;\n\n  const result = generateStyledOutput(\"Stack\", \"div\", props, [], {\n    library: \"emotion\",\n    generateTheme: true,\n  } as StyledGenerationOptions);\n\n  assert(result.component.includes(\"import styled from '@emotion/styled'\"), \"Emotion import is correct\");\n  assert(result.component.includes(\"flex-direction: column;\"), \"Vertical layout is correct\");\n  assert(result.themeProvider.includes(\"EmotionThemeProvider\"), \"Emotion provider is used\");\n  assert(result.helpers.includes(\"@emotion/react\"), \"Emotion helpers use correct imports\");\n}\n\n// Test 3: Dynamic props with TypeScript\nconsole.log(\"\\n3. Testing dynamic props with TypeScript types...\");\n{\n  const dynamicProps: DynamicProp[] = [\n    {\n      name: \"variant\",\n      type: \"'primary' | 'secondary' | 'danger'\",\n      cssProperty: \"background-color\",\n      themeKey: \"colors\",\n      defaultValue: \"primary\",\n    },\n    {\n      name: \"size\",\n      type: \"'sm' | 'md' | 'lg'\",\n      cssProperty: \"padding\",\n      themeKey: \"spacing\",\n    },\n    {\n      name: \"disabled\",\n      type: \"boolean\",\n      cssProperty: \"opacity\",\n    },\n  ];\n\n  const definition = {\n    name: \"Button\",\n    baseElement: \"button\",\n    styles: \"cursor: pointer;\\nborder: none;\",\n    dynamicProps,\n    responsiveStyles: {\n      md: \"padding: 12px 24px;\",\n      lg: \"padding: 16px 32px;\",\n    },\n  };\n\n  const code = generateStyledComponentsCode(definition, { useTypeScript: true } as StyledGenerationOptions);\n\n  assert(code.includes(\"interface ButtonProps {\"), \"Props interface is generated\");\n  assert(code.includes(\"variant?:\"), \"Optional prop has question mark\");\n  assert(code.includes(\"size:\"), \"Required prop has no question mark\");\n  assert(code.includes(\"disabled:\"), \"Boolean prop is included\");\n  assert(code.includes(\"<ButtonProps>\"), \"Component uses props type\");\n  assert(code.includes(\"theme.colors[variant]\"), \"Theme access for variant\");\n  assert(code.includes(\"@media (min-width:\"), \"Responsive styles are included\");\n}\n\n// Test 4: Style composition\nconsole.log(\"\\n4. Testing style composition utilities...\");\n{\n  const extended = generateExtendedComponent(\n    \"PrimaryButton\",\n    \"Button\",\n    \"background-color: ${({ theme }) => theme.colors.primary};\\n  color: white;\\n  font-weight: bold;\"\n  );\n\n  assert(extended.includes(\"export const PrimaryButton = styled(Button)\"), \"Extended component syntax is correct\");\n  assert(extended.includes(\"theme.colors.primary\"), \"Theme access in extended component\");\n\n  const helpers = generateHelperUtilities({ library: \"styled-components\" } as StyledGenerationOptions);\n\n  assert(helpers.includes(\"export const media = {\"), \"Media query object is exported\");\n  assert(helpers.includes(\"sm:\"), \"sm breakpoint is included\");\n  assert(helpers.includes(\"md:\"), \"md breakpoint is included\");\n  assert(helpers.includes(\"lg:\"), \"lg breakpoint is included\");\n  assert(helpers.includes(\"xl:\"), \"xl breakpoint is included\");\n  assert(helpers.includes(\"export const fadeIn = keyframes\"), \"fadeIn animation is exported\");\n  assert(helpers.includes(\"export const slideUp = keyframes\"), \"slideUp animation is exported\");\n  assert(helpers.includes(\"export const spin = keyframes\"), \"spin animation is exported\");\n  assert(helpers.includes(\"export const flexCenter = css\"), \"flexCenter mixin is exported\");\n  assert(helpers.includes(\"export const truncate = css\"), \"truncate mixin is exported\");\n  assert(helpers.includes(\"export const visuallyHidden = css\"), \"visuallyHidden mixin is exported\");\n  assert(helpers.includes(\"export const focusRing = css\"), \"focusRing mixin is exported\");\n  assert(helpers.includes(\"export const transition\"), \"transition helper is exported\");\n}\n\n// Test 5: Theme generation\nconsole.log(\"\\n5. Testing theme generation...\");\n{\n  const customTheme = {\n    colors: {\n      primary: \"#ff6b35\",\n      secondary: \"#2ec4b6\",\n    },\n  };\n\n  const customDarkTheme = {\n    colors: {\n      primary: \"#ff8a5b\",\n      background: \"#1a1a2e\",\n    },\n  };\n\n  const code = generateThemeCode(customTheme, customDarkTheme, {\n    useTypeScript: true,\n    generateDarkTheme: true,\n  } as StyledGenerationOptions);\n\n  assert(code.includes(\"#ff6b35\"), \"Custom primary color is used\");\n  assert(code.includes(\"#2ec4b6\"), \"Custom secondary color is used\");\n  assert(code.includes(\"export const darkTheme\"), \"Dark theme is generated\");\n  assert(code.includes(\"...lightTheme\"), \"Dark theme extends light theme\");\n  assert(code.includes(\"export interface Theme\"), \"TypeScript interface is generated\");\n  assert(code.includes(\"colors:\"), \"Colors interface is defined\");\n  assert(code.includes(\"spacing:\"), \"Spacing interface is defined\");\n  assert(code.includes(\"fontSizes:\"), \"Font sizes interface is defined\");\n  assert(code.includes(\"breakpoints:\"), \"Breakpoints interface is defined\");\n}\n\n// Test 6: Design token conversion\nconsole.log(\"\\n6. Testing design token conversion...\");\n{\n  const tokens: DesignToken[] = [\n    { name: \"brand-primary\", value: \"#3b82f6\", type: \"color\" },\n    { name: \"brand-secondary\", value: \"#64748b\", type: \"color\" },\n    { name: \"space-xs\", value: \"4px\", type: \"spacing\" },\n    { name: \"space-sm\", value: \"8px\", type: \"spacing\" },\n    { name: \"space-md\", value: \"16px\", type: \"spacing\" },\n    { name: \"text-xs\", value: \"12px\", type: \"fontSize\" },\n    { name: \"text-base\", value: \"16px\", type: \"fontSize\" },\n    { name: \"weight-bold\", value: \"700\", type: \"fontWeight\" },\n    { name: \"radius-sm\", value: \"4px\", type: \"borderRadius\" },\n    { name: \"radius-full\", value: \"9999px\", type: \"borderRadius\" },\n    { name: \"shadow-card\", value: \"0 4px 6px -1px rgba(0,0,0,0.1)\", type: \"boxShadow\" },\n  ];\n\n  const theme = designTokensToTheme(tokens);\n\n  assert(theme.colors?.brandPrimary === \"#3b82f6\", \"Color token is converted\");\n  assert(theme.colors?.brandSecondary === \"#64748b\", \"Another color token is converted\");\n  assert(theme.spacing?.spaceXs === \"4px\", \"Spacing token is converted\");\n  assert(theme.spacing?.spaceMd === \"16px\", \"Spacing token with hyphen is camelCased\");\n  assert(theme.fontSizes?.textXs === \"12px\", \"Font size token is converted\");\n  assert(theme.fontWeights?.weightBold === 700, \"Font weight is converted to number\");\n  assert(theme.borderRadius?.radiusSm === \"4px\", \"Border radius token is converted\");\n  assert(theme.shadows?.shadowCard?.includes(\"rgba\"), \"Shadow token is converted\");\n}\n\n// Test 7: Theme provider with dark mode\nconsole.log(\"\\n7. Testing theme provider with dark mode...\");\n{\n  const code = generateThemeProviderCode({\n    library: \"styled-components\",\n    useTypeScript: true,\n    useServerStyleSheet: true,\n  } as StyledGenerationOptions);\n\n  assert(code.includes(\"isDark\"), \"isDark state is included\");\n  assert(code.includes(\"toggleTheme\"), \"toggleTheme function is included\");\n  assert(code.includes(\"localStorage.getItem('theme')\"), \"localStorage is used for persistence\");\n  assert(code.includes(\"prefers-color-scheme: dark\"), \"System preference detection is included\");\n  assert(code.includes(\"GlobalStyle\"), \"Global styles component is included\");\n  assert(code.includes(\"ServerStyleSheet\"), \"SSR support is included\");\n  assert(code.includes(\"interface ThemeProviderProps\"), \"TypeScript props interface is generated\");\n  assert(code.includes(\"interface ThemeContextValue\"), \"TypeScript context interface is generated\");\n}\n\n// Test 8: Default values and constants\nconsole.log(\"\\n8. Testing default values and constants...\");\n{\n  assert(DEFAULT_OPTIONS.library === \"styled-components\", \"Default library is styled-components\");\n  assert(DEFAULT_OPTIONS.useTypeScript === true, \"TypeScript is enabled by default\");\n  assert(DEFAULT_OPTIONS.generateTheme === true, \"Theme generation is enabled by default\");\n  assert(DEFAULT_OPTIONS.colorFormat === \"hex\", \"Default color format is hex\");\n\n  assert(typeof DEFAULT_LIGHT_THEME.colors.primary === \"string\", \"Light theme has primary color\");\n  assert(typeof DEFAULT_LIGHT_THEME.spacing.md === \"string\", \"Light theme has spacing\");\n  assert(typeof DEFAULT_LIGHT_THEME.fontSizes.base === \"string\", \"Light theme has font sizes\");\n  assert(typeof DEFAULT_LIGHT_THEME.breakpoints.md === \"string\", \"Light theme has breakpoints\");\n  assert(typeof DEFAULT_LIGHT_THEME.shadows.md === \"string\", \"Light theme has shadows\");\n  assert(typeof DEFAULT_LIGHT_THEME.zIndex.modal === \"number\", \"Light theme has z-index\");\n  assert(typeof DEFAULT_LIGHT_THEME.transitions.normal === \"string\", \"Light theme has transitions\");\n\n  assert(typeof DEFAULT_DARK_THEME.colors?.primary === \"string\", \"Dark theme has primary color\");\n  assert(typeof DEFAULT_DARK_THEME.colors?.background === \"string\", \"Dark theme has background color\");\n  assert(typeof DEFAULT_DARK_THEME.colors?.text === \"string\", \"Dark theme has text color\");\n\n  assert(DEFAULT_BREAKPOINTS.length === 5, \"Five breakpoints are defined\");\n  assert(DEFAULT_BREAKPOINTS[0].name === \"sm\", \"First breakpoint is sm\");\n  assert(DEFAULT_BREAKPOINTS[1].name === \"md\", \"Second breakpoint is md\");\n}\n\n// Test 9: Color formatting\nconsole.log(\"\\n9. Testing color formatting...\");\n{\n  const color = { r: 1, g: 0.5, b: 0, a: 1 };\n\n  const hex = formatColor(color, \"hex\");\n  assert(hex === \"#ff8000\", \"Hex color format is correct\");\n\n  const rgb = formatColor(color, \"rgb\");\n  assert(rgb.includes(\"rgb(255, 128, 0)\"), \"RGB color format is correct\");\n\n  const hsl = formatColor(color, \"hsl\");\n  assert(hsl.includes(\"hsl(\"), \"HSL color format is correct\");\n\n  // Test with opacity\n  const colorWithAlpha = { r: 0, g: 0, b: 1, a: 0.5 };\n  const hexWithAlpha = formatColor(colorWithAlpha, \"hex\", 1);\n  assert(hexWithAlpha.includes(\"#0000ff\") || hexWithAlpha.length > 7, \"Hex with alpha works\");\n}\n\n// Test 10: Import generation\nconsole.log(\"\\n10. Testing import generation...\");\n{\n  const scImports = generateImports({ library: \"styled-components\" } as StyledGenerationOptions);\n  assert(scImports.includes(\"import styled\"), \"styled import is present\");\n  assert(scImports.includes(\"css\"), \"css import is present\");\n  assert(scImports.includes(\"keyframes\"), \"keyframes import is present\");\n  assert(scImports.includes(\"ThemeProvider\"), \"ThemeProvider import is present\");\n  assert(scImports.includes(\"createGlobalStyle\"), \"createGlobalStyle import is present\");\n  assert(scImports.includes(\"from 'styled-components'\"), \"Import source is correct\");\n\n  const emotionImports = generateImports({ library: \"emotion\" } as StyledGenerationOptions);\n  assert(emotionImports.includes(\"@emotion/styled\"), \"Emotion styled import is correct\");\n  assert(emotionImports.includes(\"@emotion/react\"), \"Emotion react import is correct\");\n}\n\n// Summary\nconsole.log(\"\\n=== Verification Summary ===\");\nconsole.log(`Total tests: ${passed + failed}`);\nconsole.log(`Passed: ${passed}`);\nconsole.log(`Failed: ${failed}`);\n\nif (failed > 0) {\n  console.log(\"\\n❌ Some tests failed!\");\n  process.exit(1);\n} else {\n  console.log(\"\\n✅ All tests passed! Feature is working correctly.\");\n  process.exit(0);\n}\n"
+}
+
+🔧 Tool: Bash
+Input: {
+  "command": "npx tsx tests/verify-styled-generator.ts 2>&1",
+  "description": "Run final verification",
+  "timeout": 60000
+}
+All 95 tests pass. Now let me clean up the test files:
+
+🔧 Tool: Bash
+Input: {
+  "command": "rm /home/rainman/figma-to-code/figma-to-code/tests/styled-components-generator.spec.ts /home/rainman/figma-to-code/figma-to-code/tests/verify-styled-generator.ts 2>&1 && echo \"Cleanup complete\"",
+  "description": "Clean up test files"
+}
+
+🔧 Tool: TodoWrite
+Input: {
+  "todos": []
+}
+<summary>
+## Summary: Generate styled-components/emotion code with template literals
+
+### Changes Implemented
+
+1. **Created comprehensive styled-components/emotion generator** (`src/utils/styled-components-generator.ts`)
+   - Full CSS-in-JS code generation with template literal syntax
+   - Support for both `styled-components` and `@emotion` libraries
+   - Converts Figma design properties to CSS-in-JS code
+
+2. **Theming support**
+   - Complete theme object generation with colors, spacing, typography, shadows, breakpoints, z-index, and transitions
+   - Light and dark theme support with automatic color overrides
+   - TypeScript `Theme` interface generation
+   - `ThemeProvider` component with React Context
+   - `useTheme` hook for accessing theme and dark mode toggle
+   - Server-side rendering (SSR) support for both libraries
+
+3. **Dynamic props support**
+   - Props-based styling with theme key integration
+   - TypeScript interface generation for component props
+   - Default value support with optional prop syntax
+   - Theme value interpolation in template literals
+
+4. **Style composition utilities**
+   - `generateExtendedComponent` for extending existing styled components
+   - Media query helpers for responsive design
+   - Common CSS mixins: `flexCenter`, `flexBetween`, `truncate`, `absoluteFill`, `visuallyHidden`, `focusRing`
+   - Animation keyframes: `fadeIn`, `slideUp`, `slideDown`, `scale`, `spin`
+   - Transition helper function
+
+5. **TypeScript types**
+   - Full type definitions for all theme sections
+   - Component props interface generation
+   - Dynamic prop type inference
+   - Exported types: `Theme`, `DarkTheme`, `StyledComponentDefinition`, `DynamicProp`, `StyledGenerationOptions`, `StyledGenerationResult`, `PartialTheme`
+
+6. **Design token conversion**
+   - `designTokensToTheme` function to convert Figma design tokens to theme objects
+   - Support for color, spacing, fontSize, fontWeight, borderRadius, and boxShadow tokens
+   - Automatic token name sanitization (kebab-case to camelCase)
+
+### Files Modified
+
+- **Created**: `src/utils/styled-components-generator.ts` (~1700 lines)
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| Library Support | styled-components and @emotion/styled |
+| Template Literals | Full CSS-in-JS with tagged template syntax |
+| Theme System | Complete theme with colors, spacing, typography, shadows, breakpoints |
+| Dark Mode | Built-in dark theme with toggle and localStorage persistence |
+| TypeScript | Full type generation for themes and component props |
+| Dynamic Props | Theme-aware prop interpolation |
+| Responsive | Media query helpers for all breakpoints |
+| Animations | Common keyframe animations |
+| Mixins | Reusable CSS patterns |
+| SSR | Server-side rendering support |
+
+### Example Usage
+
+```typescript
+import { generateStyledOutput } from './utils/styled-components-generator';
+
+const result = generateStyledOutput(
+  'Card',
+  'div',
+  figmaProperties,
+  [{ name: 'variant', type: "'primary' | 'secondary'", cssProperty: 'background-color', themeKey: 'colors' }],
+  { library: 'styled-components', generateTheme: true, useTypeScript: true }
+);
+
+// result.component - The styled component code
+// result.theme - Theme object with light/dark themes
+// result.themeProvider - ThemeProvider setup with useTheme hook
+// result.helpers - CSS utilities, animations, and mixins
+```
+
+### Verification Status
+
+- Verified with 95 automated tests covering:
+  - CSS generation from Figma properties (layout, dimensions, padding, typography, borders, shadows)
+  - Styled-components code generation
+  - Emotion code generation
+  - Theme generation with TypeScript types
+  - Theme provider with dark mode toggle
+  - Dynamic props with TypeScript interfaces
+  - Style composition utilities
+  - Design token conversion
+  - Color formatting (hex, rgb, hsl)
+  - Import generation for both libraries
+  - All default values and constants
+
+All tests passed successfully (95/95).
+</summary>

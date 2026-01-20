@@ -214,3 +214,24 @@ Input: {
   "file_path": "/home/rainman/figma-to-code/figma-to-code/tests/styled-components-generator.spec.ts",
   "limit": 60
 }
+Excellent! Now I understand this is a **Figma-to-Code** application with extensive code generation utilities. The feature request is about designing and managing prompts for AI-powered code generation with:
+- Prompt templates with variable injection
+- Version tracking and performance metrics
+- A/B testing of prompt variations
+
+Let me ask clarifying questions one at a time to refine this design.
+
+---
+
+**First question:**
+
+Looking at the existing codebase, I see extensive code generation utilities that currently use **deterministic algorithms** (e.g., `tailwind-generator.ts`, `styled-components-generator.ts`) to convert Figma properties to code.
+
+**What is the intended role of AI-powered prompts in this system?**
+
+1. **Replace deterministic generators** - Use LLMs (like GPT-4 or Claude) to generate code instead of the current algorithmic approach
+2. **Augment existing generators** - AI handles edge cases, semantic understanding, or polishing while keeping the core logic deterministic
+3. **New capability layer** - Add AI-powered features like "describe this component", "suggest accessibility improvements", or "explain this design pattern"
+4. **Internal tooling** - Prompts for developer/admin use to analyze, debug, or improve the generators themselves
+
+Which aligns best with your vision?

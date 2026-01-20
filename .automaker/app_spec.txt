@@ -254,5 +254,17 @@
       <name>CSS Modules Generator</name>
       <description>Generate scoped CSS Modules with proper naming conventions. Support composition and value imports. Generate TypeScript type definitions for CSS modules. Handle global styles appropriately.</description>
     </feature>
+    <feature>
+      <name>Prop Interface Generator</name>
+      <description>Generate component prop interfaces from design variations. Identify required vs optional props. Infer prop types from usage patterns. Support default values and documentation comments.</description>
+    </feature>
+    <feature>
+      <name>AI Prompt Engineering System</name>
+      <description>Design and manage prompts for AI-powered code generation. Support prompt templates with variable injection. Track prompt versions and performance. Enable A/B testing of prompt variations.</description>
+    </feature>
+    <feature>
+      <name>Styled Components Generator</name>
+      <description>Generate styled-components/emotion code with template literals. Support theming, dynamic props, and style composition. Generate proper TypeScript types for styled components.</description>
+    </feature>
   </implemented_features>
 </project_specification>

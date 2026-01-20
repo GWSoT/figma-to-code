@@ -4,7 +4,7 @@
   "title": "AI Prompt Engineering System",
   "dependencies": [],
   "priority": 61,
-  "status": "backlog",
+  "status": "in_progress",
   "branchName": "master",
   "id": "feature-1768844694897-58b49sxmd",
   "descriptionHistory": [
@@ -13,5 +13,6 @@
       "timestamp": "2026-01-19T17:44:54.897Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T05:51:14.783Z"
 }

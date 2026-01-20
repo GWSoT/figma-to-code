@@ -22,6 +22,9 @@ import type {
 } from "./list-pattern-detector";
 import type { FormAnalysisResult, FormFieldGroup } from "./form-analyzer";
 import type { NavigationPatternAnalysis, NavigationItem } from "./navigation-pattern-detector";
+import type { FigmaNode } from "./figma-api";
+import type { DetectedSlot, SlotPatternResult, SvelteSlotCode } from "./slot-pattern-detector";
+import { detectSlotPatterns } from "./slot-pattern-detector";
 
 // ============================================================================
 // Types and Interfaces
@@ -2123,6 +2126,360 @@ function getItemTypeName(semanticType: ListSemanticType): string {
 
 function getTypeNameFromSemantic(semanticType: ListSemanticType): string {
   return getItemTypeName(semanticType);
+}
+
+// ============================================================================
+// Slot-Based Component Generation
+// ============================================================================
+
+/**
+ * Configuration for slot-based Svelte component generation
+ */
+export interface SvelteSlotComponentOptions extends Partial<SvelteGenerationOptions> {
+  /** Component name */
+  componentName: string;
+  /** Base element for the component */
+  baseElement?: string;
+  /** Additional component classes */
+  componentClasses?: string;
+  /** Additional props to include */
+  additionalProps?: Array<{
+    name: string;
+    type: string;
+    defaultValue?: string;
+    description?: string;
+  }>;
+}
+
+/**
+ * Generated slot-based Svelte component
+ */
+export interface GeneratedSlotComponent {
+  /** Complete .svelte component file content */
+  component: string;
+  /** TypeScript types for the component */
+  types: string;
+  /** Detected slots from the Figma node */
+  slots: DetectedSlot[];
+  /** Slot code for Svelte */
+  slotCode: SvelteSlotCode;
+  /** Usage example */
+  usageExample: string;
+}
+
+/**
+ * Generate a Svelte component with slots from a Figma node
+ */
+export function generateSvelteSlotComponent(
+  node: FigmaNode,
+  options: SvelteSlotComponentOptions
+): GeneratedSlotComponent {
+  const opts: SvelteGenerationOptions = { ...DEFAULT_OPTIONS, ...options };
+  const { componentName, baseElement = "div", componentClasses = "", additionalProps = [] } = options;
+
+  // Detect slots from the Figma node
+  const slotResult = detectSlotPatterns(node, {
+    componentName,
+    useTypeScript: opts.useTypeScript,
+    framework: "svelte",
+  });
+
+  const slotCode = slotResult.frameworkCode.svelte;
+
+  // Generate the component
+  const component = generateSlotComponentCode(
+    componentName,
+    baseElement,
+    componentClasses,
+    slotResult,
+    additionalProps,
+    opts
+  );
+
+  // Generate types
+  const types = generateSlotComponentTypes(componentName, slotResult, additionalProps, opts);
+
+  // Generate usage example
+  const usageExample = slotCode.usageExample;
+
+  return {
+    component,
+    types,
+    slots: slotResult.slots,
+    slotCode,
+    usageExample,
+  };
+}
+
+/**
+ * Generate the slot component code
+ */
+function generateSlotComponentCode(
+  componentName: string,
+  baseElement: string,
+  componentClasses: string,
+  slotResult: SlotPatternResult,
+  additionalProps: SvelteSlotComponentOptions["additionalProps"],
+  options: SvelteGenerationOptions
+): string {
+  const scriptLang = options.useTypeScript ? ' lang="ts"' : "";
+  const { slots } = slotResult;
+
+  // Script section
+  let script = `<script${scriptLang}>`;
+
+  // Imports
+  if (options.includeTransitions) {
+    script += `\n  import { fade, slide } from 'svelte/transition';`;
+  }
+
+  // Props
+  if (options.useSvelte5Runes) {
+    // Svelte 5 runes syntax
+    const propsInterface = generateSvelte5PropsInterface(componentName, slots, additionalProps, options);
+    script += `\n\n${propsInterface}`;
+  } else {
+    // Classic Svelte syntax
+    script += `\n\n  /** Additional CSS classes */`;
+    script += `\n  export let className = '';`;
+
+    for (const prop of additionalProps || []) {
+      const description = prop.description ? `\n  /** ${prop.description} */` : "";
+      const defaultValue = prop.defaultValue ? ` = ${prop.defaultValue}` : "";
+      script += `${description}`;
+      script += `\n  export let ${prop.name}${options.useTypeScript ? `: ${prop.type}` : ""}${defaultValue};`;
+    }
+  }
+
+  script += `\n</script>`;
+
+  // Template section
+  const template = generateSlotTemplate(baseElement, componentClasses, slots, options);
+
+  // Style section
+  const style = options.useTailwind ? "" : generateSlotComponentStyles(options);
+
+  return `${script}\n\n${template}${style}`;
+}
+
+/**
+ * Generate Svelte 5 props interface with runes
+ */
+function generateSvelte5PropsInterface(
+  componentName: string,
+  slots: DetectedSlot[],
+  additionalProps: SvelteSlotComponentOptions["additionalProps"],
+  options: SvelteGenerationOptions
+): string {
+  let code = `  interface Props {`;
+  code += `\n    /** Additional CSS classes */`;
+  code += `\n    class?: string;`;
+
+  for (const prop of additionalProps || []) {
+    const description = prop.description ? `\n    /** ${prop.description} */` : "";
+    const optional = prop.defaultValue ? "?" : "";
+    code += `${description}`;
+    code += `\n    ${prop.name}${optional}: ${prop.type};`;
+  }
+
+  // Add snippet props for slots (Svelte 5)
+  for (const slot of slots) {
+    const slotName = slot.isDefault ? "children" : slot.name;
+    code += `\n    /** ${slot.description} */`;
+    code += `\n    ${slotName}?: import('svelte').Snippet;`;
+  }
+
+  code += `\n  }`;
+  code += `\n`;
+  code += `\n  let { class: className = ''`;
+
+  for (const prop of additionalProps || []) {
+    const defaultValue = prop.defaultValue ? ` = ${prop.defaultValue}` : "";
+    code += `, ${prop.name}${defaultValue}`;
+  }
+
+  for (const slot of slots) {
+    const slotName = slot.isDefault ? "children" : slot.name;
+    code += `, ${slotName}`;
+  }
+
+  code += ` }: Props = $props();`;
+
+  return code;
+}
+
+/**
+ * Generate the slot template
+ */
+function generateSlotTemplate(
+  baseElement: string,
+  componentClasses: string,
+  slots: DetectedSlot[],
+  options: SvelteGenerationOptions
+): string {
+  const classAttr = componentClasses
+    ? `class="${componentClasses} {className}"`
+    : `class={className}`;
+
+  const defaultSlot = slots.find(s => s.isDefault);
+  const namedSlots = slots.filter(s => !s.isDefault);
+
+  // Sort named slots by position
+  const positionOrder = ["start", "before", "center", "after", "end", "overlay"];
+  const sortedNamedSlots = [...namedSlots].sort(
+    (a, b) => positionOrder.indexOf(a.position) - positionOrder.indexOf(b.position)
+  );
+
+  // Build template
+  let template = `<${baseElement} ${classAttr}>`;
+
+  // Add slots in order based on position
+  const startSlots = sortedNamedSlots.filter(s => s.position === "start" || s.position === "before");
+  const endSlots = sortedNamedSlots.filter(s => s.position === "end" || s.position === "after");
+  const overlaySlots = sortedNamedSlots.filter(s => s.position === "overlay");
+
+  // Start/before slots
+  for (const slot of startSlots) {
+    template += `\n  <!-- ${slot.description} -->`;
+    if (slot.fallbackContent) {
+      template += `\n  <slot name="${slot.name}">${slot.fallbackContent}</slot>`;
+    } else {
+      template += `\n  <slot name="${slot.name}" />`;
+    }
+  }
+
+  // Default slot
+  if (defaultSlot) {
+    template += `\n  <!-- ${defaultSlot.description} -->`;
+    if (defaultSlot.fallbackContent) {
+      template += `\n  <slot>${defaultSlot.fallbackContent}</slot>`;
+    } else {
+      template += `\n  <slot />`;
+    }
+  } else if (slots.length === 0) {
+    // No slots detected, add a default slot anyway
+    template += `\n  <!-- Default content slot -->`;
+    template += `\n  <slot />`;
+  }
+
+  // End/after slots
+  for (const slot of endSlots) {
+    template += `\n  <!-- ${slot.description} -->`;
+    if (slot.fallbackContent) {
+      template += `\n  <slot name="${slot.name}">${slot.fallbackContent}</slot>`;
+    } else {
+      template += `\n  <slot name="${slot.name}" />`;
+    }
+  }
+
+  // Overlay slots
+  for (const slot of overlaySlots) {
+    template += `\n  <!-- ${slot.description} -->`;
+    template += `\n  {#if $$slots.${slot.name}}`;
+    template += `\n    <div class="${options.useTailwind ? "absolute inset-0" : "overlay"}">`;
+    if (slot.fallbackContent) {
+      template += `\n      <slot name="${slot.name}">${slot.fallbackContent}</slot>`;
+    } else {
+      template += `\n      <slot name="${slot.name}" />`;
+    }
+    template += `\n    </div>`;
+    template += `\n  {/if}`;
+  }
+
+  template += `\n</${baseElement}>`;
+
+  return template;
+}
+
+/**
+ * Generate component styles for non-Tailwind usage
+ */
+function generateSlotComponentStyles(options: SvelteGenerationOptions): string {
+  return `
+
+<style>
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+</style>`;
+}
+
+/**
+ * Generate TypeScript types for the slot component
+ */
+function generateSlotComponentTypes(
+  componentName: string,
+  slotResult: SlotPatternResult,
+  additionalProps: SvelteSlotComponentOptions["additionalProps"],
+  options: SvelteGenerationOptions
+): string {
+  if (!options.useTypeScript) {
+    return "// TypeScript types not generated (useTypeScript: false)";
+  }
+
+  let types = `/**\n * Props for ${componentName} component\n */\n`;
+  types += `export interface ${componentName}Props {\n`;
+  types += `  /** Additional CSS classes */\n`;
+  types += `  class?: string;\n`;
+
+  for (const prop of additionalProps || []) {
+    const description = prop.description ? `  /** ${prop.description} */\n` : "";
+    const optional = prop.defaultValue ? "?" : "";
+    types += `${description}`;
+    types += `  ${prop.name}${optional}: ${prop.type};\n`;
+  }
+
+  types += `}\n\n`;
+
+  // Slot types
+  types += `/**\n * Slots for ${componentName} component\n */\n`;
+  types += `export interface ${componentName}Slots {\n`;
+
+  for (const slot of slotResult.slots) {
+    const slotName = slot.isDefault ? "default" : slot.name;
+    types += `  /** ${slot.description} */\n`;
+    types += `  ${slotName}?: import('svelte').Snippet;\n`;
+  }
+
+  types += `}\n`;
+
+  return types;
+}
+
+/**
+ * Generate a slot-aware wrapper component from Figma design
+ */
+export function generateSvelteWrapperComponent(
+  node: FigmaNode,
+  componentName: string,
+  options: Partial<SvelteGenerationOptions> = {}
+): GeneratedSvelteCode {
+  const opts: SvelteGenerationOptions = { ...DEFAULT_OPTIONS, ...options };
+
+  // Detect slots
+  const slotResult = detectSlotPatterns(node, {
+    componentName,
+    useTypeScript: opts.useTypeScript,
+    framework: "svelte",
+  });
+
+  // Generate component
+  const slotComponent = generateSvelteSlotComponent(node, {
+    ...opts,
+    componentName,
+  });
+
+  return {
+    component: slotComponent.component,
+    types: slotComponent.types,
+    styles: "",
+    stores: "",
+    actions: "",
+  };
 }
 
 // ============================================================================

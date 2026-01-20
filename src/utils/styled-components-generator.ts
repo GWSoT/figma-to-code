@@ -1710,6 +1710,268 @@ function sanitizeTokenName(name: string): string {
 }
 
 // ============================================================================
+// Variant-Aware Component Generation
+// ============================================================================
+
+import type {
+  VariantPropertyDefinition,
+  CompoundVariantDefinition,
+  VariantStyleMapping,
+  VariantAnalysisResult,
+} from "./figma-variant-handler";
+
+/**
+ * Generate a styled component with full variant support
+ * This integrates with the figma-variant-handler for complete variant handling
+ */
+export function generateVariantAwareComponent(
+  componentName: string,
+  baseElement: string,
+  baseProps: FigmaDesignProperties,
+  variantAnalysis: VariantAnalysisResult,
+  options: Partial<StyledGenerationOptions> = {}
+): StyledGenerationResult {
+  const opts = { ...DEFAULT_OPTIONS, ...options };
+  const warnings: string[] = [];
+
+  // Generate base styles
+  const baseStyles = generateCSSFromProps(baseProps, opts);
+
+  // Generate component with variant handling
+  let component = "";
+
+  if (opts.library === "styled-components") {
+    component = generateStyledComponentWithVariants(
+      componentName,
+      baseElement,
+      baseStyles,
+      variantAnalysis,
+      opts
+    );
+  } else {
+    component = generateEmotionComponentWithVariants(
+      componentName,
+      baseElement,
+      baseStyles,
+      variantAnalysis,
+      opts
+    );
+  }
+
+  // Generate types including variant props
+  const types = opts.useTypeScript
+    ? generateVariantPropsInterface(componentName, variantAnalysis.properties)
+    : "";
+
+  // Standard theme, provider, and helpers
+  const theme = opts.generateTheme ? generateThemeCode({}, {}, opts) : "";
+  const themeProvider = opts.generateTheme ? generateThemeProviderCode(opts) : "";
+  const helpers = opts.includeHelpers ? generateHelperUtilities(opts) : "";
+
+  return {
+    component,
+    types,
+    theme,
+    themeProvider,
+    helpers,
+    warnings,
+  };
+}
+
+/**
+ * Generate styled-components code with variant support
+ */
+function generateStyledComponentWithVariants(
+  name: string,
+  baseElement: string,
+  baseStyles: string,
+  variantAnalysis: VariantAnalysisResult,
+  options: StyledGenerationOptions
+): string {
+  const { properties, compoundVariants, styleMappings } = variantAnalysis;
+
+  let code = `import styled, { css } from 'styled-components';\n\n`;
+
+  // Generate props interface
+  if (options.useTypeScript && properties.length > 0) {
+    code += generateVariantPropsInterface(name, properties);
+    code += "\n\n";
+  }
+
+  // Start styled component
+  const propsType = options.useTypeScript && properties.length > 0 ? `<${name}Props>` : "";
+  code += `export const ${name} = styled.${baseElement}${propsType}\`\n`;
+  code += `  /* Base styles */\n`;
+  code += `  ${baseStyles}\n\n`;
+
+  // Add variant interpolations
+  for (const prop of properties) {
+    code += generateVariantInterpolation(prop, styleMappings);
+  }
+
+  // Add compound variant interpolations
+  if (compoundVariants.length > 0) {
+    code += `  /* Compound variants */\n`;
+    for (const cv of compoundVariants) {
+      code += generateCompoundVariantInterpolation(cv);
+    }
+  }
+
+  code += `\`;\n`;
+
+  return code;
+}
+
+/**
+ * Generate Emotion code with variant support
+ */
+function generateEmotionComponentWithVariants(
+  name: string,
+  baseElement: string,
+  baseStyles: string,
+  variantAnalysis: VariantAnalysisResult,
+  options: StyledGenerationOptions
+): string {
+  const { properties, compoundVariants, styleMappings } = variantAnalysis;
+
+  let code = `import styled from '@emotion/styled';\nimport { css } from '@emotion/react';\n\n`;
+
+  // Generate props interface
+  if (options.useTypeScript && properties.length > 0) {
+    code += generateVariantPropsInterface(name, properties);
+    code += "\n\n";
+  }
+
+  // Start styled component
+  const propsType = options.useTypeScript && properties.length > 0 ? `<${name}Props>` : "";
+  code += `export const ${name} = styled.${baseElement}${propsType}\`\n`;
+  code += `  /* Base styles */\n`;
+  code += `  ${baseStyles}\n\n`;
+
+  // Add variant interpolations
+  for (const prop of properties) {
+    code += generateVariantInterpolation(prop, styleMappings);
+  }
+
+  // Add compound variant interpolations
+  if (compoundVariants.length > 0) {
+    code += `  /* Compound variants */\n`;
+    for (const cv of compoundVariants) {
+      code += generateCompoundVariantInterpolation(cv);
+    }
+  }
+
+  code += `\`;\n`;
+
+  return code;
+}
+
+/**
+ * Generate TypeScript props interface for variants
+ */
+function generateVariantPropsInterface(
+  componentName: string,
+  properties: VariantPropertyDefinition[]
+): string {
+  let code = `/**\n * Props for the ${componentName} component with variant support.\n */\n`;
+  code += `export interface ${componentName}Props {\n`;
+
+  for (const prop of properties) {
+    code += `  /**\n`;
+    code += `   * ${prop.description}\n`;
+    if (prop.defaultValue) {
+      const defaultDisplay = prop.type === "boolean"
+        ? prop.defaultValue
+        : `"${prop.defaultValue}"`;
+      code += `   * @default ${defaultDisplay}\n`;
+    }
+    code += `   */\n`;
+
+    const optional = !prop.required ? "?" : "";
+    code += `  ${prop.propName}${optional}: ${prop.typeString};\n`;
+  }
+
+  // Add common props
+  code += `  /** Additional CSS class names. */\n`;
+  code += `  className?: string;\n`;
+  code += `  /** Children elements. */\n`;
+  code += `  children?: React.ReactNode;\n`;
+
+  code += `}\n`;
+
+  return code;
+}
+
+/**
+ * Generate interpolation for a single variant property
+ */
+function generateVariantInterpolation(
+  prop: VariantPropertyDefinition,
+  styleMappings: VariantStyleMapping[]
+): string {
+  let code = "";
+  const propMappings = styleMappings.filter((m) => m.property === prop.propName);
+
+  if (propMappings.length === 0) {
+    return code;
+  }
+
+  code += `  /* ${prop.originalName} variants */\n`;
+
+  if (prop.type === "boolean") {
+    // Boolean: single conditional
+    const trueMapping = propMappings.find((m) =>
+      ["true", "yes", "on", "enabled", "show", "visible", "active", "checked", "selected"]
+        .includes(m.value.toLowerCase())
+    );
+
+    if (trueMapping && Object.keys(trueMapping.css).length > 0) {
+      code += `  \${({ ${prop.propName} }) => ${prop.propName} && css\`\n`;
+      for (const [key, value] of Object.entries(trueMapping.css)) {
+        code += `    ${toKebabCase(key)}: ${value};\n`;
+      }
+      code += `  \`}\n\n`;
+    }
+  } else {
+    // Enum: multiple conditionals
+    for (const mapping of propMappings) {
+      if (Object.keys(mapping.css).length > 0) {
+        code += `  \${({ ${prop.propName} }) => ${prop.propName} === '${mapping.value}' && css\`\n`;
+        for (const [key, value] of Object.entries(mapping.css)) {
+          code += `    ${toKebabCase(key)}: ${value};\n`;
+        }
+        code += `  \`}\n\n`;
+      }
+    }
+  }
+
+  return code;
+}
+
+/**
+ * Generate interpolation for a compound variant
+ */
+function generateCompoundVariantInterpolation(cv: CompoundVariantDefinition): string {
+  const propNames = Object.keys(cv.conditions);
+  const conditions = Object.entries(cv.conditions)
+    .map(([key, value]) => `${key} === '${value}'`)
+    .join(" && ");
+
+  let code = `  \${({ ${propNames.join(", ")} }) => ${conditions} && css\`\n`;
+  code += `    ${cv.styles}\n`;
+  code += `  \`}\n`;
+
+  return code;
+}
+
+/**
+ * Convert camelCase to kebab-case for CSS property names
+ */
+function toKebabCase(str: string): string {
+  return str.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+// ============================================================================
 // Exports
 // ============================================================================
 

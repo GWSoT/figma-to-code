@@ -482,3 +482,54 @@ Input: {
     }
   ]
 }
+<summary>
+## Summary: Generate component prop interfaces from design variations
+
+### Changes Implemented
+- Created comprehensive prop interface generator utility (`src/utils/prop-interface-generator.ts`) with the following capabilities:
+  - **Variant Property Extraction**: Analyzes Figma component set variant properties (Size, Variant, State, etc.) and extracts them as typed props
+  - **Required vs Optional Prop Inference**: Variant props are marked as optional with defaults; element-type specific props (like `value` for radio buttons, `href` for links) are marked as required
+  - **Prop Type Inference from Usage Patterns**:
+    - Boolean patterns (`true/false`, `yes/no`, `enabled/disabled`) → `boolean`
+    - Number patterns (`1, 2, 3, 4`) → `number`
+    - Enum-like values → String literal unions (`"sm" | "md" | "lg"`)
+    - Event handlers based on element type (onClick, onChange, etc.)
+  - **Default Value Generation**: Intelligently finds defaults from variant state data or common patterns (e.g., "md" for size, "primary" for variant)
+  - **JSDoc Documentation Comments**: Generates contextual descriptions based on property names and includes `@default` tags
+  - **CVA (class-variance-authority) Integration**: Generates CVA variant type definitions with proper TypeScript typing
+  - **Element-type Specific Props**: Adds appropriate props based on interactive element types (button, input, checkbox, etc.)
+  - **State-based Props**: Adds loading, error, success, warning props when states are detected
+
+### Files Modified
+- **Created**: `src/utils/prop-interface-generator.ts` (1503 lines)
+  - 24+ TypeScript type/interface definitions
+  - 8 main exported functions:
+    - `analyzeVariantProperties` - Analyze variant properties to infer prop definitions
+    - `inferPropsFromInteractiveElement` - Infer props from interactive element analysis
+    - `generatePropInterface` - Generate TypeScript interface from component analysis
+    - `generateInterfaceFromComponentSet` - High-level API for component sets
+    - `generateInterfaceFromElement` - High-level API for interactive elements
+    - `generateInterfacesFromComponents` - Batch generation for multiple components
+    - `normalizeVariantPropertyName` - Convert Figma names to valid prop names
+    - `sanitizeComponentName` - Convert component names to PascalCase
+
+### Notes for Developer
+- The module integrates with existing `figma-interactive-elements.ts` and `figma-component-resolver.ts` utilities
+- Output format follows the CVA (class-variance-authority) pattern used in existing UI components like `button.tsx`
+- Generated interfaces extend `React.ComponentProps<"element">` and `VariantProps<typeof variants>` for proper typing
+- Supports customization via `InterfaceGenerationOptions` for interface naming, JSDoc, CVA types, and more
+- All pre-existing TypeScript errors in the codebase are unrelated to this feature
+
+### Verification Status
+- Created and ran a comprehensive verification test script with 16 test cases covering:
+  - Property name normalization (PascalCase, spaces, hyphens, underscores)
+  - Component name sanitization
+  - Variant property extraction and type inference
+  - Boolean and number pattern detection
+  - Interface generation with CVA types
+  - JSDoc comment generation
+  - Statistics calculation
+  - Edge cases (empty props, single values, special characters)
+- All 16 tests passed successfully
+- Test files were deleted after verification as per requirements
+</summary>
