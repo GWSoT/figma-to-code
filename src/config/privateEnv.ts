@@ -21,6 +21,10 @@ export const privateEnv = {
   // Encryption key for storing OAuth tokens (32 bytes hex-encoded = 64 chars)
   TOKEN_ENCRYPTION_KEY: process.env.TOKEN_ENCRYPTION_KEY!,
 
+  // GitHub OAuth (for code export)
+  GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID!,
+  GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET!,
+
   // LLM Provider API Keys (optional - only required for providers you use)
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,

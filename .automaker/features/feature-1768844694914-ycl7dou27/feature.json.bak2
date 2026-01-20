@@ -6,7 +6,7 @@
     "export-options-panel"
   ],
   "priority": 80,
-  "status": "in_progress",
+  "status": "verified",
   "branchName": "master",
   "id": "feature-1768844694914-ycl7dou27",
   "descriptionHistory": [
@@ -16,5 +16,6 @@
       "source": "initial"
     }
   ],
-  "startedAt": "2026-01-20T07:19:57.240Z"
+  "startedAt": "2026-01-20T07:19:57.240Z",
+  "updatedAt": "2026-01-20T08:44:50.279Z"
 }

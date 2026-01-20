@@ -1,0 +1,180 @@
+{
+  "name": "figma-to-code-vscode",
+  "displayName": "Figma to Code",
+  "description": "In-editor design-to-code workflow with Figma integration. View designs, generate code, and sync with your project.",
+  "version": "0.1.0",
+  "publisher": "figma-to-code",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "figma",
+    "design",
+    "code generation",
+    "react",
+    "tailwind",
+    "css"
+  ],
+  "activationEvents": [
+    "onView:figmaDesigns",
+    "onCommand:figma-to-code.openDesign"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "figma-to-code",
+          "title": "Figma to Code",
+          "icon": "resources/figma-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "figma-to-code": [
+        {
+          "id": "figmaDesigns",
+          "name": "Designs",
+          "type": "webview"
+        },
+        {
+          "id": "figmaLayers",
+          "name": "Layers",
+          "type": "tree"
+        },
+        {
+          "id": "figmaHistory",
+          "name": "Generation History",
+          "type": "tree"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "figma-to-code.openDesign",
+        "title": "Open Figma Design",
+        "category": "Figma to Code"
+      },
+      {
+        "command": "figma-to-code.generateCode",
+        "title": "Generate Code from Selection",
+        "category": "Figma to Code"
+      },
+      {
+        "command": "figma-to-code.refreshDesigns",
+        "title": "Refresh Designs",
+        "category": "Figma to Code",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "figma-to-code.syncToFigma",
+        "title": "Sync Code Changes to Figma",
+        "category": "Figma to Code"
+      },
+      {
+        "command": "figma-to-code.authenticate",
+        "title": "Connect Figma Account",
+        "category": "Figma to Code"
+      },
+      {
+        "command": "figma-to-code.insertCode",
+        "title": "Insert Generated Code",
+        "category": "Figma to Code"
+      },
+      {
+        "command": "figma-to-code.openSettings",
+        "title": "Open Settings",
+        "category": "Figma to Code"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "figma-to-code.refreshDesigns",
+          "when": "view == figmaDesigns",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "figma-to-code.syncToFigma",
+          "group": "figma"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Figma to Code",
+      "properties": {
+        "figmaToCode.figmaAccessToken": {
+          "type": "string",
+          "default": "",
+          "description": "Your Figma Personal Access Token for API access"
+        },
+        "figmaToCode.defaultFramework": {
+          "type": "string",
+          "enum": ["react", "vue", "svelte", "html"],
+          "default": "react",
+          "description": "Default framework for code generation"
+        },
+        "figmaToCode.defaultStyling": {
+          "type": "string",
+          "enum": ["tailwind", "css", "styled-components", "css-modules"],
+          "default": "tailwind",
+          "description": "Default styling approach for generated code"
+        },
+        "figmaToCode.outputDirectory": {
+          "type": "string",
+          "default": "./src/components",
+          "description": "Default directory for generated component files"
+        },
+        "figmaToCode.enableBidirectionalSync": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable watching for file changes and syncing back to Figma"
+        },
+        "figmaToCode.recentFiles": {
+          "type": "array",
+          "default": [],
+          "description": "Recently opened Figma files"
+        },
+        "figmaToCode.autoRefresh": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically refresh designs when switching to the extension"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "figma-to-code.generateCode",
+        "key": "ctrl+shift+g",
+        "mac": "cmd+shift+g",
+        "when": "view == figmaDesigns"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0",
+    "@vscode/vsce": "^2.22.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}

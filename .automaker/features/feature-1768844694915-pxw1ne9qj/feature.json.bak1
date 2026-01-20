@@ -6,7 +6,7 @@
     "export-options-panel"
   ],
   "priority": 81,
-  "status": "in_progress",
+  "status": "verified",
   "branchName": "master",
   "id": "feature-1768844694915-pxw1ne9qj",
   "descriptionHistory": [
@@ -17,5 +17,5 @@
     }
   ],
   "startedAt": "2026-01-20T08:15:41.143Z",
-  "updatedAt": "2026-01-20T08:15:41.026Z"
+  "updatedAt": "2026-01-20T08:48:48.550Z"
 }

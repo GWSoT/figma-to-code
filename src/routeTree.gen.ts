@@ -18,11 +18,13 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
 import { Route as DashboardPreviewRouteImport } from './routes/dashboard/preview'
+import { Route as DashboardHistoryRouteImport } from './routes/dashboard/history'
 import { Route as DashboardFramesRouteImport } from './routes/dashboard/frames'
 import { Route as DashboardFigmaRouteImport } from './routes/dashboard/figma'
 import { Route as DashboardDesignPreviewRouteImport } from './routes/dashboard/design-preview'
 import { Route as ProfileUserIdIndexRouteImport } from './routes/profile/$userId/index'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe/webhook'
+import { Route as ApiGithubCallbackRouteImport } from './routes/api/github/callback'
 import { Route as ApiFigmaCallbackRouteImport } from './routes/api/figma/callback'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
@@ -71,6 +73,11 @@ const DashboardPreviewRoute = DashboardPreviewRouteImport.update({
   path: '/preview',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardHistoryRoute = DashboardHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardFramesRoute = DashboardFramesRouteImport.update({
   id: '/frames',
   path: '/frames',
@@ -96,6 +103,11 @@ const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
   path: '/api/stripe/webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiGithubCallbackRoute = ApiGithubCallbackRouteImport.update({
+  id: '/api/github/callback',
+  path: '/api/github/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiFigmaCallbackRoute = ApiFigmaCallbackRouteImport.update({
   id: '/api/figma/callback',
   path: '/api/figma/callback',
@@ -117,11 +129,13 @@ export interface FileRoutesByFullPath {
   '/dashboard/design-preview': typeof DashboardDesignPreviewRoute
   '/dashboard/figma': typeof DashboardFigmaRoute
   '/dashboard/frames': typeof DashboardFramesRoute
+  '/dashboard/history': typeof DashboardHistoryRoute
   '/dashboard/preview': typeof DashboardPreviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/figma/callback': typeof ApiFigmaCallbackRoute
+  '/api/github/callback': typeof ApiGithubCallbackRoute
   '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/profile/$userId/': typeof ProfileUserIdIndexRoute
 }
@@ -134,11 +148,13 @@ export interface FileRoutesByTo {
   '/dashboard/design-preview': typeof DashboardDesignPreviewRoute
   '/dashboard/figma': typeof DashboardFigmaRoute
   '/dashboard/frames': typeof DashboardFramesRoute
+  '/dashboard/history': typeof DashboardHistoryRoute
   '/dashboard/preview': typeof DashboardPreviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/figma/callback': typeof ApiFigmaCallbackRoute
+  '/api/github/callback': typeof ApiGithubCallbackRoute
   '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/profile/$userId': typeof ProfileUserIdIndexRoute
 }
@@ -153,11 +169,13 @@ export interface FileRoutesById {
   '/dashboard/design-preview': typeof DashboardDesignPreviewRoute
   '/dashboard/figma': typeof DashboardFigmaRoute
   '/dashboard/frames': typeof DashboardFramesRoute
+  '/dashboard/history': typeof DashboardHistoryRoute
   '/dashboard/preview': typeof DashboardPreviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/figma/callback': typeof ApiFigmaCallbackRoute
+  '/api/github/callback': typeof ApiGithubCallbackRoute
   '/api/stripe/webhook': typeof ApiStripeWebhookRoute
   '/profile/$userId/': typeof ProfileUserIdIndexRoute
 }
@@ -173,11 +191,13 @@ export interface FileRouteTypes {
     | '/dashboard/design-preview'
     | '/dashboard/figma'
     | '/dashboard/frames'
+    | '/dashboard/history'
     | '/dashboard/preview'
     | '/dashboard/settings'
     | '/dashboard/'
     | '/api/auth/$'
     | '/api/figma/callback'
+    | '/api/github/callback'
     | '/api/stripe/webhook'
     | '/profile/$userId/'
   fileRoutesByTo: FileRoutesByTo
@@ -190,11 +210,13 @@ export interface FileRouteTypes {
     | '/dashboard/design-preview'
     | '/dashboard/figma'
     | '/dashboard/frames'
+    | '/dashboard/history'
     | '/dashboard/preview'
     | '/dashboard/settings'
     | '/dashboard'
     | '/api/auth/$'
     | '/api/figma/callback'
+    | '/api/github/callback'
     | '/api/stripe/webhook'
     | '/profile/$userId'
   id:
@@ -208,11 +230,13 @@ export interface FileRouteTypes {
     | '/dashboard/design-preview'
     | '/dashboard/figma'
     | '/dashboard/frames'
+    | '/dashboard/history'
     | '/dashboard/preview'
     | '/dashboard/settings'
     | '/dashboard/'
     | '/api/auth/$'
     | '/api/figma/callback'
+    | '/api/github/callback'
     | '/api/stripe/webhook'
     | '/profile/$userId/'
   fileRoutesById: FileRoutesById
@@ -226,6 +250,7 @@ export interface RootRouteChildren {
   UnauthenticatedRoute: typeof UnauthenticatedRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiFigmaCallbackRoute: typeof ApiFigmaCallbackRoute
+  ApiGithubCallbackRoute: typeof ApiGithubCallbackRoute
   ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   ProfileUserIdIndexRoute: typeof ProfileUserIdIndexRoute
 }
@@ -295,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardPreviewRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/history': {
+      id: '/dashboard/history'
+      path: '/history'
+      fullPath: '/dashboard/history'
+      preLoaderRoute: typeof DashboardHistoryRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/frames': {
       id: '/dashboard/frames'
       path: '/frames'
@@ -330,6 +362,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiStripeWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/github/callback': {
+      id: '/api/github/callback'
+      path: '/api/github/callback'
+      fullPath: '/api/github/callback'
+      preLoaderRoute: typeof ApiGithubCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/figma/callback': {
       id: '/api/figma/callback'
       path: '/api/figma/callback'
@@ -351,6 +390,7 @@ interface DashboardRouteChildren {
   DashboardDesignPreviewRoute: typeof DashboardDesignPreviewRoute
   DashboardFigmaRoute: typeof DashboardFigmaRoute
   DashboardFramesRoute: typeof DashboardFramesRoute
+  DashboardHistoryRoute: typeof DashboardHistoryRoute
   DashboardPreviewRoute: typeof DashboardPreviewRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
@@ -360,6 +400,7 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardDesignPreviewRoute: DashboardDesignPreviewRoute,
   DashboardFigmaRoute: DashboardFigmaRoute,
   DashboardFramesRoute: DashboardFramesRoute,
+  DashboardHistoryRoute: DashboardHistoryRoute,
   DashboardPreviewRoute: DashboardPreviewRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
@@ -378,6 +419,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnauthenticatedRoute: UnauthenticatedRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiFigmaCallbackRoute: ApiFigmaCallbackRoute,
+  ApiGithubCallbackRoute: ApiGithubCallbackRoute,
   ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   ProfileUserIdIndexRoute: ProfileUserIdIndexRoute,
 }

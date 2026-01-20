@@ -5,7 +5,7 @@
  * Supports multiple frameworks, styling options, and configuration files.
  */
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -43,6 +43,7 @@ import {
   type DesignTokenExport,
   type ExportResult,
 } from "~/utils/code-export";
+import { useRecordConversion } from "~/hooks/useConversionHistory";
 
 // ============================================================================
 // Types
@@ -56,6 +57,16 @@ interface ExportCodeDialogProps {
   framework: FrameworkType;
   styling: StylingType;
   designTokens?: DesignTokenExport[];
+  /** Optional context for tracking conversion history */
+  conversionContext?: {
+    fileKey: string;
+    fileName?: string;
+    nodeId: string;
+    nodeName: string;
+    nodeType?: string;
+    figmaAccountId?: string;
+    configurationId?: string;
+  };
 }
 
 interface ExportConfig {
@@ -104,6 +115,7 @@ export function ExportCodeDialog({
   framework,
   styling,
   designTokens = [],
+  conversionContext,
 }: ExportCodeDialogProps) {
   const [config, setConfig] = useState<ExportConfig>({
     includeReadme: true,
@@ -114,10 +126,14 @@ export function ExportCodeDialog({
   const [isExporting, setIsExporting] = useState(false);
   const [exportResult, setExportResult] = useState<ExportResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const startTimeRef = useRef<number>(0);
+
+  const recordConversion = useRecordConversion();
 
   const handleExport = useCallback(async () => {
     setIsExporting(true);
     setError(null);
+    startTimeRef.current = Date.now();
 
     try {
       const exportOptions: CodeExportOptions = {
@@ -134,13 +150,58 @@ export function ExportCodeDialog({
 
       // Auto-download
       downloadZip(result.blob, result.filename);
+
+      // Record conversion history if context is provided
+      if (conversionContext) {
+        const durationMs = Date.now() - startTimeRef.current;
+        const outputCode = files.map(f => f.content).join('\n\n');
+
+        recordConversion.mutate({
+          fileKey: conversionContext.fileKey,
+          fileName: conversionContext.fileName,
+          nodeId: conversionContext.nodeId,
+          nodeName: conversionContext.nodeName,
+          nodeType: conversionContext.nodeType,
+          figmaAccountId: conversionContext.figmaAccountId,
+          configurationId: conversionContext.configurationId,
+          conversionType: "full-export",
+          jsFramework: framework,
+          cssFramework: styling,
+          outputCode,
+          outputFormat: framework === "html" ? "html" : "tsx",
+          exportedAssetsCount: result.fileCount,
+          durationMs,
+          status: "completed",
+        });
+      }
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to generate export";
       setError(message);
+
+      // Record failed conversion if context is provided
+      if (conversionContext) {
+        const durationMs = Date.now() - startTimeRef.current;
+
+        recordConversion.mutate({
+          fileKey: conversionContext.fileKey,
+          fileName: conversionContext.fileName,
+          nodeId: conversionContext.nodeId,
+          nodeName: conversionContext.nodeName,
+          nodeType: conversionContext.nodeType,
+          figmaAccountId: conversionContext.figmaAccountId,
+          configurationId: conversionContext.configurationId,
+          conversionType: "full-export",
+          jsFramework: framework,
+          cssFramework: styling,
+          durationMs,
+          status: "failed",
+          errorMessage: message,
+        });
+      }
     } finally {
       setIsExporting(false);
     }
-  }, [files, componentName, framework, styling, config, designTokens]);
+  }, [files, componentName, framework, styling, config, designTokens, conversionContext, recordConversion]);
 
   const handleClose = useCallback(() => {
     setExportResult(null);

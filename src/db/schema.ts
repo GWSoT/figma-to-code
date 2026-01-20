@@ -962,3 +962,146 @@ export type CreateConversionHistoryData = typeof conversionHistory.$inferInsert;
 export type UpdateConversionHistoryData = Partial<
   Omit<CreateConversionHistoryData, "id" | "userId" | "createdAt">
 >;
+
+// ============================================
+// GitHub Account Tables
+// ============================================
+
+/** GitHub account connection status */
+export type GitHubAccountStatus = "active" | "expired" | "revoked";
+
+// GitHub Account - OAuth linked GitHub accounts for code export
+export const githubAccount = pgTable(
+  "github_account",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    // GitHub user information
+    githubUserId: text("github_user_id").notNull(),
+    githubUsername: text("github_username").notNull(),
+    githubEmail: text("github_email"),
+    githubAvatarUrl: text("github_avatar_url"),
+    githubName: text("github_name"),
+    // OAuth tokens (encrypted at application level)
+    accessToken: text("access_token").notNull(),
+    refreshToken: text("refresh_token"),
+    accessTokenExpiresAt: timestamp("access_token_expires_at"),
+    // Scopes granted
+    scopes: text("scopes"), // Comma-separated list of scopes
+    // Account metadata
+    label: text("label"), // Optional friendly name (e.g., "Work", "Personal")
+    isDefault: boolean("is_default")
+      .$default(() => false)
+      .notNull(),
+    status: text("status")
+      .$default(() => "active")
+      .notNull(), // "active" | "expired" | "revoked"
+    lastUsedAt: timestamp("last_used_at"),
+    createdAt: timestamp("created_at")
+      .$defaultFn(() => new Date())
+      .notNull(),
+    updatedAt: timestamp("updated_at")
+      .$defaultFn(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    index("idx_github_account_user_id").on(table.userId),
+    index("idx_github_account_github_user_id").on(table.githubUserId),
+  ]
+);
+
+// GitHub Export - Tracks exports to GitHub repositories
+export const githubExport = pgTable(
+  "github_export",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    githubAccountId: text("github_account_id")
+      .notNull()
+      .references(() => githubAccount.id, { onDelete: "cascade" }),
+    // Repository information
+    repositoryOwner: text("repository_owner").notNull(),
+    repositoryName: text("repository_name").notNull(),
+    repositoryUrl: text("repository_url").notNull(),
+    isNewRepository: boolean("is_new_repository")
+      .$default(() => false)
+      .notNull(),
+    // Branch and commit info
+    branchName: text("branch_name").notNull(),
+    commitSha: text("commit_sha"),
+    commitMessage: text("commit_message").notNull(),
+    // PR info (if created)
+    pullRequestUrl: text("pull_request_url"),
+    pullRequestNumber: integer("pull_request_number"),
+    pullRequestTitle: text("pull_request_title"),
+    // Export details
+    componentName: text("component_name").notNull(),
+    filesExported: integer("files_exported").notNull(),
+    totalSizeBytes: integer("total_size_bytes"),
+    // Source conversion reference (if applicable)
+    conversionHistoryId: text("conversion_history_id")
+      .references(() => conversionHistory.id, { onDelete: "set null" }),
+    // Status
+    status: text("status")
+      .$default(() => "pending")
+      .notNull(), // "pending" | "in_progress" | "completed" | "failed"
+    errorMessage: text("error_message"),
+    // Timestamps
+    createdAt: timestamp("created_at")
+      .$defaultFn(() => new Date())
+      .notNull(),
+    completedAt: timestamp("completed_at"),
+  },
+  (table) => [
+    index("idx_github_export_user_id").on(table.userId),
+    index("idx_github_export_github_account_id").on(table.githubAccountId),
+    index("idx_github_export_repository").on(table.repositoryOwner, table.repositoryName),
+    index("idx_github_export_status").on(table.status),
+  ]
+);
+
+// GitHub Account relations
+export const githubAccountRelations = relations(githubAccount, ({ one, many }) => ({
+  user: one(user, {
+    fields: [githubAccount.userId],
+    references: [user.id],
+  }),
+  exports: many(githubExport),
+}));
+
+// GitHub Export relations
+export const githubExportRelations = relations(githubExport, ({ one }) => ({
+  user: one(user, {
+    fields: [githubExport.userId],
+    references: [user.id],
+  }),
+  githubAccount: one(githubAccount, {
+    fields: [githubExport.githubAccountId],
+    references: [githubAccount.id],
+  }),
+  conversionHistory: one(conversionHistory, {
+    fields: [githubExport.conversionHistoryId],
+    references: [conversionHistory.id],
+  }),
+}));
+
+// Type exports for GitHub Account
+export type GitHubAccount = typeof githubAccount.$inferSelect;
+export type CreateGitHubAccountData = typeof githubAccount.$inferInsert;
+export type UpdateGitHubAccountData = Partial<
+  Omit<CreateGitHubAccountData, "id" | "userId" | "createdAt">
+>;
+
+// Type exports for GitHub Export
+export type GitHubExport = typeof githubExport.$inferSelect;
+export type CreateGitHubExportData = typeof githubExport.$inferInsert;
+export type UpdateGitHubExportData = Partial<
+  Omit<CreateGitHubExportData, "id" | "userId" | "createdAt">
+>;
+
+/** GitHub export status type */
+export type GitHubExportStatus = "pending" | "in_progress" | "completed" | "failed";

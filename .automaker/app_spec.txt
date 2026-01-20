@@ -350,5 +350,29 @@
       <name>VS Code Extension Integration</name>
       <description>VS Code extension for in-editor design-to-code workflow. Show Figma designs in sidebar. Generate code directly into project. Support bi-directional sync.</description>
     </feature>
+    <feature>
+      <name>GitHub Repository Export</name>
+      <description>Export generated code directly to GitHub repository. Support creating new repo or pushing to existing. Configure branch, commit message, and PR creation. Handle authentication securely.</description>
+    </feature>
+    <feature>
+      <name>Conversion History Tracker</name>
+      <description>Track history of all conversions per user. Store conversion settings, input designs, and output code. Enable re-running past conversions with updated settings. Support version comparison.</description>
+    </feature>
+    <feature>
+      <name>CLI Integration</name>
+      <description>Command-line interface for design-to-code conversion. Support headless conversion with configuration files. Enable CI/CD integration for automated design sync. Output progress and errors to terminal.</description>
+    </feature>
+    <feature>
+      <name>ZIP Download Export</name>
+      <description>Export generated code as downloadable ZIP file. Include all components, styles, assets, and configuration files. Generate proper directory structure. Include setup instructions in README.</description>
+    </feature>
+    <feature>
+      <name>Code Editor with Syntax Highlighting</name>
+      <description>Integrated code editor with syntax highlighting for all supported languages. Support find/replace, multiple cursors, and code folding. Include error highlighting and autocomplete.</description>
+    </feature>
+    <feature>
+      <name>Design Token Panel</name>
+      <description>Display extracted design tokens with visual previews. Allow token editing and renaming. Show token usage across components. Support token grouping and categorization.</description>
+    </feature>
   </implemented_features>
 </project_specification>

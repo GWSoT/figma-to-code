@@ -515,7 +515,7 @@ export function IntegratedCodeEditor({
     });
 
     // Register Svelte as a custom language if not registered
-    if (!monaco.languages.getLanguages().some((lang) => lang.id === "svelte")) {
+    if (!monaco.languages.getLanguages().some((lang: { id: string }) => lang.id === "svelte")) {
       monaco.languages.register({ id: "svelte" });
       monaco.languages.setMonarchTokensProvider("svelte", {
         tokenizer: {
@@ -540,7 +540,7 @@ export function IntegratedCodeEditor({
     }
 
     // Register Vue as a custom language if not registered
-    if (!monaco.languages.getLanguages().some((lang) => lang.id === "vue")) {
+    if (!monaco.languages.getLanguages().some((lang: { id: string }) => lang.id === "vue")) {
       monaco.languages.register({ id: "vue" });
       monaco.languages.setMonarchTokensProvider("vue", {
         tokenizer: {
