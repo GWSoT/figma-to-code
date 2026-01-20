@@ -7,7 +7,7 @@
     "figma-document-tree-parser"
   ],
   "priority": 74,
-  "status": "verified",
+  "status": "in_progress",
   "branchName": "master",
   "id": "feature-1768844694909-9luhwt4jx",
   "descriptionHistory": [
@@ -18,5 +18,5 @@
     }
   ],
   "startedAt": "2026-01-20T07:08:16.629Z",
-  "updatedAt": "2026-01-20T07:09:31.176Z"
+  "updatedAt": "2026-01-20T07:08:18.752Z"
 }

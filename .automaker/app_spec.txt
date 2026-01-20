@@ -306,5 +306,17 @@
       <name>Code Generation Agent</name>
       <description>AI agent specialized in generating code from design understanding. Apply framework idioms and best practices. Optimize for readability and maintainability. Support iterative refinement based on feedback.</description>
     </feature>
+    <feature>
+      <name>Split View Editor Interface</name>
+      <description>Side-by-side view showing Figma design and generated code. Synchronized scrolling and element highlighting. Click-to-navigate between design elements and code. Support multiple panel arrangements.</description>
+    </feature>
+    <feature>
+      <name>Layer Tree Panel</name>
+      <description>Display Figma layer hierarchy in navigable tree view. Show layer types with icons. Support expand/collapse, search, and filtering. Highlight corresponding code on selection.</description>
+    </feature>
+    <feature>
+      <name>Element Inspector Panel</name>
+      <description>Inspect individual design elements with detailed property view. Show computed CSS values alongside Figma properties. Allow direct editing of element styles. Sync changes bidirectionally.</description>
+    </feature>
   </implemented_features>
 </project_specification>

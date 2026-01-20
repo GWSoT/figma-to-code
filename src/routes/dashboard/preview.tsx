@@ -9,17 +9,10 @@
  */
 
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { CodePreview, VIEWPORT_PRESETS } from "~/components/CodePreview";
 import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
 import {
   Tabs,
   TabsContent,
@@ -40,7 +33,6 @@ import {
 } from "~/components/ui/resizable";
 import {
   Code2,
-  Eye,
   Settings,
   Download,
   Copy,
@@ -59,6 +51,8 @@ import { Link } from "@tanstack/react-router";
 
 interface PreviewSearchParams {
   frameId?: string;
+  nodeId?: string;
+  fileKey?: string;
   width?: number;
   height?: number;
 }
@@ -71,6 +65,8 @@ export const Route = createFileRoute("/dashboard/preview")({
   validateSearch: (search: Record<string, unknown>): PreviewSearchParams => {
     return {
       frameId: search.frameId as string | undefined,
+      nodeId: search.nodeId as string | undefined,
+      fileKey: search.fileKey as string | undefined,
       width: search.width ? Number(search.width) : undefined,
       height: search.height ? Number(search.height) : undefined,
     };
@@ -318,7 +314,7 @@ function SettingsPanel({
 // ============================================================================
 
 function PreviewPage() {
-  const search = Route.useSearch();
+  const search = Route.useSearch() as PreviewSearchParams;
 
   // State
   const [files, setFiles] = useState<GeneratedFile[]>(DEMO_FILES);
@@ -358,6 +354,10 @@ function PreviewPage() {
     });
   }, [files]);
 
+  // Extract width and height from search params
+  const initialWidth = search.width || 375;
+  const initialHeight = search.height || 667;
+
   return (
     <div className="h-[calc(100vh-4rem)] flex flex-col">
       {/* Header */}
@@ -389,7 +389,7 @@ function PreviewPage() {
 
       {/* Main content */}
       <div className="flex-1 overflow-hidden">
-        <ResizablePanelGroup direction="horizontal">
+        <ResizablePanelGroup orientation="horizontal">
           {/* Code Editor Panel */}
           <ResizablePanel defaultSize={50} minSize={30}>
             <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full flex flex-col">
@@ -435,8 +435,8 @@ function PreviewPage() {
                 files={files}
                 framework={framework}
                 styling={styling}
-                initialWidth={search.width || 375}
-                initialHeight={search.height || 667}
+                initialWidth={initialWidth}
+                initialHeight={initialHeight}
                 hotReloadEnabled={true}
                 showDeviceFrame={true}
                 interactiveMode={true}

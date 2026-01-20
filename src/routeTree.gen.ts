@@ -17,8 +17,10 @@ import { Route as CssModulesDemoRouteImport } from './routes/css-modules-demo'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard/settings'
+import { Route as DashboardPreviewRouteImport } from './routes/dashboard/preview'
 import { Route as DashboardFramesRouteImport } from './routes/dashboard/frames'
 import { Route as DashboardFigmaRouteImport } from './routes/dashboard/figma'
+import { Route as DashboardDesignPreviewRouteImport } from './routes/dashboard/design-preview'
 import { Route as ProfileUserIdIndexRouteImport } from './routes/profile/$userId/index'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe/webhook'
 import { Route as ApiFigmaCallbackRouteImport } from './routes/api/figma/callback'
@@ -64,6 +66,11 @@ const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardPreviewRoute = DashboardPreviewRouteImport.update({
+  id: '/preview',
+  path: '/preview',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardFramesRoute = DashboardFramesRouteImport.update({
   id: '/frames',
   path: '/frames',
@@ -72,6 +79,11 @@ const DashboardFramesRoute = DashboardFramesRouteImport.update({
 const DashboardFigmaRoute = DashboardFigmaRouteImport.update({
   id: '/figma',
   path: '/figma',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardDesignPreviewRoute = DashboardDesignPreviewRouteImport.update({
+  id: '/design-preview',
+  path: '/design-preview',
   getParentRoute: () => DashboardRoute,
 } as any)
 const ProfileUserIdIndexRoute = ProfileUserIdIndexRouteImport.update({
@@ -102,8 +114,10 @@ export interface FileRoutesByFullPath {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/unauthenticated': typeof UnauthenticatedRoute
+  '/dashboard/design-preview': typeof DashboardDesignPreviewRoute
   '/dashboard/figma': typeof DashboardFigmaRoute
   '/dashboard/frames': typeof DashboardFramesRoute
+  '/dashboard/preview': typeof DashboardPreviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -117,8 +131,10 @@ export interface FileRoutesByTo {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/unauthenticated': typeof UnauthenticatedRoute
+  '/dashboard/design-preview': typeof DashboardDesignPreviewRoute
   '/dashboard/figma': typeof DashboardFigmaRoute
   '/dashboard/frames': typeof DashboardFramesRoute
+  '/dashboard/preview': typeof DashboardPreviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -134,8 +150,10 @@ export interface FileRoutesById {
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/unauthenticated': typeof UnauthenticatedRoute
+  '/dashboard/design-preview': typeof DashboardDesignPreviewRoute
   '/dashboard/figma': typeof DashboardFigmaRoute
   '/dashboard/frames': typeof DashboardFramesRoute
+  '/dashboard/preview': typeof DashboardPreviewRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
@@ -152,8 +170,10 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/unauthenticated'
+    | '/dashboard/design-preview'
     | '/dashboard/figma'
     | '/dashboard/frames'
+    | '/dashboard/preview'
     | '/dashboard/settings'
     | '/dashboard/'
     | '/api/auth/$'
@@ -167,8 +187,10 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/unauthenticated'
+    | '/dashboard/design-preview'
     | '/dashboard/figma'
     | '/dashboard/frames'
+    | '/dashboard/preview'
     | '/dashboard/settings'
     | '/dashboard'
     | '/api/auth/$'
@@ -183,8 +205,10 @@ export interface FileRouteTypes {
     | '/sign-in'
     | '/sign-up'
     | '/unauthenticated'
+    | '/dashboard/design-preview'
     | '/dashboard/figma'
     | '/dashboard/frames'
+    | '/dashboard/preview'
     | '/dashboard/settings'
     | '/dashboard/'
     | '/api/auth/$'
@@ -264,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardSettingsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/preview': {
+      id: '/dashboard/preview'
+      path: '/preview'
+      fullPath: '/dashboard/preview'
+      preLoaderRoute: typeof DashboardPreviewRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/frames': {
       id: '/dashboard/frames'
       path: '/frames'
@@ -276,6 +307,13 @@ declare module '@tanstack/react-router' {
       path: '/figma'
       fullPath: '/dashboard/figma'
       preLoaderRoute: typeof DashboardFigmaRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/design-preview': {
+      id: '/dashboard/design-preview'
+      path: '/design-preview'
+      fullPath: '/dashboard/design-preview'
+      preLoaderRoute: typeof DashboardDesignPreviewRouteImport
       parentRoute: typeof DashboardRoute
     }
     '/profile/$userId/': {
@@ -310,15 +348,19 @@ declare module '@tanstack/react-router' {
 }
 
 interface DashboardRouteChildren {
+  DashboardDesignPreviewRoute: typeof DashboardDesignPreviewRoute
   DashboardFigmaRoute: typeof DashboardFigmaRoute
   DashboardFramesRoute: typeof DashboardFramesRoute
+  DashboardPreviewRoute: typeof DashboardPreviewRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardDesignPreviewRoute: DashboardDesignPreviewRoute,
   DashboardFigmaRoute: DashboardFigmaRoute,
   DashboardFramesRoute: DashboardFramesRoute,
+  DashboardPreviewRoute: DashboardPreviewRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }

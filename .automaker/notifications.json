@@ -759,6 +759,39 @@
       "dismissed": false,
       "featureId": "feature-1768844694902-4xeta1kii",
       "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "5f093ca7-2f92-4729-9bbd-c34e40116b55",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694906-j6hsamdb4\" has been verified and is complete.",
+      "createdAt": "2026-01-20T07:07:34.251Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694906-j6hsamdb4",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "08c591d1-590e-4e27-9606-ff6e8d918f73",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694909-9luhwt4jx\" has been verified and is complete.",
+      "createdAt": "2026-01-20T07:09:31.177Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694909-9luhwt4jx",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "4f9660af-1b0f-43b3-b702-51a51fc1faf4",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694908-rcet6f72w\" has been verified and is complete.",
+      "createdAt": "2026-01-20T07:09:35.291Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694908-rcet6f72w",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
     }
   ]
 }

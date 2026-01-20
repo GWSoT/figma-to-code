@@ -6,7 +6,7 @@
     "code-preview-renderer"
   ],
   "priority": 71,
-  "status": "in_progress",
+  "status": "backlog",
   "branchName": "master",
   "id": "feature-1768844694906-j6hsamdb4",
   "descriptionHistory": [
@@ -15,6 +15,5 @@
       "timestamp": "2026-01-19T17:44:54.907Z",
       "source": "initial"
     }
-  ],
-  "startedAt": "2026-01-20T06:56:43.159Z"
+  ]
 }

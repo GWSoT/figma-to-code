@@ -5,7 +5,7 @@ import {
   useRouterState,
 } from "@tanstack/react-router";
 import { cn } from "~/lib/utils";
-import { LayoutDashboard, ChevronLeft, ChevronRight, Figma, Layers, SplitSquareHorizontal } from "lucide-react";
+import { LayoutDashboard, ChevronLeft, ChevronRight, Figma, Layers, SplitSquareHorizontal, Eye } from "lucide-react";
 import { authClient } from "~/lib/auth-client";
 import { redirect } from "@tanstack/react-router";
 import { DashboardBackground } from "~/components/DashboardBackground";
@@ -50,6 +50,11 @@ const navItems: NavItem[] = [
   {
     title: "Code Preview",
     href: "/dashboard/preview",
+    icon: Eye,
+  },
+  {
+    title: "Design View",
+    href: "/dashboard/design-preview",
     icon: SplitSquareHorizontal,
   },
 ];
