@@ -398,3 +398,10 @@ Input: {
   "description": "Run Playwright tests for styled-components generator",
   "timeout": 180000
 }
+
+🔧 Tool: TaskOutput
+Input: {
+  "task_id": "bc48b48",
+  "block": true,
+  "timeout": 180000
+}

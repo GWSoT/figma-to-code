@@ -9,7 +9,6 @@
  * - Supports default values and documentation comments
  */
 
-import type { FigmaNode } from "./figma-api";
 import type {
   InteractiveElementAnalysis,
   InteractiveElementType,
@@ -32,13 +31,8 @@ export type InferredPropType =
   | "string-literal"
   | "number-literal"
   | "ReactNode"
-  | "(() => void)"
-  | "((value: T) => void)"
-  | "React.MouseEventHandler"
-  | "React.ChangeEventHandler"
-  | "React.FormEventHandler"
-  | "React.KeyboardEventHandler"
-  | "React.FocusEventHandler"
+  | "function"
+  | "eventHandler"
   | "CSSProperties"
   | "className"
   | "children"
@@ -129,6 +123,29 @@ export interface InterfaceGenerationStats {
 }
 
 /**
+ * Supported base HTML element types
+ */
+export type BaseElementType =
+  | "div"
+  | "span"
+  | "button"
+  | "input"
+  | "a"
+  | "form"
+  | "label"
+  | "select"
+  | "textarea"
+  | "img"
+  | "ul"
+  | "li"
+  | "nav"
+  | "header"
+  | "footer"
+  | "main"
+  | "section"
+  | "article";
+
+/**
  * Configuration for interface generation
  */
 export interface InterfaceGenerationOptions {
@@ -137,7 +154,7 @@ export interface InterfaceGenerationOptions {
   /** Whether to extend React component props */
   extendReactProps: boolean;
   /** Base HTML element for extending native props */
-  baseElement?: keyof JSX.IntrinsicElements;
+  baseElement?: BaseElementType;
   /** Whether to generate CVA (class-variance-authority) variant types */
   generateCVATypes: boolean;
   /** Whether to include JSDoc comments */
@@ -200,7 +217,7 @@ export interface InteractiveElementInput {
 /**
  * Analyze variant properties to infer prop definitions
  */
-export function analyzeVariantProperties(
+function analyzeVariantPropertiesImpl(
   variantProperties: Record<string, string[]>,
   variants: VariantInfo[]
 ): PropDefinition[] {
@@ -224,7 +241,7 @@ function inferPropFromVariant(
   values: string[],
   variants: VariantInfo[]
 ): PropDefinition {
-  const normalizedName = normalizeVariantPropertyName(propName);
+  const normalizedName = normalizeVariantPropertyNameImpl(propName);
   const { type, typeString, possibleValues } = inferTypeFromValues(propName, values);
   const defaultValue = findDefaultValue(propName, values, variants);
   const description = generateVariantDescription(propName, values);
@@ -249,7 +266,7 @@ function inferPropFromVariant(
 /**
  * Normalize a Figma variant property name to a valid prop name
  */
-function normalizeVariantPropertyName(name: string): string {
+function normalizeVariantPropertyNameImpl(name: string): string {
   // Handle common Figma naming patterns
   // e.g., "Size" -> "size", "Has Icon" -> "hasIcon", "Is Disabled" -> "isDisabled"
 
@@ -273,7 +290,6 @@ function inferTypeFromValues(
   propName: string,
   values: string[]
 ): { type: InferredPropType; typeString: string; possibleValues: string[] } {
-  const lowerName = propName.toLowerCase();
   const normalizedValues = values.map((v) => v.toLowerCase().trim());
 
   // Check for boolean patterns
@@ -396,7 +412,7 @@ function findDefaultValue(
  * Generate a description for a variant property
  */
 function generateVariantDescription(propName: string, values: string[]): string {
-  const normalizedName = normalizeVariantPropertyName(propName);
+  const normalizedName = normalizeVariantPropertyNameImpl(propName);
 
   // Generate contextual descriptions based on property name
   const lowerName = propName.toLowerCase();
@@ -440,11 +456,11 @@ function generateVariantDescription(propName: string, values: string[]): string 
 /**
  * Infer props from an interactive element analysis
  */
-export function inferPropsFromInteractiveElement(
+function inferPropsFromInteractiveElementImpl(
   input: InteractiveElementInput
 ): PropDefinition[] {
   const props: PropDefinition[] = [];
-  const { element, resolvedComponent, resolvedInstance } = input;
+  const { element } = input;
 
   // Add element-type specific props
   const elementTypeProps = getPropsForElementType(element.elementType);
@@ -460,7 +476,7 @@ export function inferPropsFromInteractiveElement(
 
   // Add component set variant props if available
   if (element.metadata.componentSet) {
-    const variantProps = analyzeVariantProperties(
+    const variantProps = analyzeVariantPropertiesImpl(
       element.metadata.componentSet.variantProperties,
       element.metadata.componentSet.allVariants
     );
@@ -596,7 +612,7 @@ function getPropsForElementType(elementType: InteractiveElementType): PropDefini
       props.push(
         createProp("children", "ReactNode", true, "The chip/tag content."),
         createProp("selected", "boolean", false, "Whether the chip is selected.", "false"),
-        createProp("onDelete", "(() => void)", false, "Callback when delete is clicked."),
+        createProp("onDelete", "function", false, "Callback when delete is clicked."),
         createProp("disabled", "boolean", false, "Whether the chip is disabled.", "false")
       );
       break;
@@ -737,7 +753,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onClick",
-          "React.MouseEventHandler",
+          "eventHandler",
           false,
           "Click event handler.",
           undefined,
@@ -753,7 +769,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onChange",
-          "React.ChangeEventHandler",
+          "eventHandler",
           false,
           "Change event handler.",
           undefined,
@@ -762,7 +778,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
         ),
         createProp(
           "onBlur",
-          "React.FocusEventHandler",
+          "eventHandler",
           false,
           "Blur event handler.",
           undefined,
@@ -771,7 +787,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
         ),
         createProp(
           "onFocus",
-          "React.FocusEventHandler",
+          "eventHandler",
           false,
           "Focus event handler.",
           undefined,
@@ -788,7 +804,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onChange",
-          "((checked: boolean) => void)",
+          "function",
           false,
           "Change event handler with new checked value.",
           undefined,
@@ -803,7 +819,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onChange",
-          "((value: T) => void)",
+          "function",
           false,
           "Change event handler with selected value.",
           undefined,
@@ -812,7 +828,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
         ),
         createProp(
           "onOpenChange",
-          "((open: boolean) => void)",
+          "function",
           false,
           "Open state change handler.",
           undefined,
@@ -827,7 +843,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onChange",
-          "((value: number) => void)",
+          "function",
           false,
           "Value change handler.",
           undefined,
@@ -836,7 +852,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
         ),
         createProp(
           "onChangeEnd",
-          "((value: number) => void)",
+          "function",
           false,
           "Handler called when interaction ends.",
           undefined,
@@ -850,7 +866,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onSelect",
-          "(() => void)",
+          "function",
           false,
           "Called when tab is selected.",
           undefined,
@@ -865,7 +881,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onExpandedChange",
-          "((expanded: boolean) => void)",
+          "function",
           false,
           "Expansion state change handler.",
           undefined,
@@ -879,7 +895,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onPageChange",
-          "((page: number) => void)",
+          "function",
           false,
           "Page change handler.",
           undefined,
@@ -893,7 +909,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onChange",
-          "((rating: number) => void)",
+          "function",
           false,
           "Rating change handler.",
           undefined,
@@ -907,7 +923,7 @@ function getEventHandlerProps(elementType: InteractiveElementType): PropDefiniti
       props.push(
         createProp(
           "onFilesChange",
-          "((files: File[]) => void)",
+          "function",
           false,
           "File selection change handler.",
           undefined,
@@ -1008,7 +1024,7 @@ function createProp(
   possibleValues?: string[],
   inferenceSource: PropInferenceSource = "element-type"
 ): PropDefinition {
-  const typeString = getTypeString(type, possibleValues);
+  const typeString = getTypeString(type, name, possibleValues);
 
   return {
     name,
@@ -1027,7 +1043,7 @@ function createProp(
 /**
  * Get the TypeScript type string for a type
  */
-function getTypeString(type: InferredPropType, possibleValues?: string[]): string {
+function getTypeString(type: InferredPropType, propName: string, possibleValues?: string[]): string {
   switch (type) {
     case "string-literal":
       if (possibleValues && possibleValues.length > 0) {
@@ -1036,14 +1052,38 @@ function getTypeString(type: InferredPropType, possibleValues?: string[]): strin
       return "string";
     case "ReactNode":
       return "React.ReactNode";
-    case "(() => void)":
-    case "((value: T) => void)":
-    case "React.MouseEventHandler":
-    case "React.ChangeEventHandler":
-    case "React.FormEventHandler":
-    case "React.KeyboardEventHandler":
-    case "React.FocusEventHandler":
-      return type;
+    case "function":
+      // Infer function signature from prop name
+      if (propName === "onDelete" || propName === "onSelect") {
+        return "() => void";
+      }
+      if (propName === "onChange") {
+        return "(value: unknown) => void";
+      }
+      if (propName === "onOpenChange" || propName === "onExpandedChange") {
+        return "(open: boolean) => void";
+      }
+      if (propName === "onPageChange") {
+        return "(page: number) => void";
+      }
+      if (propName === "onChangeEnd") {
+        return "(value: number) => void";
+      }
+      if (propName === "onFilesChange") {
+        return "(files: File[]) => void";
+      }
+      return "() => void";
+    case "eventHandler":
+      if (propName === "onClick") {
+        return "React.MouseEventHandler<HTMLElement>";
+      }
+      if (propName === "onChange") {
+        return "React.ChangeEventHandler<HTMLElement>";
+      }
+      if (propName === "onBlur" || propName === "onFocus") {
+        return "React.FocusEventHandler<HTMLElement>";
+      }
+      return "React.EventHandler<React.SyntheticEvent>";
     case "CSSProperties":
       return "React.CSSProperties";
     case "className":
@@ -1080,7 +1120,7 @@ function deduplicateProps(props: PropDefinition[]): PropDefinition[] {
 /**
  * Generate a TypeScript interface from component analysis
  */
-export function generatePropInterface(
+function generatePropInterfaceImpl(
   componentSetInput: ComponentSetInput | null,
   interactiveInput: InteractiveElementInput | null,
   options: Partial<InterfaceGenerationOptions> = {}
@@ -1091,7 +1131,7 @@ export function generatePropInterface(
 
   // Collect props from component set
   if (componentSetInput) {
-    const variantProps = analyzeVariantProperties(
+    const variantProps = analyzeVariantPropertiesImpl(
       componentSetInput.variantProperties,
       componentSetInput.variants
     );
@@ -1100,7 +1140,7 @@ export function generatePropInterface(
 
   // Collect props from interactive element
   if (interactiveInput) {
-    const elementProps = inferPropsFromInteractiveElement(interactiveInput);
+    const elementProps = inferPropsFromInteractiveElementImpl(interactiveInput);
     allProps.push(...elementProps);
   }
 
@@ -1148,7 +1188,7 @@ export function generatePropInterface(
   const interfaceName = generateInterfaceName(opts);
 
   // Generate extends clause
-  const extendsTypes = generateExtendsClause(opts, props);
+  const extendsTypes = generateExtendsClause(opts);
 
   // Generate CVA variant props if needed
   let cvaVariantProps: string | undefined;
@@ -1187,8 +1227,7 @@ function generateInterfaceName(options: InterfaceGenerationOptions): string {
  * Generate extends clause
  */
 function generateExtendsClause(
-  options: InterfaceGenerationOptions,
-  props: PropDefinition[]
+  options: InterfaceGenerationOptions
 ): string[] {
   const extendsTypes: string[] = [];
 
@@ -1219,7 +1258,7 @@ function generateCVAVariantProps(
   code += `    variants: {\n`;
 
   for (const [propName, values] of Object.entries(componentSetInput.variantProperties)) {
-    const normalizedName = normalizeVariantPropertyName(propName);
+    const normalizedName = normalizeVariantPropertyNameImpl(propName);
     code += `      ${normalizedName}: {\n`;
     for (const value of values) {
       code += `        "${value}": "/* ${value} styles */",\n`;
@@ -1232,7 +1271,7 @@ function generateCVAVariantProps(
 
   // Add default variants
   for (const [propName, values] of Object.entries(componentSetInput.variantProperties)) {
-    const normalizedName = normalizeVariantPropertyName(propName);
+    const normalizedName = normalizeVariantPropertyNameImpl(propName);
     const defaultValue = findDefaultValue(propName, values, componentSetInput.variants);
     if (defaultValue) {
       code += `      ${normalizedName}: ${defaultValue},\n`;
@@ -1283,7 +1322,7 @@ function generateInterfaceCode(
   code += ` {\n`;
 
   // Filter out props that would be inherited from extended types
-  const propsToInclude = filterInheritedProps(props, extendsTypes, options);
+  const propsToInclude = filterInheritedProps(props, options);
 
   // Add props
   for (const prop of propsToInclude) {
@@ -1314,7 +1353,6 @@ function generateInterfaceCode(
  */
 function filterInheritedProps(
   props: PropDefinition[],
-  extendsTypes: string[],
   options: InterfaceGenerationOptions
 ): PropDefinition[] {
   // If extending React component props, many common props are inherited
@@ -1336,11 +1374,6 @@ function filterInheritedProps(
     inheritedProps.add("onKeyUp");
     inheritedProps.add("onMouseEnter");
     inheritedProps.add("onMouseLeave");
-  }
-
-  if (options.generateCVATypes) {
-    // Variant props are included via VariantProps<typeof variants>
-    // We keep them for documentation but they're technically inherited
   }
 
   return props.filter((p) => !inheritedProps.has(p.name));
@@ -1378,7 +1411,7 @@ function calculateInterfaceStats(props: PropDefinition[]): InterfaceGenerationSt
 /**
  * Generate prop interfaces from a Figma component set
  */
-export function generateInterfaceFromComponentSet(
+function generateInterfaceFromComponentSetImpl(
   componentSet: {
     name: string;
     variantProperties: Record<string, string[]>;
@@ -1389,16 +1422,16 @@ export function generateInterfaceFromComponentSet(
 ): GeneratedInterface {
   const opts = {
     ...options,
-    componentName: options?.componentName || sanitizeComponentName(componentSet.name),
+    componentName: options?.componentName || sanitizeComponentNameImpl(componentSet.name),
   };
 
-  return generatePropInterface(componentSet, null, opts);
+  return generatePropInterfaceImpl(componentSet, null, opts);
 }
 
 /**
  * Generate prop interfaces from an interactive element analysis
  */
-export function generateInterfaceFromElement(
+function generateInterfaceFromElementImpl(
   element: InteractiveElementAnalysis,
   resolvedComponent?: ResolvedComponent,
   resolvedInstance?: ResolvedInstance,
@@ -1407,12 +1440,12 @@ export function generateInterfaceFromElement(
   const componentName =
     options?.componentName ||
     (resolvedComponent
-      ? sanitizeComponentName(resolvedComponent.name)
-      : sanitizeComponentName(element.nodeName));
+      ? sanitizeComponentNameImpl(resolvedComponent.name)
+      : sanitizeComponentNameImpl(element.nodeName));
 
   const opts = { ...options, componentName };
 
-  return generatePropInterface(
+  return generatePropInterfaceImpl(
     element.metadata.componentSet
       ? {
           name: element.metadata.componentSet.name,
@@ -1428,7 +1461,7 @@ export function generateInterfaceFromElement(
 /**
  * Sanitize a component name for use in TypeScript
  */
-function sanitizeComponentName(name: string): string {
+function sanitizeComponentNameImpl(name: string): string {
   return name
     .replace(/[^a-zA-Z0-9]/g, " ")
     .trim()
@@ -1440,7 +1473,7 @@ function sanitizeComponentName(name: string): string {
 /**
  * Generate multiple interfaces from a collection of components
  */
-export function generateInterfacesFromComponents(
+function generateInterfacesFromComponentsImpl(
   components: Array<{
     componentSet?: ComponentSetInput;
     interactiveElement?: InteractiveElementInput;
@@ -1448,7 +1481,7 @@ export function generateInterfacesFromComponents(
   }>
 ): GeneratedInterface[] {
   return components.map((component) =>
-    generatePropInterface(
+    generatePropInterfaceImpl(
       component.componentSet || null,
       component.interactiveElement || null,
       component.options
@@ -1460,13 +1493,11 @@ export function generateInterfacesFromComponents(
 // Exports
 // ============================================================================
 
-export {
-  analyzeVariantProperties,
-  inferPropsFromInteractiveElement,
-  generatePropInterface,
-  generateInterfaceFromComponentSet,
-  generateInterfaceFromElement,
-  generateInterfacesFromComponents,
-  normalizeVariantPropertyName,
-  sanitizeComponentName,
-};
+export const analyzeVariantProperties = analyzeVariantPropertiesImpl;
+export const inferPropsFromInteractiveElement = inferPropsFromInteractiveElementImpl;
+export const generatePropInterface = generatePropInterfaceImpl;
+export const generateInterfaceFromComponentSet = generateInterfaceFromComponentSetImpl;
+export const generateInterfaceFromElement = generateInterfaceFromElementImpl;
+export const generateInterfacesFromComponents = generateInterfacesFromComponentsImpl;
+export const normalizeVariantPropertyName = normalizeVariantPropertyNameImpl;
+export const sanitizeComponentName = sanitizeComponentNameImpl;
