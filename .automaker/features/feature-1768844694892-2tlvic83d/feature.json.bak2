@@ -6,7 +6,7 @@
     "css-framework-selection-interface"
   ],
   "priority": 55,
-  "status": "backlog",
+  "status": "in_progress",
   "branchName": "master",
   "id": "feature-1768844694892-2tlvic83d",
   "descriptionHistory": [
@@ -15,5 +15,6 @@
       "timestamp": "2026-01-19T17:44:54.892Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T05:32:03.161Z"
 }

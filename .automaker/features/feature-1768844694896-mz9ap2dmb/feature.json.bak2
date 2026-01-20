@@ -6,7 +6,7 @@
     "component-composition-analyzer"
   ],
   "priority": 60,
-  "status": "in_progress",
+  "status": "backlog",
   "branchName": "master",
   "id": "feature-1768844694896-mz9ap2dmb",
   "descriptionHistory": [
@@ -15,7 +15,5 @@
       "timestamp": "2026-01-19T17:44:54.897Z",
       "source": "initial"
     }
-  ],
-  "startedAt": "2026-01-20T05:51:13.679Z",
-  "updatedAt": "2026-01-20T05:51:17.584Z"
+  ]
 }

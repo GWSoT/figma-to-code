@@ -250,5 +250,9 @@
       <name>Component Composition Analyzer</name>
       <description>Analyze design to identify optimal component boundaries. Detect reusable patterns that should be extracted. Suggest component hierarchy based on design structure. Balance reusability vs simplicity.</description>
     </feature>
+    <feature>
+      <name>CSS Modules Generator</name>
+      <description>Generate scoped CSS Modules with proper naming conventions. Support composition and value imports. Generate TypeScript type definitions for CSS modules. Handle global styles appropriately.</description>
+    </feature>
   </implemented_features>
 </project_specification>

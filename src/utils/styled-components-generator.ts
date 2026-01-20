@@ -1634,11 +1634,23 @@ export function generateImports(options: Partial<StyledGenerationOptions> = {}):
 /**
  * Convert design tokens to theme object
  */
+/**
+ * Partial theme type for token conversion
+ */
+export interface PartialTheme {
+  colors?: Record<string, string>;
+  spacing?: Record<string, string>;
+  fontSizes?: Record<string, string>;
+  fontWeights?: Record<string, number>;
+  borderRadius?: Record<string, string>;
+  shadows?: Record<string, string>;
+}
+
 export function designTokensToTheme(
   tokens: DesignToken[],
   options: Partial<StyledGenerationOptions> = {}
-): Partial<Theme> {
-  const theme: Partial<Theme> = {
+): PartialTheme {
+  const theme: PartialTheme = {
     colors: {},
     spacing: {},
     fontSizes: {},

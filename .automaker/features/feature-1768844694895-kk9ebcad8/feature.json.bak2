@@ -6,7 +6,7 @@
     "prop-interface-generator"
   ],
   "priority": 59,
-  "status": "in_progress",
+  "status": "backlog",
   "branchName": "master",
   "id": "feature-1768844694895-kk9ebcad8",
   "descriptionHistory": [
@@ -15,7 +15,5 @@
       "timestamp": "2026-01-19T17:44:54.896Z",
       "source": "initial"
     }
-  ],
-  "startedAt": "2026-01-20T05:51:01.938Z",
-  "updatedAt": "2026-01-20T05:51:04.519Z"
+  ]
 }

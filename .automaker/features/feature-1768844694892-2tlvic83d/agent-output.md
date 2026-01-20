@@ -695,3 +695,161 @@ Input: {
   "description": "Run CSS Modules verification test",
   "timeout": 300000
 }
+
+🔧 Tool: TaskOutput
+Input: {
+  "task_id": "bf06de9",
+  "block": true,
+  "timeout": 180000
+}
+Let me check the test output:
+
+🔧 Tool: Bash
+Input: {
+  "command": "cat /tmp/claude/-home-rainman-figma-to-code-figma-to-code/tasks/bf06de9.output 2>/dev/null | tail -100",
+  "description": "Check test output"
+}
+
+🔧 Tool: Bash
+Input: {
+  "command": "ps aux | grep -E \"(playwright|vite)\" | head -10",
+  "description": "Check if processes are running"
+}
+Let me kill the running test and try a different approach - starting the server first and then running tests separately:
+
+🔧 Tool: KillShell
+Input: {
+  "shell_id": "bf06de9"
+}
+Let me start the dev server in background and then run a quick verification:
+
+🔧 Tool: Bash
+Input: {
+  "command": "npm run dev:app &\nsleep 15\n# Try to curl the demo page\ncurl -s http://localhost:3000/css-modules-demo 2>&1 | head -100",
+  "description": "Start dev server and check demo page",
+  "timeout": 60000
+}
+
+🔧 Tool: TaskOutput
+Input: {
+  "task_id": "b183933",
+  "block": true,
+  "timeout": 45000
+}
+The server is running on port 3001 because 3000 is in use. Let me verify with curl:
+
+🔧 Tool: Bash
+Input: {
+  "command": "curl -s http://localhost:3001/css-modules-demo 2>&1 | head -50",
+  "description": "Check demo page content"
+}
+The CSS Modules implementation is working. I can see the scoped class names in the HTML output:
+- `ExampleCard-module__card___-vsLx` - follows the `[name]__[local]___[hash]` pattern
+- `ExampleButton-module__primary___Te08F` - properly scoped button classes
+- `shared-module__flexCenter___PjFkm` - composition from shared module is working
+
+The implementation is verified. Let me clean up by stopping the dev server and removing the verification test:
+
+🔧 Tool: KillShell
+Input: {
+  "shell_id": "b183933"
+}
+
+🔧 Tool: Bash
+Input: {
+  "command": "rm /home/rainman/figma-to-code/figma-to-code/tests/css-modules-verification.spec.ts",
+  "description": "Remove verification test file"
+}
+
+🔧 Tool: TodoWrite
+Input: {
+  "todos": [
+    {
+      "content": "Configure Vite for CSS Modules support",
+      "status": "completed",
+      "activeForm": "Configuring Vite for CSS Modules support"
+    },
+    {
+      "content": "Create TypeScript type definitions for CSS Modules",
+      "status": "completed",
+      "activeForm": "Creating TypeScript type definitions for CSS Modules"
+    },
+    {
+      "content": "Create CSS Module utilities and helpers",
+      "status": "completed",
+      "activeForm": "Creating CSS Module utilities and helpers"
+    },
+    {
+      "content": "Create example CSS Module components with proper naming",
+      "status": "completed",
+      "activeForm": "Creating example CSS Module components with proper naming"
+    },
+    {
+      "content": "Handle global styles appropriately",
+      "status": "completed",
+      "activeForm": "Handling global styles appropriately"
+    },
+    {
+      "content": "Create Playwright verification test",
+      "status": "completed",
+      "activeForm": "Creating Playwright verification test"
+    },
+    {
+      "content": "Run verification and clean up test",
+      "status": "completed",
+      "activeForm": "Running verification and cleaning up test"
+    }
+  ]
+}
+<summary>
+## Summary: Generate scoped CSS Modules with proper naming conventions
+
+### Changes Implemented
+- Configured Vite for CSS Modules with scoped class naming (development: `[name]__[local]___[hash]`, production: `[hash]`)
+- Created TypeScript type definitions for CSS Modules imports (`.module.css`, `.module.scss`, `.values.css`, `.global.css`)
+- Built comprehensive CSS Module utilities library with:
+  - `composeClasses()` - combine multiple class names
+  - `cm()` - clsx-style conditional class composition
+  - `cmTw()` - merge CSS Module classes with Tailwind utilities
+  - `createVariants()` - CVA-like variant management for CSS Modules
+  - `bindStyles()` - helper object for shorter syntax
+  - `strictStyles()` - development-only validation
+  - `validateModule()` - testing utility
+- Created example components demonstrating patterns:
+  - `ExampleCard` - full card component with variants and subcomponents
+  - `ExampleButton` - button with composition from shared module
+  - `shared.module.css` - reusable styles for composition
+  - `theme.values.css` - ICSS `:export` for sharing values with JS
+  - `MixedStyles.module.css` - `:global()` selector usage
+  - `globals.global.css` - fully global styles pattern
+- Added demo route at `/css-modules-demo` for visual verification
+
+### Files Modified/Created
+- `vite.config.ts` - Added CSS Modules configuration
+- `tsconfig.json` - Added type definitions include
+- `src/types/css-modules.d.ts` - TypeScript declarations
+- `src/lib/css-modules.ts` - Utility functions
+- `src/components/css-modules-examples/` - Example components directory:
+  - `ExampleCard.module.css` / `ExampleCard.tsx`
+  - `ExampleButton.module.css` / `ExampleButton.tsx`
+  - `shared.module.css`
+  - `theme.values.css`
+  - `MixedStyles.module.css`
+  - `globals.global.css`
+  - `index.ts`
+- `src/routes/css-modules-demo.tsx` - Demo page
+- `playwright.config.ts` - Playwright configuration
+
+### Verification Status
+- Feature verified by starting the development server and fetching the demo page
+- Confirmed scoped class names are generated correctly (e.g., `ExampleCard-module__card___-vsLx`)
+- Verified CSS composition works (shared module classes appear in composed elements)
+- Build passes successfully with TypeScript type checking
+
+### Notes for Developer
+- CSS Modules files must use `.module.css` extension for scoping
+- Global styles can use `.global.css` extension (not scoped)
+- Use `:global()` selector within modules to target non-scoped classes
+- The `createVariants()` utility provides CVA-like functionality for CSS Modules
+- Import CSS values using ICSS `:export` syntax in `.values.css` files
+</summary>
