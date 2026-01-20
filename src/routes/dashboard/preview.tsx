@@ -11,6 +11,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useCallback } from "react";
 import { CodePreview, VIEWPORT_PRESETS } from "~/components/CodePreview";
+import { IntegratedCodeEditor, type EditorError } from "~/components/IntegratedCodeEditor";
 import { Button } from "~/components/ui/button";
 import { Badge } from "~/components/ui/badge";
 import {
@@ -35,11 +36,6 @@ import {
   Code2,
   Settings,
   Download,
-  Copy,
-  Check,
-  FileCode,
-  Palette,
-  FileType,
   ArrowLeft,
 } from "lucide-react";
 import type { GeneratedFile, FrameworkType, StylingType } from "~/utils/code-generation-agent/types";
@@ -164,88 +160,6 @@ if (root) {
 // Components
 // ============================================================================
 
-/** Code editor with syntax highlighting placeholder */
-function CodeEditor({
-  files,
-  selectedFile,
-  onFileSelect,
-  onCodeChange,
-}: {
-  files: GeneratedFile[];
-  selectedFile: GeneratedFile | null;
-  onFileSelect: (file: GeneratedFile) => void;
-  onCodeChange: (content: string) => void;
-}) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = useCallback(async () => {
-    if (selectedFile) {
-      await navigator.clipboard.writeText(selectedFile.content);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  }, [selectedFile]);
-
-  const getFileIcon = (type: GeneratedFile["type"]) => {
-    switch (type) {
-      case "component":
-        return <FileCode className="h-4 w-4" />;
-      case "styles":
-        return <Palette className="h-4 w-4" />;
-      case "types":
-        return <FileType className="h-4 w-4" />;
-      default:
-        return <Code2 className="h-4 w-4" />;
-    }
-  };
-
-  return (
-    <div className="flex flex-col h-full">
-      {/* File tabs */}
-      <div className="flex items-center gap-1 p-2 border-b bg-muted/50 overflow-x-auto">
-        {files.map((file) => (
-          <Button
-            key={file.path}
-            variant={selectedFile?.path === file.path ? "secondary" : "ghost"}
-            size="sm"
-            onClick={() => onFileSelect(file)}
-            className="flex items-center gap-2 shrink-0"
-          >
-            {getFileIcon(file.type)}
-            {file.path}
-          </Button>
-        ))}
-        <div className="flex-1" />
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleCopy}
-          className="shrink-0"
-        >
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          {copied ? "Copied!" : "Copy"}
-        </Button>
-      </div>
-
-      {/* Code content */}
-      <div className="flex-1 overflow-auto">
-        {selectedFile ? (
-          <textarea
-            className="w-full h-full p-4 font-mono text-sm bg-gray-950 text-gray-100 resize-none focus:outline-none"
-            value={selectedFile.content}
-            onChange={(e) => onCodeChange(e.target.value)}
-            spellCheck={false}
-          />
-        ) : (
-          <div className="flex items-center justify-center h-full text-muted-foreground">
-            Select a file to view its content
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 /** Settings panel for preview configuration */
 function SettingsPanel({
   framework,
@@ -323,6 +237,7 @@ function PreviewPage() {
   const [styling, setStyling] = useState<StylingType>("tailwind");
   const [activeTab, setActiveTab] = useState<string>("preview");
   const [previewReady, setPreviewReady] = useState(false);
+  const [editorErrors, setEditorErrors] = useState<EditorError[]>([]);
 
   // Handle code changes for hot reload
   const handleCodeChange = useCallback((content: string) => {
@@ -407,11 +322,15 @@ function PreviewPage() {
               </div>
 
               <TabsContent value="preview" className="flex-1 m-0 overflow-hidden">
-                <CodeEditor
+                <IntegratedCodeEditor
                   files={files}
                   selectedFile={selectedFile}
                   onFileSelect={setSelectedFile}
                   onCodeChange={handleCodeChange}
+                  errors={editorErrors}
+                  theme="vs-dark"
+                  showMinimap={true}
+                  wordWrap="on"
                 />
               </TabsContent>
 
@@ -441,7 +360,20 @@ function PreviewPage() {
                 showDeviceFrame={true}
                 interactiveMode={true}
                 onPreviewReady={() => setPreviewReady(true)}
-                onPreviewError={(error) => console.error("Preview error:", error)}
+                onPreviewError={(error) => {
+                  console.error("Preview error:", error);
+                  // Parse error message to extract line/column if available
+                  const lineMatch = error.match(/line (\d+)/i);
+                  const colMatch = error.match(/column (\d+)/i);
+                  if (lineMatch) {
+                    setEditorErrors([{
+                      line: parseInt(lineMatch[1], 10),
+                      column: colMatch ? parseInt(colMatch[1], 10) : 1,
+                      message: error,
+                      severity: "error",
+                    }]);
+                  }
+                }}
               />
             </div>
           </ResizablePanel>

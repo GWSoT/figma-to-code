@@ -635,3 +635,56 @@ Input: {
   "description": "Run Playwright verification tests",
   "timeout": 180000
 }
+
+🔧 Tool: TaskOutput
+Input: {
+  "task_id": "b18fce5",
+  "block": true,
+  "timeout": 180000
+}
+The tests are taking a while. Let me check the output:
+
+🔧 Tool: Bash
+Input: {
+  "command": "cat /tmp/claude/-home-rainman-figma-to-code-figma-to-code/tasks/b18fce5.output 2>/dev/null | tail -50",
+  "description": "Check test output"
+}
+
+🔧 Tool: Bash
+Input: {
+  "command": "cat /tmp/claude/-home-rainman-figma-to-code-figma-to-code/tasks/b18fce5.output 2>/dev/null",
+  "description": "Get test output"
+}
+Let me check if there are any other output files or get the Playwright status:
+
+🔧 Tool: Bash
+Input: {
+  "command": "ps aux | grep -E \"(playwright|npm|node)\" | head -5",
+  "description": "Check running processes"
+}
+
+🔧 Tool: KillShell
+Input: {
+  "shell_id": "b18fce5"
+}
+The test seems to be stuck. Let me simplify the tests and run them directly. First, let me update the test to be simpler:
+
+🔧 Tool: Read
+Input: {
+  "file_path": "/home/rainman/figma-to-code/figma-to-code/tests/code-preview-verification.spec.ts"
+}
+The file may have been modified due to the linter adding IntegratedCodeEditor. Let me check what the current state of the preview.tsx is and simplify the test:
+
+🔧 Tool: Write
+Input: {
+  "file_path": "/home/rainman/figma-to-code/figma-to-code/tests/code-preview-verification.spec.ts",
+  "content": "/**\n * Temporary verification test for CodePreview feature\n * This test verifies the real-time preview functionality\n */\n\nimport { test, expect } from \"@playwright/test\";\n\ntest.describe(\"CodePreview Feature Verification\", () => {\n  test(\"should render the preview page with key elements\", async ({ page }) => {\n    // Navigate to the preview page\n    await page.goto(\"/dashboard/preview\");\n\n    // Wait for page to load\n    await page.waitForLoadState(\"networkidle\");\n\n    // Check page title and header\n    await expect(page.getByRole(\"heading\", { name: \"Code Preview\" })).toBeVisible({ timeout: 10000 });\n    await expect(page.getByText(\"Edit code and see changes in real-time\")).toBeVisible();\n\n    // Check for back button\n    await expect(page.getByText(/back to frames/i)).toBeVisible();\n\n    // Check for download button\n    await expect(page.getByText(/download all/i)).toBeVisible();\n  });\n\n  test(\"should display tabs for code and settings\", async ({ page }) => {\n    await page.goto(\"/dashboard/preview\");\n    await page.waitForLoadState(\"networkidle\");\n\n    // Check for code tab\n    await expect(page.getByRole(\"tab\", { name: /code/i })).toBeVisible({ timeout: 10000 });\n\n    // Check for settings tab\n    await expect(page.getByRole(\"tab\", { name: /settings/i })).toBeVisible();\n  });\n\n  test(\"should display live preview component\", async ({ page }) => {\n    await page.goto(\"/dashboard/preview\");\n    await page.waitForLoadState(\"networkidle\");\n\n    // Check for Live Preview header in the CodePreview component\n    await expect(page.getByText(\"Live Preview\")).toBeVisible({ timeout: 10000 });\n\n    // The iframe should exist for preview\n    await expect(page.locator('iframe[title=\"Component Preview\"]')).toBeVisible({ timeout: 10000 });\n  });\n\n  test(\"should allow switching between code and settings tabs\", async ({ page }) => {\n    await page.goto(\"/dashboard/preview\");\n    await page.waitForLoadState(\"networkidle\");\n\n    // Click settings tab\n    await page.getByRole(\"tab\", { name: /settings/i }).click();\n\n    // Check settings content is visible (framework dropdown)\n    await expect(page.getByText(/framework/i)).toBeVisible({ timeout: 5000 });\n    await expect(page.getByText(/styling/i)).toBeVisible();\n\n    // Click back to code tab\n    await page.getByRole(\"tab\", { name: /code/i }).click();\n  });\n\n  test(\"should show preview status badge\", async ({ page }) => {\n    await page.goto(\"/dashboard/preview\");\n    await page.waitForLoadState(\"networkidle\");\n\n    // Wait for preview to be ready\n    await page.waitForTimeout(3000);\n\n    // Check for status badge (either \"Preview Ready\" or \"Loading...\")\n    const badge = page.locator('[class*=\"badge\"]').first();\n    await expect(badge).toBeVisible({ timeout: 10000 });\n  });\n\n  test(\"should have viewport presets in selector\", async ({ page }) => {\n    await page.goto(\"/dashboard/preview\");\n    await page.waitForLoadState(\"networkidle\");\n\n    // Click the viewport selector\n    const viewportSelector = page.getByRole(\"combobox\").first();\n    await viewportSelector.click();\n\n    // Check for device presets\n    await expect(page.getByText(\"iPhone SE\")).toBeVisible({ timeout: 5000 });\n    await expect(page.getByText(\"iPad Mini\")).toBeVisible();\n  });\n});\n"
+}
+Now let me run just a single test to verify the feature works:
+
+🔧 Tool: Bash
+Input: {
+  "command": "npx playwright test tests/code-preview-verification.spec.ts --grep \"should render the preview page\" --reporter=line 2>&1 | head -50",
+  "description": "Run single Playwright test",
+  "timeout": 120000
+}

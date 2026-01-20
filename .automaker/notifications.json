@@ -792,6 +792,28 @@
       "dismissed": false,
       "featureId": "feature-1768844694908-rcet6f72w",
       "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "10f43177-15b9-43af-b1b4-a22f60d0d49c",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694910-hnssyp0bm\" has been verified and is complete.",
+      "createdAt": "2026-01-20T07:11:07.544Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694910-hnssyp0bm",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "4cb66ca3-a23e-462b-a416-7af03a9f6714",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694910-jk9n6rs8d\" has been verified and is complete.",
+      "createdAt": "2026-01-20T07:12:55.259Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694910-jk9n6rs8d",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
     }
   ]
 }

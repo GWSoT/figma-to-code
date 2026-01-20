@@ -318,5 +318,13 @@
       <name>Element Inspector Panel</name>
       <description>Inspect individual design elements with detailed property view. Show computed CSS values alongside Figma properties. Allow direct editing of element styles. Sync changes bidirectionally.</description>
     </feature>
+    <feature>
+      <name>Component Tree Panel</name>
+      <description>Display generated component hierarchy in tree view. Show props and state for each component. Allow component selection and highlighting. Support component renaming and reorganization.</description>
+    </feature>
+    <feature>
+      <name>Asset Management Panel</name>
+      <description>Display all exported assets with preview thumbnails. Show asset metadata (size, format, usage). Allow re-export with different settings. Track asset references in code.</description>
+    </feature>
   </implemented_features>
 </project_specification>

@@ -6,7 +6,7 @@
     "asset-cdn-upload-pipeline"
   ],
   "priority": 76,
-  "status": "verified",
+  "status": "in_progress",
   "branchName": "master",
   "id": "feature-1768844694910-jk9n6rs8d",
   "descriptionHistory": [
@@ -16,6 +16,5 @@
       "source": "initial"
     }
   ],
-  "startedAt": "2026-01-20T07:11:08.485Z",
-  "updatedAt": "2026-01-20T07:12:55.257Z"
+  "startedAt": "2026-01-20T07:11:08.485Z"
 }
