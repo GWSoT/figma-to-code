@@ -7,7 +7,7 @@
     "design-understanding-agent"
   ],
   "priority": 66,
-  "status": "in_progress",
+  "status": "backlog",
   "branchName": "master",
   "id": "feature-1768844694902-4xeta1kii",
   "descriptionHistory": [
@@ -16,7 +16,5 @@
       "timestamp": "2026-01-19T17:44:54.902Z",
       "source": "initial"
     }
-  ],
-  "startedAt": "2026-01-20T06:44:45.830Z",
-  "updatedAt": "2026-01-20T06:44:48.526Z"
+  ]
 }

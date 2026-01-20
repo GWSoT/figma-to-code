@@ -266,5 +266,25 @@
       <name>Styled Components Generator</name>
       <description>Generate styled-components/emotion code with template literals. Support theming, dynamic props, and style composition. Generate proper TypeScript types for styled components.</description>
     </feature>
+    <feature>
+      <name>Context Window Manager</name>
+      <description>Manage LLM context window limits intelligently. Prioritize most relevant design information. Chunk large designs for multi-turn generation. Track token usage and optimize for cost.</description>
+    </feature>
+    <feature>
+      <name>LLM Integration Layer</name>
+      <description>Abstract LLM provider integration supporting multiple providers: OpenAI, Anthropic, local models. Handle rate limiting, retries, and failover. Support streaming responses for real-time feedback.</description>
+    </feature>
+    <feature>
+      <name>Component Variant Handler</name>
+      <description>Handle Figma component variants in code generation. Map variant properties to component props. Generate variant-aware styling (compound variants). Support boolean, enum, and multi-select variants.</description>
+    </feature>
+    <feature>
+      <name>Slot and Children Pattern Generator</name>
+      <description>Identify slot/children patterns in Figma designs. Generate proper React children, Vue slots, or Svelte slots. Support named slots for complex component structures.</description>
+    </feature>
+    <feature>
+      <name>Agentic Task Orchestrator</name>
+      <description>Orchestrate multi-step agentic workflows for complex conversions. Define task graphs with dependencies. Handle parallel execution where possible. Support human-in-the-loop checkpoints.</description>
+    </feature>
   </implemented_features>
 </project_specification>

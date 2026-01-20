@@ -20,4 +20,12 @@ export const privateEnv = {
   FIGMA_CLIENT_SECRET: process.env.FIGMA_CLIENT_SECRET!,
   // Encryption key for storing OAuth tokens (32 bytes hex-encoded = 64 chars)
   TOKEN_ENCRYPTION_KEY: process.env.TOKEN_ENCRYPTION_KEY!,
+
+  // LLM Provider API Keys (optional - only required for providers you use)
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+  // Custom base URLs for self-hosted or Azure deployments
+  OPENAI_BASE_URL: process.env.OPENAI_BASE_URL,
+  ANTHROPIC_BASE_URL: process.env.ANTHROPIC_BASE_URL,
+  OLLAMA_BASE_URL: process.env.OLLAMA_BASE_URL,
 } as const;

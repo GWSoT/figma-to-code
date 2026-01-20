@@ -6,7 +6,7 @@
     "llm-integration-layer"
   ],
   "priority": 63,
-  "status": "backlog",
+  "status": "in_progress",
   "branchName": "master",
   "id": "feature-1768844694899-nbuk8m8xr",
   "descriptionHistory": [
@@ -15,5 +15,6 @@
       "timestamp": "2026-01-19T17:44:54.899Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T05:57:37.486Z"
 }

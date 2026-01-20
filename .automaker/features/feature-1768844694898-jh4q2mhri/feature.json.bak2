@@ -6,7 +6,7 @@
     "ai-prompt-engineering-system"
   ],
   "priority": 62,
-  "status": "backlog",
+  "status": "in_progress",
   "branchName": "master",
   "id": "feature-1768844694898-jh4q2mhri",
   "descriptionHistory": [
@@ -15,5 +15,6 @@
       "timestamp": "2026-01-19T17:44:54.898Z",
       "source": "initial"
     }
-  ]
+  ],
+  "startedAt": "2026-01-20T05:55:06.469Z"
 }

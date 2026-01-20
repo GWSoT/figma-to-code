@@ -649,6 +649,61 @@
       "dismissed": false,
       "featureId": "feature-1768844694893-l98cp0pm7",
       "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "c52f22c8-0f18-455a-ba52-473569ac5411",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694899-nbuk8m8xr\" has been verified and is complete.",
+      "createdAt": "2026-01-20T05:58:58.407Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694899-nbuk8m8xr",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "f11d442e-d608-4b41-85fc-3c767f2f1857",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694898-jh4q2mhri\" has been verified and is complete.",
+      "createdAt": "2026-01-20T06:17:52.761Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694898-jh4q2mhri",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "80d1a703-681b-45db-a552-49df22cb3d0a",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694895-kk9ebcad8\" has been verified and is complete.",
+      "createdAt": "2026-01-20T06:19:46.748Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694895-kk9ebcad8",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "42b68f00-a2c0-446a-8252-eb3e19771fdd",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694896-mz9ap2dmb\" has been verified and is complete.",
+      "createdAt": "2026-01-20T06:20:11.111Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694896-mz9ap2dmb",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
+    },
+    {
+      "id": "a8077368-2c87-47e6-8174-c7615576aebd",
+      "type": "feature_verified",
+      "title": "Feature Verified",
+      "message": "\"feature-1768844694900-j7k2sstvq\" has been verified and is complete.",
+      "createdAt": "2026-01-20T06:29:28.724Z",
+      "read": false,
+      "dismissed": false,
+      "featureId": "feature-1768844694900-j7k2sstvq",
+      "projectPath": "/home/rainman/figma-to-code/figma-to-code"
     }
   ]
 }
